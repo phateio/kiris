@@ -1,0 +1,13 @@
+<tr>
+  <td class="datetime"><%= datetime_tag track.created_at %></td>
+  <td class="title" data-tooltips-text="<%= track.tags %>"><%= render_niconico_track_link(track) %></td>
+  <td class="artist"><%= track.artist %></td>
+  <td class="niconico"><%= render_track_niconico_link(track) %></td>
+  <td class="uploader"><%= track.uploader %></td>
+  <td class="status"><%= track.status %></td>
+  <td class="images"><%= render_niconico_track_images_link(track) %></td>
+  <td class="lyrics"><%= render_niconico_track_lyrics_link(track) %></td>
+  <td class="comments"><%= render_niconico_track_comments_link(track) %></td>
+  <td class="edit"><%= render_niconico_track_edit_link(track) %></td>
+  <td class="delete"><%= render_niconico_track_delete_link(track) %></td>
+</tr>

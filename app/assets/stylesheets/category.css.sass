@@ -1,0 +1,21 @@
+.category
+  border-collapse: collapse
+  .title1 td
+    font-size: 1.5em
+    font-weight: bold
+  .title1 td, .title2 td
+    padding: 6px 6px
+    border-top: 1px dashed #CCCCCC
+    border-bottom: 1px dashed #CCCCCC
+    text-align: left
+  tr
+    &:hover
+      background-color: rgba(128, 128, 128, 0.3)
+    & > td
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+      &:first-child
+        padding: 0px 6px
+      &:last-child
+        padding-right: 6px

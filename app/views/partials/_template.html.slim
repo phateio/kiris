@@ -1,0 +1,22 @@
+script#template-playing-li type="text/template"
+  li.hidden id="{{id}}" data-tooltips-text="{{tags}}" data-tooltips-padding="30"
+    .songinfo lang="ja"
+      span.artist
+        = "{{artist}}"
+      span &nbsp;-&nbsp;
+      span.title
+        = "{{title}}"
+      | &nbsp;
+      span
+        = "("
+      span.timeleft
+        = "{{timeleft}}"
+      span
+        = "/"
+      span.duration
+        = "{{duration}}"
+      span
+        = ")"
+
+script#template-image-info type="text/template"
+  a href="{{source_url}}" target="_blank" Illustration by {{illustrator}}

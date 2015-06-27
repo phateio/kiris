@@ -1,0 +1,12 @@
+<%= render_object_error_messages(playlist) %>
+<%= form_for playlist, url: form_for_option_url, remote: true do |f| %>
+  <table>
+    <tr><td><%= f.label :playedtime %></td><td><%= f.datetime_field :playedtime %></td></tr>
+    <tr><td><%= f.label :track_id %></td><td><%= f.text_field :track_id %></td></tr>
+    <tr><td><%= f.label :nickname %></td><td><%= f.text_field :nickname %></td></tr>
+    <tr><td><%= f.label :userip %></td><td><%= f.text_field :userip %></td></tr>
+    <tr><td><%= f.label :aliasip %></td><td><%= f.text_field :aliasip %></td></tr>
+    <tr><td><%= f.label :useragent %></td><td><%= f.text_field :useragent %></td></tr>
+    <tr><td colspan="2"><%= f.submit nil, class: 'submit-button', data: {disable: true} %></td></tr>
+  </table>
+<% end %>

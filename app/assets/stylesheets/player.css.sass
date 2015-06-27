@@ -1,0 +1,145 @@
+//= depend_on_asset 'jplayer-black-and-yellow.png'
+
+@import template
+
+$player-height: 30px
+
+#player
+  z-index: 9000
+  position: relative
+  height: $player-height
+  line-height: $player-height
+  background-color: rgba(0, 0, 0, 0.6)
+  border-bottom: 1px solid #222222
+  font-size: 13px
+  div.jp-audio div.jp-type-single
+    div.jp-interface
+      height: 30px
+      line-height: 30px
+      color: #FFFFFF
+      a
+        position: absolute
+        overflow: hidden
+        text-indent: 100%
+        white-space: nowrap
+      ul.jp-controls
+        @extend .list-style-type-none
+        display: inline-block
+        li
+          display: inline
+        a.jp-play, a.jp-pause
+          top: 0px
+          left: 0px
+          width: 33px
+          height: $player-height
+          outline: none
+          border-right: 1px solid rgb(36, 37, 38)
+        a.jp-play
+          background: image-url("jplayer-black-and-yellow.png") 0 0 no-repeat
+          &:hover
+            background: image-url("jplayer-black-and-yellow.png") -33px 0 no-repeat
+        a.jp-pause
+          background: image-url("jplayer-black-and-yellow.png") 0 -30px no-repeat
+          display: none
+          &:hover
+            background: image-url("jplayer-black-and-yellow.png") -33px -30px no-repeat
+      ul.jp-playing
+        @extend .list-style-type-none
+        display: inline-block
+        position: relative
+        left: 33px
+        height: $player-height
+        line-height: $player-height
+        padding: 0px 8px
+        overflow: hidden
+        white-space: nowrap
+        text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000
+        div
+          display: inline-block
+        .songinfo
+          width: 100%
+          span
+            display: inline-block
+          .artist, .title
+            overflow: hidden
+            vertical-align: top
+            text-overflow: ellipsis
+        .timeleft, .duration
+          padding: 0px 4px
+      ul.playlist-expanded
+        height: auto
+        margin-left: -1px
+        border: 1px dashed rgba(255, 255, 255, 0.2)
+        border-style: none dashed dashed dashed
+        background-color: rgba(0, 0, 0, 0.3)
+      .jp-side-bar
+        display: inline-block
+        position: absolute
+        top: 0px
+        right: 0px
+        vertical-align: top
+        .jp-listeners
+          display: inline-block
+          height: $player-height
+          padding-right: 5px
+          overflow: hidden
+          vertical-align: top
+          ul
+            @extend .list-style-type-none
+            display: inline-block
+            vertical-align: top
+            & > li
+              text-align: right
+        .jp-volume-bar-container
+          display: inline-block
+          height: $player-height
+          vertical-align: top
+          border-left: 1px solid rgb(50, 51, 52)
+          ul.jp-mute-container
+            @extend .list-style-type-none
+            display: inline-block
+            vertical-align: sub
+            a.jp-mute, a.jp-unmute
+              display: inline-block
+              position: initial
+              width: 17px
+              height: 13px
+              margin-left: 7px
+              outline: none
+            a.jp-mute
+              background: image-url("jplayer-black-and-yellow.png") -10px -68px no-repeat
+              &:hover
+                background: image-url("jplayer-black-and-yellow.png") -43px -68px no-repeat
+            a.jp-unmute
+              background: image-url("jplayer-black-and-yellow.png") -10px -98px no-repeat
+              &:hover
+                background: image-url("jplayer-black-and-yellow.png") -43px -98px no-repeat
+          .jp-volume-bar
+            display: inline-block
+            width: 80px
+            height: 7px
+            margin-right: 8px
+            background-color: #363939
+            background: linear-gradient(to bottom, #161919 0%, #262929 8%, #262929 95%, #161919 100%)
+            //background: image-url("jplayer-black-and-yellow.png") 0 -192px repeat-x;
+            overflow: hidden
+            vertical-align: middle
+            cursor: pointer
+            &:hover
+              background-color: #464949
+              background: linear-gradient(to bottom, #363939 0%, #464949 8%, #464949 95%, #363939 100%)
+          .jp-volume-bar-value
+            width: 0px
+            height: 5px
+            margin: 1px
+            background: image-url("jplayer-black-and-yellow.png") 0 -133px repeat-x
+            border-radius: 1px
+    .jp-no-solution
+      z-index: 1001
+      position: fixed
+      bottom: 80px
+      right: 12px
+      padding: 1px 8px
+      border: 1px dashed #888888
+      background-color: rgba(0, 0, 0, 0.7)
+      color: #EE0000

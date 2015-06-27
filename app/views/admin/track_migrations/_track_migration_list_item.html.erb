@@ -1,0 +1,12 @@
+<%= content_tag :tr do %>
+  <%= content_tag :td, datetime_tag(track_migration.created_at) %>
+  <%= content_tag :td, render_admin_track_migration_title(track_migration), class: 'title', data: {tooltips_text: track_migration.tags} %>
+  <%= content_tag :td, track_migration.artist, class: 'artist' %>
+  <%= content_tag :td, render_admin_track_migration_niconico_link(track_migration) %>
+  <%= content_tag :td, track_migration.duration_abbrtime %>
+  <%= content_tag :td, track_migration.uploader %>
+  <%= content_tag :td, track_migration.status %>
+  <%= content_tag :td, render_admin_track_migration_edit_link(track_migration) %>
+  <%= content_tag :td, render_admin_track_migration_migrate_link(track_migration) %>
+  <%= content_tag :td, render_admin_track_migration_delete_link(track_migration) %>
+<% end %>

@@ -1,0 +1,6 @@
+ul.member-menu.js-dropdown-menu.noselect
+  li data-hover="true"
+    ul.sub-menu.hidden
+      - navbar_member_items.each do |item|
+          = content_tag(:li, link_to(item[:text], item[:url], remote: true), data: {hover: true}) if @access >= item[:privilege]
+    a = "+#{@nickname}"

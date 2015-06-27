@@ -1,0 +1,9 @@
+<%= form_tag admin_notices_path, method: :post, id: 'noticeform', remote: true do %>
+  <div class="buttons">
+    <%= button_tag t('admin.notices.new_notification'), class: 'js-button-new', type: 'button' %>
+    <%= submit_tag t('form.save'), data: {disable: true} %>
+  </div>
+  <%= render_notice_list(notices) %>
+  <div class="errormsg"><%= flash[:error] %></div>
+  <%= render_notice_template %>
+<% end %>

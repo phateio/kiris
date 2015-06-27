@@ -1,0 +1,15 @@
+- if thread_editable?(item)
+  .actions
+    ul.fence
+      li
+        a.js-link-etit
+          = t('form.edit')
+      li
+        a.js-link-open
+          = t('form.open')
+      li
+        a.js-link-close
+          = t('form.close')
+      li
+        a.js-link-delete
+          = t('form.delete')

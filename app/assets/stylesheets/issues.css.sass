@@ -1,0 +1,115 @@
+@import mixins
+@import template
+
+$metadata-color: #888888
+$dateline-color: #999999
+
+#issuepanel
+  min-width: 22em
+  .buttons
+    margin-bottom: $default-line-spacing
+    text-align: left
+  .issue-list
+    & > ul
+      @extend .list-style-type-none
+      & > li
+        padding: 8px 10px 10px 12px
+        margin-bottom: -1px
+        border: $default-border-decoration
+        +vendor-prefix(box-sizing, border-box)
+        @extend .default-hover-effect
+        .number
+          float: right
+          color: $metadata-color
+        .subject
+          margin-right: 50px
+          a
+            color: $front-color
+        .dateline
+          margin-left: 12px
+          font-size: smaller
+          color: $dateline-color
+          & > ul
+            @extend .list-style-type-none
+
+#issuerefresh
+  float: right
+
+#issueform
+  .title
+    td
+      padding-bottom: $default-line-spacing
+      input[name="subject"]
+        @extend .default-input-text
+        width: 22em
+  .message
+    textarea[name="message"]
+      @extend .default-textarea
+      width: 30em
+      height: 8em
+  .profile
+    input[name="nickname"]
+      @extend .default-input-text
+      width: 10em
+  .buttons td
+    text-align: right
+    input[type="submit"]
+      @extend .default-button
+  .errormsg
+    @extend .default-errormsg
+
+#issuethread
+  .title
+    margin-bottom: $default-line-spacing
+    .subject
+      font-size: larger
+  .itemblock
+    margin-bottom: $default-line-spacing
+    border: $default-border-decoration
+    @extend .default-radius-box
+    .header
+      margin: 0px 12px
+      white-space: nowrap
+      .actions
+        float: right
+        margin-right: 6px
+        & > ul
+          @extend .list-style-type-none
+      .dateline
+        border-bottom: $default-border-decoration
+        background-color: rgba(0, 0, 0, 0.3)
+        color: $dateline-color
+        & > ul
+          @extend .list-style-type-none
+    .message
+      .buttons
+        margin: 0px 6px 10px 6px
+        input[type="submit"]
+          @extend .default-button
+          float: right
+      .rendered-text
+        padding: 0px 15px
+      textarea
+        @extend .default-textarea
+        width: calc(100% - 12px)
+        min-height: 15em
+        margin: 4px 6px
+        +vendor-prefix(box-sizing, border-box)
+    .horizon
+      margin: 0px 10px
+      border: 1px dashed #CCCCCC
+      font-size: smaller
+    .signature
+      margin: 4px 8px
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+      font-size: smaller
+      color: $metadata-color
+      +vendor-prefix(box-sizing, border-box)
+
+#issuereplies
+  @extend #issuethread
+
+#issuereplyform
+  @extend #issueform

@@ -1,0 +1,69 @@
+- url_mibbit = '//widget.mibbit.com/?settings=56ac64c1d5b964d2060e1c7f1c238f62&server=irc.rizon.net&channel=%23phatecc&nick=&autoConnect=true&delay=0'
+- url_rizon_no = '//widget.mibbit.com/?settings=56ac64c1d5b964d2060e1c7f1c238f62&server=irc.rizon.no&channel=%23phatecc&nick=&autoConnect=true&delay=0'
+.subpage
+  #chatportal
+    div
+      span.info
+        | IRC Server:
+      |  irc.rizon.net
+    div
+      span.info
+        | Channel:
+      |  #phatecc
+    div
+      span.info
+        | Port:
+      |  6660-6670, 7000, +6697
+    div
+      span.info
+        | Encoding:
+      |  UTF-8
+    .rules
+      p
+        | 聊天室規則：
+      ol
+        li
+          | 聊天室大部分時間討論的話題都和正在播放的歌曲無關，請做好心理準備。
+        li
+          | 禁止張貼可能讓其他網友感到不舒服的圖片或連結。
+        li
+          | 聊天室與彈幕系統是互相獨立的，要發彈幕請回首頁使用左下角的半透明輸入框。
+        li
+          span.transparent
+            | 請將這裡當做和管理員「
+            span.symbol
+              | JRS
+            | 」培養感情的場所(?)
+    .buttons
+      button#chat_enter type="button" disabled="disabled"
+        | 進入新版聊天室
+      button#chat_enter_mibbit type="button"
+        | 進入舊版聊天室
+    .links
+      span
+        | 備用連結：
+      a href=url_mibbit target="_blank"
+        | Mibbit/irc.rizon.net
+      span
+        | &nbsp;|&nbsp;
+      a href="https://qchat.rizon.net/?channels=phatecc" target="_blank"
+        | Rizon-qchat/irc.rizon.net
+script
+  |   (function() {
+        var css_chat = '<style>#chat {z-index: auto;}</style>';
+        var css_chat_mibbit = '<style>#chat_mibbit {z-index: auto; opacity: 1;} #danmakubar {display: none;}</style>';
+        $('#chat_enter').on('click', function(event) {
+          $('#chat').data('loaded', true).removeClass('hidden');
+          $('#container .subpage').html(css_chat);
+        });
+        $('#chat_enter_mibbit').on('click', function(event) {
+          $('#chat_mibbit').html($('<iframe/>', {
+            src: "#{url_mibbit}"
+          }));
+          $('#container .subpage').html(css_chat_mibbit);
+        });
+        if ($('#chat').data('loaded'))
+          $('#container .subpage').html(css_chat);
+        if ($('#chat_mibbit').html())
+          $('#container .subpage').html(css_chat_mibbit);
+      })();

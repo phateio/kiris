@@ -1,0 +1,42 @@
+@import template
+
+[data-route^="niconico-"]
+  .niconico-track-form
+    @extend .default-table-layout
+    input[type="text"]
+      @extend .default-input-text
+      width: 320px
+    .submit-button
+      margin-top: $default-line-spacing
+      float: right
+  .niconico-track-form-fetch
+    @extend .default-table-layout
+    input[type="text"]
+      @extend .default-input-text
+      width: 320px
+  .button-field
+    margin-bottom: $default-line-spacing
+    @extend .clearfix
+    & > *
+      float: left
+      margin-left: 16px
+  .upload-rules
+    margin-top: $default-line-spacing
+  .niconico-tracks-list
+    @extend .data-list
+    .numero, .duration, .asin, .niconico, .status, .edit, .delete
+      width: 50px
+      text-align: center
+    .datetime
+      width: 150px
+      text-align: center
+    .title, .artist, .album
+      overflow: hidden
+      text-overflow: ellipsis
+    .uploader
+      width: 100px
+      overflow: hidden
+      text-overflow: ellipsis
+    .image-count, .comment-count, .lyric-status
+      margin-left: 2px
+      color: #888888

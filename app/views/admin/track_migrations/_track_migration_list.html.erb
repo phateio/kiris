@@ -1,0 +1,6 @@
+<table class="track_migration-list" data-flexible-table>
+  <%= render_admin_track_migration_list_item_header %>
+  <% track_migrations.each do |track_migration| %>
+    <%= render_admin_track_migration_list_item(track_migration) %>
+  <% end %>
+</table>

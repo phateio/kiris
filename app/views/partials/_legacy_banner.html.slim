@@ -1,0 +1,16 @@
+/[if lte IE 8]
+  sass:
+    .lte_ie8_banner
+      z-index: 1001
+      position: fixed
+      bottom: 120px
+      right: 12px
+      padding: 1px 8px
+      border: 1px dashed #888888
+      background-color: #000000
+      color: #EE0000
+  .lte_ie8_banner
+    = t('support.lte_ie8_banner')
+    a.cross.js-button-hide
+noscript
+  .nojs_banner = t('support.nojs_banner')

@@ -1,0 +1,36 @@
+doctype html
+html lang=I18n.locale
+  head
+    meta charset="utf-8"
+    meta name="description" content=@page_description
+    meta name="keywords" content=@page_keywords
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = csrf_meta_tags.to_s.gsub(/\n/, '').html_safe
+    title = @page_title
+    = stylesheet_link_tag 'application', media: 'all'
+    = google_fonts_link_tag 'Source Code Pro', media: 'all'
+    = javascript_include_tag 'application'
+    = favicon_link_tag '/favicon.ico', rel: 'icon', type: 'image/x-icon'
+    = render partial: 'partials/internal_style_sheet'
+  body
+    #screenframe
+      #backimg_back
+      #backimg_front
+      #backimg_dark.hidden
+      #backimg_filter
+      = render partial: 'partials/player'
+      #container
+        #scrolldiv
+          #homelinkdiv
+            = link_to '', root_path, remote: true
+          #subpages data-route="#{controller_name}-#{action_name}"
+            = yield
+          = render partial: 'partials/lyrics'
+        = render partial: 'partials/danmaku_input_field'
+        = render partial: 'partials/chatroom'
+      = render partial: 'partials/navbar'
+    / render partial: 'partials/embedded_background'
+    #tooltips.hidden
+    = render partial: 'partials/template'
+    = render partial: 'partials/legacy_banner'
+    = render partial: 'partials/tracking'

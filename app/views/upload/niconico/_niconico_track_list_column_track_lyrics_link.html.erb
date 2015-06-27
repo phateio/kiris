@@ -1,0 +1,4 @@
+<%
+  concat link_to(t('search.lyrics'), track_lyrics_path(track), remote: true)
+  concat content_tag(:span, "(#{track.lyric.present? ? "\u2714" : "\u2718"})", class: 'lyric-status')
+%>

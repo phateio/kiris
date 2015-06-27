@@ -1,0 +1,19 @@
+#chat.hidden
+  #content
+    table
+  #onlinelist.noselect onmousedown="return false"
+    ol
+  #inputbox
+    div
+      input type="text" value=""
+script#chatroom-content-tr type="text/template"
+  tr
+    td.timeline title="{{datetime}}" {{timestamp}}
+    td class="{{type}}" {{message}}
+/coffee:
+  window.debug = 1
+  chat = new Chat()
+  setTimeout ->
+    chat.connect()
+  , 3000
+#chat_mibbit

@@ -1,0 +1,10 @@
+<%= content_tag :tr do %>
+  <%= content_tag :td, playlist.track_id %>
+  <%= content_tag :td, playlist.track.title %>
+  <%= content_tag :td, playlist.nickname %>
+  <%= content_tag :td, render_admin_playlist_hostname(playlist.userip), title: playlist.userip %>
+  <%= content_tag :td, playlist.aliasip %>
+  <%= content_tag :td, playlist.useragent, class: 'useragent', title: playlist.useragent %>
+  <%= content_tag :td, render_admin_playlist_edit_link(playlist) %>
+  <%= content_tag :td, render_admin_playlist_delete_link(playlist) %>
+<% end %>

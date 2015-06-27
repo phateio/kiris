@@ -1,0 +1,6 @@
+footer
+  .debuginfo
+    = time_tag Time.zone.now, format: '%F %R %z'
+    | , Processed in 
+    = (Time.now - @start_time).round(6)
+    |  second(s).

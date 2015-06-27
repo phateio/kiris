@@ -1,0 +1,11 @@
+<div class="subpage">
+  <%= render_flash_messages %>
+  <%= render_track_comment_toolbar_field %>
+  <% if @track_comments.length > 0 %>
+    <%= render_track_comment_list(@track_comments) %>
+  <% else %>
+    <p>尚無任何留言</p>
+  <% end %>
+  <%= render_track_comment_form(@track_comment) %>
+</div>
+<%= render_debug_information %>

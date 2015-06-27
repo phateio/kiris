@@ -1,0 +1,24 @@
+@import template
+
+[data-route^="playlist-"]
+  td
+    padding-right: 8px
+    vertical-align: top
+  td:first-child
+    padding-left: 8px
+  input[type="text"], input[type="datetime"], input[type="url"]
+    @extend .default-input-text
+    width: 320px
+  .button-field
+    margin-bottom: $default-line-spacing
+    @extend .clearfix
+    & > *
+      float: right
+  .playlist-list
+    @extend .data-list
+    .useragent
+      overflow: hidden
+      text-overflow: ellipsis
+  .submit-button
+    margin-top: $default-line-spacing
+    float: right

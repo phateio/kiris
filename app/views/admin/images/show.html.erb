@@ -1,0 +1,10 @@
+<div class="subpage image-list">
+  <% if @images.length > 0 %>
+    <% @images.each do |image| %>
+      <%= render_admin_image_list_item(image) %>
+    <% end %>
+  <% else %>
+    <p><%= t('images.no_images_to_show') %></p>
+  <% end %>
+</div>
+<%= render_debug_information %>

@@ -1,0 +1,338 @@
+en:
+  activerecord:
+    attributes:
+      history:
+        created_at: Played time
+        id: ID
+        updated_at: Last modified
+      image:
+        created_at: Added
+        id: ID
+        identity: Identity
+        nickname: Nickname
+        rate: Evaluation
+        source: Image source
+        status: Status
+        updated_at: Last modified
+        url: Image URL
+        userip: IP address
+        verified: Verified
+      track:
+        album: Album
+        album_cover: Album cover
+        artist: Artist
+        asin: ASIN
+        cooldown_time: Cooldown time
+        count: Played
+        created_at: Added
+        detail_page_url: Product page
+        duration: Duration
+        id: ID
+        identity: Identity
+        label: Record label
+        legacy: Legacy
+        mtime: Modified
+        nexttime: Cooldown due date
+        niconico: Niconico ID
+        number: No.
+        release_date: Release date
+        source_bitrate: Source bitrate
+        source_bitrate_type: Source bitrate type
+        source_channels: number of source channels
+        source_format: Source format
+        source_frequency: Source sampling frequency
+        status: Status
+        szhash: Hash
+        tags: Tags
+        title: Title
+        updated_at: Last modified
+        uploader: Uploader
+        userip: IP address
+      track_migration:
+        album: Album
+        album_cover: Album cover
+        artist: Artist
+        asin: ASIN
+        cooldown_time: Cooldown time
+        count: Played
+        created_at: Added
+        detail_page_url: Product page
+        duration: Duration
+        id: ID
+        identity: Identity
+        label: Record label
+        legacy: Legacy
+        mtime: Modified time
+        nexttime: Cooldown due date
+        niconico: Niconico ID
+        number: No.
+        release_date: Release date
+        source_bitrate: Source bitrate
+        source_bitrate_type: Source bitrate type
+        source_channels: number of source channels
+        source_format: Source format
+        source_frequency: Source sampling frequency
+        status: Status
+        szhash: Hash
+        tags: Tags
+        title: Title
+        updated_at: Last modified
+        uploader: Uploader
+        userip: IP address
+      track_migration_comment:
+        created_at: Added
+        id: ID
+        identity: Identity
+        message: Message
+        nickname: Nickname
+        rate: Evaluation
+        status: Status
+        updated_at: Last modified
+        useragent: User Agent
+        userip: IP address
+    errors:
+      models:
+        image:
+          attributes:
+            source:
+              invalid_format: is invalid ! Accept link of pixiv, piapro, or Niconico seiga only.
+            url:
+              invalid_content_type: content type is invalid! Accept JPG or PNG file only.
+              invalid_format: is invalid! Accept JPG or PNG file Direct Link of imgur.com only.
+  admin:
+    images:
+      background_management: Background Management
+    notices:
+      new_notification: New notification
+      notification_management: Notification Management
+    playlist:
+      playlist_management: Playlist Management
+      title: Playlist
+    track:
+      review_title: Track Review
+      review_title_with_index: Track Review#%{id}
+      title: Track
+      title_with_index: Track#%{id}
+      track_management: Track Management
+    track_migration:
+      title: Track Migration
+      track_migration_management: Track Migration Management
+  form:
+    cancel: Cancel
+    close: Close
+    content: Content
+    delete: Delete
+    edit: Edit
+    email: Email
+    export: Export
+    import: Import
+    invalid_parameters: Invalid parameters
+    nickname: Nickname
+    open: Open
+    preview: Preview
+    refresh: Refresh
+    save: Save
+    submit: Submit
+    title: Title
+    tripcode: Tripcode
+    update: Update
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total
+      one_page:
+        display_entries:
+          one: Displaying <b>1</b> %{entry_name}
+          other: Displaying <b>all %{count}</b> %{entry_name}
+          zero: No %{entry_name} found
+    select:
+      prompt: Please select
+    submit:
+      create: Create
+      submit: Save
+      update: Update
+  images:
+    image_not_found: This image does not exist or has been removed
+    image_rank_level: |-
+      Rank 5 - Include image source and fit with this audio
+      Rank 4 - No image source but fit with this audio
+      Rank 3 - Include image source but not related to this audio directly
+      Rank 2 - No image source and not related to this audio directly
+      Rank 1 - R15
+      Rank 0 - Questionable
+      Rank ⑨ - BAKA
+    image_rank_standard: Image rank standard
+    image_rules_caption: Track image rules
+    image_rules_content: |-
+      No screenshot.
+      Please avoid any post-processing on images.
+      Image resolution must greater than 960 × 720, otherwise case by case.
+      Image URL only allow Direct Link of <a href="http://imgur.com/" target="_blank">imgur.com</a> (<a href="http://i.imgur.com/gM09wTV.jpg" target="_blank">Example</a>)
+      Image will as one of random backgrounds of this audio when rated as Rank 2 or above.
+    image_url: Image URL
+    image_url_placeholder: http://i.imgur.com/example.png
+    invalid_status: Invalid status
+    nickname_tip: This will show on homepage, take it seriously please. (optional)
+    no_images_to_show: No images to show.
+    posted_date: Posted
+    source_url: Source
+    source_url_placeholder: Author's pixiv, piapro, or Niconico seiga link (leave it blank if you don't know)
+    status: Status
+    status_msg:
+      rank_0: Rank 0
+      rank_1: Rank 1
+      rank_2: Rank 2
+      rank_3: Rank 3
+      rank_4: Rank 4
+      rank_5: Rank 5
+      rank_baka: Rank ⑨
+      rejected_duplicate: Duplicate
+      rejected_jpeg_artifacts: JPEG artifacts
+      rejected_low_resolution: Low resolution
+      rejected_other: Other
+      rejected_poor_quality: Poor quality
+      rejected_post_processing: Post-processing
+      rejected_replaced: Replaced
+      rejected_resized: Resized
+      rejected_screenshot: Screenshot
+      rejected_source_inconsistent: Image is inconsistent with image source
+      rejected_subpar_artwork: Subpar artwork
+      rejected_user_created_content: User created content
+      rejected_watermark: Post-processing watermark
+      rejected_wrong_place: Wrong place
+    track_title: Title
+  issues:
+    content_cannot_be_empty: Content cannot be empty
+    issue: Issue
+    issue_list_empty: No issues to show
+    issue_not_found: The issue does not exist or has been removed
+    issues: Issues
+    list_of_issues: List of Issues
+    new_issue: New issue
+    title_cannot_be_empty: Title cannot be empty
+    typeid_appeal: Appeal
+    typeid_invalid: Type ID invalid
+    typeid_question: Question
+    typeid_suggestion: Suggestion
+  members:
+    email: Email
+    login: Sign in
+    login_failed: The username or password you entered is incorrect
+    logout: Sign out
+    password: Password
+    username: Username
+  metainfo:
+    description: Phate Radio is an experimental internet radio for testing automated system
+    sitename: Phate Radio
+    sitetags: ACG,Radio,Anime music,Game music,Doujin music
+  navbar:
+    category: Category
+    chat: Chat
+    faq: FAQ
+    feedback: Feedback
+    forum: Forum
+    history: History
+    home: Home
+    images: Images
+    latest: Latest
+    menu: Menu
+    news: News
+    preferences: Preferences
+    search: Search
+    speed: Speed Test
+    support: Support
+    upload: Upload
+  player:
+    mute: Mute
+    play: Play
+    stop: Stop
+    unmute: Unmute
+    volume_down: Decrease volume
+    volume_up: Increase volume
+  preferences:
+    auto_background: Auto change backgrounds
+    function: Function
+    hotkeys: Keyboard shortcut
+    nickname_placeholder: No Name
+    show_danmaku: Show danmaku messages
+    show_lyrics: Show lyrics
+  search:
+    comments: Comments
+    images: Images
+    lyrics: Lyrics
+    random_search: Random Search
+    request: Request
+    request_msg:
+      artist_in_range_on_playlist: There are a song with same artist nearly.
+      invalid_referrer: Invalid referrer. Please use %{host} domain to browse and request.
+      ip_already_on_playlist: There are at least one song you requested on playlist.
+      ip_of_proxies: Please do not use proxy server to request.
+      ip_of_torel: Please do not use Tor network to request.
+      ip_range_on_playlist:
+        one: There are at least one song requested from you IP range on playlist.
+        other: There are at least %{count} songs requested from you IP range on playlist.
+      ip_reverse_dns_not_match: The reverse DNS does not match your IP, please contact your ISP or network administrator to solve this problem.
+      max_tracks_on_playlist: Max number of songs on playlist reached. Please try again later.
+      request_success: Success
+      track_already_on_playlist: This song is already on the playlist.
+      track_in_cooldown_time: This song is waiting for cooldown time end.
+      track_not_found: This song does not exist or has been removed
+      track_not_ready: Track does not ready for request yet.
+      track_same_artist_on_playlist: There are already a song with same artist on playlist.
+      track_same_name_in_history: There are already a song with same name played within %{hours} hours.
+      track_same_name_on_playlist: There are a song with same name on playlist.
+      track_with_cooldown_time_in_history: There are already a song with fixed cooldown time played within %{hours} hours.
+      track_with_cooldown_time_on_playlist: There are already a song with fixed cooldown time on playlist.
+    request_rules_caption: Request rules
+    request_rules_content: |-
+      A song can only be request once in 25 hours.
+      A song cannot be request when there are already a song with same artist on playlist.
+      Request a song limit per person, when there are no other request on playlist can continuous request.
+      A song will be added extra cooldown time when request again within 8 days after cooldown time end.
+    search: Search
+    search_not_found: Your search did not match any documents
+  support:
+    jp_no_solution: 'Notice: To play the media you will need to either update your browser to a recent version or use Google Chrome browser.'
+    lte_ie8_banner: 'Update Required: The browser you are using is too old. Please upgrade your browser to Internet Explorer 9+ or using Google Chrome browser.'
+    nojs_banner: 'Notice: Please enable JavaScript for full functionality of this site.'
+  system_mailer:
+    new_issue_notify:
+      subject: 'New issue: %{subject}'
+    new_issue_reply_notify:
+      subject: "[%{subject}] has a new reply"
+  tracks:
+    comments:
+      title: Track Discussion
+      title_with_track_index: Track#%{id} Discussion
+    title_with_index: Track#%{id}
+  upload:
+    niconico:
+      acceptable_tags_not_found: Acceptable tags does NOT found
+      blank_niconico_id: Niconico ID cannot be blank
+      comments:
+        comments_title: Niconico#%{id} Discussion
+      duplicate_niconico_id: Duplicate Niconico ID
+      invalid_niconico_id: Invalid Niconico ID
+      movie_type_not_supported: "%{movie_type}: Unknown video type, please contact administrator to support this format"
+      new_track: New track
+      niconico_id_not_found: This Niconico video does not exist or has been removed
+      reserved_tags_not_found: Reserved tags does NOT found
+      title: Niconico audio
+      track_tag_format_caption: Tag format
+      track_tag_format_content: "Normal: {Reserved Tags},Original Name,Translations(English, Chinese, etc)\nVOCALOID: {Reserved Tags},Producers(Composers)\nTouhou Project: {Reserved Tags},Producers(Doujin circles)\n　\nExamples: \nNormal: niconico,北斗の拳,Fist of the North Star\nVOCALOID: niconico,VOCALOID,ギガP\nTouhou Project: niconico,東方Project,DiGiTAL WiNG\n　\nUploader name will be removed if track not contain necessary tags."
+      upload_rules_caption: Upload rules
+      upload_rules_content: |-
+        Views must greater than 10,000.
+        Video must contain at least one of following tags: VOCALOID, UTAU, 东方アレンジ, 东方ヴォーカル, 歌ってみた, 音楽.
+        The audio will be requestable until the conversion finished and imported.
+        Administrators reserves the right to make the final decision.
+        If the original video removed, the audio in database will also be removed in next routine checks.
+        The system still in development. If you have any feedback, please don't hesitate to contact us.
+      view_counter_not_enough: Views must greater than %{count}
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: Last &raquo;
+      next: Next &rsaquo;
+      previous: "&lsaquo; Prev"
+      truncate: "&hellip;"

@@ -1,0 +1,10 @@
+<div class="subpage">
+  <%= render partial: 'search_form' %>
+  <% if @histories.length > 0 %>
+    <%= render_history_list(@histories) %>
+  <% else %>
+    <p>尚無任何播放紀錄</p>
+  <% end %>
+</div>
+<script>$('.search-list .request a[data-track-id]').trigger('refresh');</script>
+<%= render_debug_information %>

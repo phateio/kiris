@@ -1,0 +1,160 @@
+$main-font: 15px Helvetica, 'Microsoft JhengHei', sans-serif
+$main-color: #dddddd
+$light-blue: #66ccff
+$light-blue-trans: rgba(0, 204, 255, 0.8)
+
+#chat, #chat_mibbit
+  z-index: -99
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 100%
+  height: 100%
+  border: 0px
+  margin: 0px
+  opacity: 0
+  font: $main-font
+  color: $main-color
+  overflow: hidden
+  white-space: nowrap
+  iframe
+    width: 100%
+    height: 100%
+    border: none
+  #content
+    display: block
+    position: absolute
+    top: 0px
+    left: 0px
+    right: 124px
+    bottom: 62px
+    padding: 2px
+    margin: 2px 2px 0px 2px
+    line-height: 150%
+    border-right: 1px solid $light-blue-trans
+    box-shadow-right: 0px 0px 4px $light-blue-trans
+    overflow-y: auto
+    white-space: normal
+    table
+      width: 100%
+    .timeline
+      width: 35px
+      font-size: 11px
+      color: #888888
+      background-color: rgba(17, 17, 17, 0.8)
+      border-right: 1px solid #444444
+    .nickname
+      color: #FFFFFF
+    .message
+      padding-left: 3px
+  #onlinelist
+    position: absolute
+    width: 108px
+    top: 0px
+    right: 0px
+    bottom: 62px
+    padding: 6px
+    margin: 2px 2px 0px 2px
+    border-left: 1px solid $light-blue-trans
+    box-shadow-left: 0px 0px 4px $light-blue-trans
+    font-weight: bold
+    line-height: 150%
+    color: #BBBBBB
+    white-space: nowrap
+    overflow-x: hidden
+    overflow-y: auto
+  #inputbox
+    position: absolute
+    height: 56px
+    left: 0px
+    right: 0px
+    bottom: 0px
+    margin: 0px 2px 2px 2px
+    border: 1px solid $light-blue
+    box-shadow: 0px 0px 4px $light-blue
+    border-radius: 6px
+    & > div
+      padding: 2px
+      margin: 4px
+      border: 1px solid $light-blue
+      box-shadow: 0px 0px 4px $light-blue
+      overflow: hidden
+    input
+      width: 100%
+      padding: 0px
+      border: 0px
+      margin: 0px
+      outline: 0px
+      font: $main-font
+      color: $main-color
+      background-color: rgba(0, 0, 0, 0.5)
+      font-size: 15px
+
+.color_white
+  color: white
+
+.color_black
+  color: black
+
+.color_blue
+  color: blue
+
+.color_green
+  color: green
+
+.color_red
+  color: red
+
+.color_brown
+  color: brown
+
+.color_purple
+  color: purple
+
+.color_orange
+  color: orange
+
+.color_yellow
+  color: yellow
+
+.color_light_green
+  color: lightgreen
+
+.color_teal
+  color: teal
+
+.color_light_cyan
+  color: cyan
+
+.color_light_blue
+  color: royalblue
+
+.color_pink
+  color: hotpink
+
+.color_gray
+  color: gray
+
+.color_light_gray
+  color: lightgray
+
+.msg_join
+  color: darkgoldenrod
+
+.msg_left
+  color: saddlebrown
+
+.msg_quit
+  color: saddlebrown
+
+.msg_kick
+  color: darkred
+
+.msg_nick
+  color: olive
+
+.msg_mode
+  color: lime
+
+.msg_action
+  color: lime

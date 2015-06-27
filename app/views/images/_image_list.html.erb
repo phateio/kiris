@@ -1,0 +1,14 @@
+<div class="subpage image-list">
+  <% if images.length > 0 %>
+    <% images.each do |image| %>
+      <%= render_image_list_item(image) %>
+    <% end %>
+  <% else %>
+    <%= content_tag :p, t('images.no_images_to_show') %>
+  <% end %>
+  <%= render_pagination(images) %>
+  <div class="image-rank-standard">
+    <p><%= t('images.image_rank_standard') %>:</p>
+    <%= i18n_list_tag :ul, 'images.image_rank_level', class: 'image-rank-level' %>
+  </div>
+</div>

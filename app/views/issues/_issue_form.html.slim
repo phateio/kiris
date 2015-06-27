@@ -1,0 +1,25 @@
+= form_tag issues_new_path, method: :post, id: 'issueform', remote: true do
+  table
+    tbody.title
+      tr
+        td
+          select[name="typeid"]
+            - typeids.each do |typeid|
+              option value=typeid
+                = t("issues.typeid_#{typeid}")
+          input name="subject" type="text" value=subject placeholder=t('form.title') autofocus="true"
+    tbody.message
+      tr
+        td
+          textarea name="message" placeholder=t('form.content')
+            = message
+    tbody.profile
+      tr
+        td
+          input name="nickname" type="text" value="" placeholder=t('form.nickname') data-option="nickname"
+    tfoot.buttons
+      tr
+        td
+          = submit_tag t('form.submit'), data: {disable: true}
+  .errormsg
+    = flash[:error]

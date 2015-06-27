@@ -1,0 +1,30 @@
+<div class="subpage">
+  <table class="track-list">
+    <tr><td><%= Track.human_attribute_name('id') %></td><td><%= @track.id %><%= render_admin_track_edit_link(@track) %><%= render_admin_track_delete_link(@track) %></td></tr>
+    <tr><td><%= Track.human_attribute_name('number') %></td><td><%= @track.number %></td></tr>
+    <tr><td><%= Track.human_attribute_name('szhash') %></td><td><%= @track.szhash %></td></tr>
+    <tr><td><%= Track.human_attribute_name('title') %></td><td><%= @track.title %></td></tr>
+    <tr><td><%= Track.human_attribute_name('tags') %></td><td><%= @track.tags %></td></tr>
+    <tr><td><%= Track.human_attribute_name('artist') %></td><td><%= @track.artist %></td></tr>
+    <tr><td><%= Track.human_attribute_name('album') %></td><td><%= @track.album %></td></tr>
+    <tr><td><%= Track.human_attribute_name('duration') %></td><td><%= @track.duration_abbrtime %></td></tr>
+    <tr><td><%= Track.human_attribute_name('count') %></td><td><%= @track.count %></td></tr>
+    <tr><td><%= Track.human_attribute_name('cooldown_time') %></td><td><%= @track.cooldown_time %></td></tr>
+    <tr><td><%= Track.human_attribute_name('mtime') %></td><td><%= @track.mtime %></td></tr>
+    <tr><td><%= Track.human_attribute_name('nexttime') %></td><td><%= @track.nexttime %></td></tr>
+    <tr><td><%= Track.human_attribute_name('label') %></td><td><%= @track.label %></td></tr>
+    <tr><td><%= Track.human_attribute_name('asin') %></td><td><%= @track.asin %></td></tr>
+    <tr><td><%= Track.human_attribute_name('niconico') %></td><td><%= render_track_niconico_link(@track) %></td></tr>
+    <tr><td><%= Track.human_attribute_name('album_cover') %></td><td><%= @track.album_cover %></td></tr>
+    <tr><td><%= Track.human_attribute_name('release_date') %></td><td><%= @track.release_date %></td></tr>
+    <tr><td><%= Track.human_attribute_name('detail_page_url') %></td><td><%= @track.detail_page_url %></td></tr>
+    <tr><td><%= Track.human_attribute_name('uploader') %></td><td><%= @track.uploader %></td></tr>
+    <tr><td><%= Track.human_attribute_name('source_format') %></td><td><%= @track.source_format %></td></tr>
+    <tr><td><%= Track.human_attribute_name('source_bitrate') %></td><td><%= @track.source_bitrate %></td></tr>
+    <tr><td><%= Track.human_attribute_name('source_bitrate_type') %></td><td><%= @track.source_bitrate_type %></td></tr>
+    <tr><td><%= Track.human_attribute_name('source_frequency') %></td><td><%= @track.source_frequency %></td></tr>
+    <tr><td><%= Track.human_attribute_name('source_channels') %></td><td><%= @track.source_channels %></td></tr>
+    <tr><td><%= Track.human_attribute_name('status') %></td><td><%= @track.status %></td></tr>
+    <tr><td><%= Track.human_attribute_name('legacy') %></td><td><%= @track.legacy %></td></tr>
+  </table>
+</div>

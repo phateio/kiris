@@ -1,0 +1,34 @@
+<%= render_object_error_messages(track) %>
+<%= form_for track, url: form_for_option_url, remote: true do |f| %>
+  <table>
+    <tr><td><%= f.label :number %></td><td><%= f.text_field :number %></td></tr>
+    <tr><td><%= f.label :szhash %></td><td><%= f.text_field :szhash %></td></tr>
+    <tr><td><%= f.label :title %></td><td><%= f.text_field :title %></td></tr>
+    <tr><td><%= f.label :tags %></td><td><%= f.text_field :tags %></td></tr>
+    <tr><td><%= f.label :artist %></td><td><%= f.text_field :artist %></td></tr>
+    <tr><td><%= f.label :album %></td><td><%= f.text_field :album %></td></tr>
+    <tr><td><%= f.label :duration %></td><td><%= f.text_field :duration %></td></tr>
+    <tr><td><%= f.label :count %></td><td><%= f.text_field :count %></td></tr>
+    <tr><td><%= f.label :cooldown_time %></td><td><%= f.text_field :cooldown_time %></td></tr>
+    <tr><td><%= f.label :mtime %></td><td><%= f.datetime_field :mtime %></td></tr>
+    <tr><td><%= f.label :nexttime %></td><td><%= f.datetime_field :nexttime %></td></tr>
+    <tr><td><%= f.label :label %></td><td><%= f.text_field :label %></td></tr>
+    <tr><td><%= f.label :asin %></td><td><%= f.text_field :asin %></td></tr>
+    <tr><td><%= f.label :niconico %></td><td><%= f.text_field :niconico %></td></tr>
+    <tr><td><%= f.label :album_cover %></td><td><%= f.text_field :album_cover %></td></tr>
+    <tr><td><%= f.label :release_date %></td><td><%= f.text_field :release_date %></td></tr>
+    <tr><td><%= f.label :detail_page_url %></td><td><%= f.url_field :detail_page_url %></td></tr>
+    <tr><td><%= f.label :uploader %></td><td><%= f.text_field :uploader %></td></tr>
+    <tr><td><%= f.label :source_format %></td><td><%= f.text_field :source_format %></td></tr>
+    <tr><td><%= f.label :source_bitrate %></td><td><%= f.text_field :source_bitrate %></td></tr>
+    <tr><td><%= f.label :source_bitrate_type %></td><td><%= f.text_field :source_bitrate_type %></td></tr>
+    <tr><td><%= f.label :source_frequency %></td><td><%= f.text_field :source_frequency %></td></tr>
+    <tr><td><%= f.label :source_channels %></td><td><%= f.text_field :source_channels %></td></tr>
+    <tr><td><%= f.label :userip %></td><td><%= f.text_field :userip %></td></tr>
+    <tr><td><%= f.label :status %></td><td><%= f.text_field :status %></td></tr>
+    <tr><td><%= f.label :identity %></td><td><%= f.text_field :identity %></td></tr>
+    <tr><td><%= f.label :legacy %></td><td><%= f.check_box :legacy %></td></tr>
+    <tr><td colspan="2"><%= f.submit nil, class: 'submit-button', data: {disable: true} %></td></tr>
+  </table>
+  <%= render_redirect_to_hidden_field_tag(@redirect_to) %>
+<% end %>

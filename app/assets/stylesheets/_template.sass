@@ -1,0 +1,67 @@
+@import mixins
+
+$front-color: #eeeeee
+$link-color: #6699ff
+$text-color: white
+$max-width: 320px - 36px
+
+$default-input-text-width: 50em
+$default-line-spacing: 12px
+$light-blue: hsl(200, 100, 70) // RGB: #66CCFF
+$border-color: hsla(200, 100, 70, 0.8)
+$border-color-light: hsla(200, 100, 70, 0.5)
+$default-border-decoration: 1px solid $border-color
+
+.default-input-text
+  padding: 2px 4px
+
+.default-textarea
+  padding: 6px 8px
+
+.default-button
+  padding: 2px 8px
+
+.default-hover-effect
+  &:hover
+    background-color: rgba(128, 128, 128, 0.2)
+
+.default-radius-box
+  border-radius: 4px
+
+.default-errormsg
+  color: #FF0000
+
+.default-table-layout
+  tr > td
+    padding: 0px 4px
+    vertical-align: top
+
+.data-list
+  @extend .default-table-layout
+  white-space: nowrap
+  tr
+    @extend .default-hover-effect
+    & > td
+      padding: 0px 12px
+      border-bottom: 1px solid $border-color
+
+.clearfix
+  &::after
+    content: ''
+    display: table
+    clear: both
+
+.noselect
+  +vendor-prefix(user-select, none)
+
+.fence > li
+  display: inline-block
+  &:not(:last-child)::after
+    content: '|'
+    padding: 0px 3px
+
+
+.list-style-type-none
+  padding: 0px
+  margin: 0px
+  list-style-type: none

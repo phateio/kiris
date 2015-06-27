@@ -1,0 +1,2 @@
+module Tracks::ImagesHelper
+end

@@ -1,0 +1,4 @@
+- if thread_editable?(item)
+  = form_tag url_for(action: 'show', id: item[:id]), method: :put, class: 'js-closezone hidden', remote: true do
+    = hidden_field_tag 'issue_id', item[:id]
+    = hidden_field_tag 'issue_status', 'CLOSED'

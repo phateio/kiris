@@ -1,0 +1,10 @@
+<%= content_tag :tr do %>
+  <%= content_tag :td, Playlist.human_attribute_name('track_id') %>
+  <%= content_tag :td, Track.human_attribute_name('title') %>
+  <%= content_tag :td, Playlist.human_attribute_name('nickname') %>
+  <%= content_tag :td, Playlist.human_attribute_name('userip') %>
+  <%= content_tag :td, Playlist.human_attribute_name('aliasip') %>
+  <%= content_tag :td, Playlist.human_attribute_name('useragent'), data: {flexible_width: '100%'} %>
+  <%= content_tag :td, t('form.edit') %>
+  <%= content_tag :td, t('form.delete') %>
+<% end %>

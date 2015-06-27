@@ -1,0 +1,7 @@
+<table class="niconico-tracks-list" data-flexible-table>
+  <%= render_niconico_track_columns_header %>
+  <% tracks.each do |track| %>
+    <%= render_niconico_track_columns(track) %>
+  <% end %>
+</table>
+<%= render_pagination(tracks) %>

@@ -1,0 +1,7 @@
+<%= render_flash_messages %>
+<%= render_object_error_messages(track) %>
+<%= form_for track, url: form_for_option_url, method: :patch, remote: true do |f| %>
+  <table class="niconico-track-form-fetch">
+    <tr><td><%= f.label :niconico %></td><td><%= f.text_field :niconico %></td><td><%= f.submit t('form.submit'), data: {disable: true} %></td></tr>
+  </table>
+<% end %>

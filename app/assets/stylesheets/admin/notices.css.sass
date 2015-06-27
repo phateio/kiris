@@ -1,0 +1,25 @@
+@import mixins
+@import template
+
+#noticeform
+  .buttons
+    padding-bottom: $default-line-spacing
+    text-align: right
+  input[name="dateline[]"]
+    width: 7em
+    border: none
+    text-align: center
+  input[name="subject[]"]
+    width: 100%
+    border: none
+  table tr
+    & > td.dateline
+      text-align: center
+    & > td.subject
+      min-width: 50em
+  .message
+    textarea[name="message"]
+      @extend .default-textarea
+      width: 100%
+      height: 8em
+      +vendor-prefix(box-sizing, border-box)

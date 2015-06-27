@@ -1,0 +1,7 @@
+<table class="search-list" data-flexible-table>
+  <%= render_history_columns_header %>
+  <% histories.each do |history| %>
+    <%= render_history_columns(history) %>
+  <% end %>
+</table>
+<%= render_pagination(histories) %>

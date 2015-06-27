@@ -1,0 +1,12 @@
+<%= content_tag :tr do %>
+  <%= content_tag :td, Track.human_attribute_name('created_at') %>
+  <%= content_tag :td, Track.human_attribute_name('title'), data: {flexible_width: '50%'} %>
+  <%= content_tag :td, Track.human_attribute_name('artist'), data: {flexible_width: '50%'} %>
+  <%= content_tag :td, Track.human_attribute_name('niconico') %>
+  <%= content_tag :td, Track.human_attribute_name('duration') %>
+  <%= content_tag :td, Track.human_attribute_name('uploader') %>
+  <%= content_tag :td, Track.human_attribute_name('status') %>
+  <%= content_tag :td, t('form.edit') %>
+  <%= content_tag :td, 'Review' %>
+  <%= content_tag :td, t('form.delete') %>
+<% end %>

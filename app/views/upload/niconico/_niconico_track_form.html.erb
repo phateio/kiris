@@ -1,0 +1,12 @@
+<%= render_flash_messages %>
+<%= render_object_error_messages(track) %>
+<%= form_for track, url: form_for_option_url, remote: true do |f| %>
+  <table class="niconico-track-form">
+    <tr><td><%= f.label :title %></td><td><%= f.text_field :title %></td></tr>
+    <tr><td><%= f.label :tags %></td><td><%= f.text_field :tags %></td></tr>
+    <tr><td><%= f.label :artist %></td><td><%= f.text_field :artist %></td></tr>
+    <tr><td><%= f.label :niconico %></td><td><%= f.object.niconico %><%= f.hidden_field :niconico %></td></tr>
+    <tr><td><%= f.label :uploader %></td><td><%= render_niconico_track_form_uploader(f) %></td></tr>
+    <tr><td colspan="2"><%= f.submit nil, class: 'submit-button', data: {disable: true} %></td></tr>
+  </table>
+<% end %>

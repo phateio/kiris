@@ -1,0 +1,12 @@
+.subpage
+  #speed
+    div
+      button.js-button-start type="button"
+        | Start
+      button.js-button-stop[type="button" disabled]
+        | Stop
+      span.downrate
+    video[type="video/mp4"]
+      p
+        | Your browser does not support the video tag.
+= render_debug_information

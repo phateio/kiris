@@ -1,0 +1,28 @@
+@import template
+
+#searchform
+  margin-bottom: $default-line-spacing
+  text-align: center
+  input[name="q"]
+    @extend .default-input-text
+    width: 400px
+  input[type="submit"]
+    @extend .default-button
+
+[data-route^="search-"]
+  .search-list
+    @extend .data-list
+    .numero, .request, .duration
+      width: 50px
+      text-align: center
+    .datetime
+      width: 150px
+      text-align: center
+    .title, .artist, .album
+      overflow: hidden
+      text-overflow: ellipsis
+    .image-count, .comment-count, .lyric-status
+      margin-left: 2px
+      color: #888888
+    .disabled
+      color: gray

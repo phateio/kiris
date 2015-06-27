@@ -1,0 +1,11 @@
+<%= content_tag :script, class: 'template-notice-item', type: 'text/template' do %>
+  <tbody class="item">
+    <tr>
+      <td class="id"><input name="id[]" type="hidden" value=""></td>
+      <td class="dateline"><input name="dateline[]" type="text" value="<%= Time.now.strftime('%F') %>"></td>
+      <td class="subject"><input name="subject[]" type="text" value=""></td>
+      <td><a class="cross js-button-delete" data-parent-level="3"></a></td>
+    </tr>
+    <tr><td colspan="4"><textarea name="message[]" class="hidden" placeholder="<%= t('form.content') %>"></textarea></td></tr>
+  </tbody>
+<% end %>

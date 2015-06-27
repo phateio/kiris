@@ -1,0 +1,84 @@
+@import i18n
+@import template
+
+\:lang(en)
+  +lang-english
+
+\:lang(ja)
+  +lang-japanese
+
+\:lang(zh-Hans)
+  +lang-chinese
+
+\:lang(zh-Hant)
+  +lang-chinese
+
+body
+  cursor: default
+  font-size: small // 13px
+  line-height: 1.9
+  background-color: #000000
+  color: $front-color
+  word-break: break-all
+  &.progress
+    cursor: progress
+
+input, button, textarea
+  border: 1px solid $border-color
+  font-family: inherit
+  background-color: rgba(0, 0, 0, 0.3)
+  color: $text-color
+
+input[disabled], button[disabled]
+  color: #666666
+
+input::-moz-focus-inner, button::-moz-focus-inner
+  border: 0px
+  padding: 0px
+  margin: 0px
+
+select
+  font-family: inherit
+  color: #000000
+
+textarea
+  font: inherit
+  line-height: inherit
+  word-break: inherit
+
+a
+  cursor: pointer
+  color: $link-color
+
+a:link
+  text-decoration: none
+
+a:visited
+  text-decoration: none
+
+a:hover
+  text-decoration: none
+
+a:active
+  text-decoration: none
+
+a.button
+  @extend .default-input-text
+  display: inline-block
+  padding: 0 8px
+  border: 1px solid #EEEEEE
+  background-color: rgba(0, 0, 0, 0.3)
+  color: #FFFFFF
+
+\:focus
+  outline: none
+
+kbd[data-type="key"]
+  display: inline-block
+  padding: 0.1em 0.5em
+  margin: 0 0.2em
+  border: 1px solid #CCCCCC
+  border-radius: 3px
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px white inset
+  background-color: #F7F7F7
+  color: #000000

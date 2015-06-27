@@ -1,0 +1,12 @@
+<div class="subpage">
+  <%= render_flash_messages %>
+  <%= content_tag :div, class: 'button-field' do %>
+    <%= link_to t('upload.niconico.new_track'), new_upload_niconico_path, class: 'button', remote: true %>
+  <% end %>
+  <% if @tracks.length > 0 %>
+    <%= render_niconico_track_list(@tracks) %>
+  <% else %>
+    <p>尚無任何歌曲上傳</p>
+  <% end %>
+</div>
+<%= render_debug_information %>

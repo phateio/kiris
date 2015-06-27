@@ -1,0 +1,4 @@
+<%
+  concat link_to(t('search.images'), track_images_path(track), remote: true)
+  concat content_tag(:span, "(#{track.images.size})", class: 'image-count')
+%>

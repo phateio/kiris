@@ -1,0 +1,5 @@
+<%= content_tag :div, class: 'item' do %>
+  <%= content_tag :div, render_track_comment_item_header(track_comment), class: 'header' %>
+  <%= content_tag :div, simple_content(track_comment.message), class: 'message' %>
+  <%= content_tag :div, track_comment.useragent, class: 'signature' %>
+<% end %>

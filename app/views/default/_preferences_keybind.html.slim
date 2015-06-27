@@ -1,0 +1,29 @@
+.keybinding-container
+  table.keybindings
+    tr
+      th colspan="2"
+        = t('preferences.hotkeys')
+    tr
+      td
+        kbd data-type="key"
+          | p
+      td
+        | #{t('player.play')} / #{t('player.stop')}
+    tr
+      td
+        kbd data-type="key"
+          | m
+      td
+        | #{t('player.mute')} / #{t('player.unmute')}
+    tr
+      td
+        kbd data-type="key"
+          | .
+      td
+        = t('player.volume_up')
+    tr
+      td
+        kbd data-type="key"
+          | ,
+      td
+        = t('player.volume_down')

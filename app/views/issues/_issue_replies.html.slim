@@ -1,0 +1,14 @@
+#issuereplies
+  - if item_replies.to_a.length > 0
+    - item_replies.each do |item_reply|
+      .itemblock
+        .header
+          = render_issue_reply_action(item_reply)
+          = render_dateline(item_reply)
+        .message
+          = markdown_format item_reply[:message], class: 'rendered-text js-outertext'
+          = render_issue_reply_edit_zone(item_reply)
+          = render_issue_reply_delete_zone(item_reply)
+        hr.horizon
+        .signature
+          = item_reply[:useragent]

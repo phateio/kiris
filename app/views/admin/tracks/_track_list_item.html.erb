@@ -1,0 +1,12 @@
+<%= content_tag :tr do %>
+  <%= content_tag :td, datetime_tag(track.created_at) %>
+  <%= content_tag :td, track.title, class: 'title', data: {tooltips_text: track.tags} %>
+  <%= content_tag :td, track.artist, class: 'artist' %>
+  <%= content_tag :td, render_admin_track_niconico_link(track) %>
+  <%= content_tag :td, track.duration_abbrtime %>
+  <%= content_tag :td, track.uploader %>
+  <%= content_tag :td, track.status %>
+  <%= content_tag :td, render_admin_track_edit_link(track) %>
+  <%= content_tag :td, render_admin_track_review_link(track) %>
+  <%= content_tag :td, render_admin_track_delete_link(track) %>
+<% end %>

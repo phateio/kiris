@@ -1,0 +1,20 @@
+= form_tag url_for(action: 'show', id: @item[:id]), method: :post, id: 'issuereplyform', remote: true do
+  table
+    tbody.title
+      tr
+        td
+          | Re: #{subject}
+    tbody.message
+      tr
+        td
+          textarea name="message" placeholder=t('form.content')
+    tbody.profile
+      tr
+        td
+          input name="nickname" type="text" value="" placeholder=t('form.nickname') data-option="nickname"
+    tfoot.buttons
+      tr
+        td
+          = submit_tag t('form.submit'), data: {disable: true}
+  .errormsg
+    = flash[:error]

@@ -1,0 +1,29 @@
+<div class="subpage">
+<p>標籤目錄重新規劃中，2014 新番請直接使用搜尋功能輸入動畫名稱尋找。</p><br/>
+<% if @items && @items.length > 0 %>
+<table class="category" data-flexible-table>
+<% @items.each do |item| %>
+  <% if item[:tid] == 0 %>
+  <tr class="title1">
+    <td data-flexible-width="50%"><%= item[:title] %></td>
+    <td data-flexible-width="50%"></td>
+  </tr>
+  <% elsif (/^\#.+\#$/ =~ item[:title]) != nil %>
+  <tr class="title2">
+    <td class="title"><%= item[:title] %></td>
+    <td class="comment"><%= item[:comment] %></td>
+  </tr>
+  <% else %>
+  <tr>
+    <% keyword = item[:keyword].present? ? item[:keyword] : item[:title] %>
+    <td class="title"><%= link_to item[:title], {controller: '/search', q: keyword}, remote: true %></td>
+    <td class="comment"><%= item[:comment] %></td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
+<% else %>
+<p>尚無任何紀錄</p>
+<% end %>
+</div>
+<%= render_debug_information %>

@@ -1,0 +1,6 @@
+<table class="playlist-list" data-flexible-table>
+  <%= render_admin_playlist_list_item_header %>
+  <% playlist_colle.each do |playlist| %>
+    <%= render_admin_playlist_list_item(playlist) %>
+  <% end %>
+</table>

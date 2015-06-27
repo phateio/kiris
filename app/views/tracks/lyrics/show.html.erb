@@ -1,0 +1,5 @@
+<div class="subpage">
+  <%= link_to t('form.edit'), edit_track_lyrics_path(@track), remote: true %>
+  <%= simple_content @lyric ? @lyric.text : '' %>
+</div>
+<%= render_debug_information %>

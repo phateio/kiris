@@ -1,0 +1,154 @@
+@import template
+
+#screenframe
+  display: flex
+  flex-flow: column
+  position: fixed
+  top: 0px
+  left: 0px
+  width: 100%
+  height: 100%
+
+#container
+  flex: 1
+  position: relative
+  overflow: hidden
+  #scrolldiv
+    position: absolute
+    height: 100%
+    width: 100% !important
+    overflow: auto
+  .debuginfo
+    padding: 12px 18px
+    text-align: right
+    color: #888888
+
+#homelinkdiv
+  display: none
+  text-align: right
+  a
+    @extend .noselect
+    display: inline-block
+    position: relative
+    margin-right: 16px
+    z-index: 2000
+    font-weight: normal
+    color: #666666
+    &:hover
+      color: #444444
+    &::before
+      content: "×"
+      display: inline-block
+      line-height: 48px
+      font-size: 48px
+      cursor: pointer
+      text-align: center
+
+#tooltips
+  z-index: 9999
+  position: absolute
+  padding: 2px 6px
+  color: #EEEEEE
+  background-color: hsla(200, 100%, 30%, 0.7)
+  &.arrow-left::after
+    content: ''
+    display: inline-block
+    position: absolute
+    left: -11px
+    top: 3px
+    width: 0px
+    height: 0px
+    border-top: 11px solid transparent
+    border-bottom: 11px solid transparent
+    border-right: 11px solid hsla(200, 100%, 30%, 0.7)
+
+.subpage
+  display: table
+  padding: 0px 18px 18px 18px
+  margin: 0px auto
+  -webkit-user-select: text
+  -moz-user-select: text
+  -khtml-user-select: text
+  -ms-user-select: text
+
+.fence > li
+  display: inline-block
+  &:not(:last-child)::after
+    content: '|'
+    padding: 0px 3px
+
+.pagination
+  float: right
+  margin-top: $default-line-spacing
+  .first a, .prev a, .page a, .next a, .last a, .current, .gap
+    float: left
+    margin-left: 4px
+    padding: 0px 8px
+  .first a, .prev a, .page a, .next a, .last a
+    color: #FFFFFF
+    border: 1px solid #C2D5E3
+    &:hover
+      color: $link-color
+      border: 1px solid $link-color
+  .current
+    color: #888888
+    border: 1px solid #888888
+  .gap
+    color: #888888
+
+.cross
+  font-size: larger
+  color: #FFFFFF
+  @extend .noselect
+  &:hover
+    font-weight: bold
+  &::after
+    content: "×"
+    display: inline-block
+    width: 1.5em
+    height: 100%
+    cursor: pointer
+    text-align: center
+
+.nojs_banner
+  z-index: 1001
+  position: fixed
+  bottom: 40px
+  right: 12px
+  padding: 1px 8px
+  border: 1px dashed #888888
+  background-color: rgba(0, 0, 0, 0.7)
+  color: #EE0000
+
+.dummy
+  display: inline-block
+  position: fixed
+  top: 100%
+  left: 0px
+  width: auto
+  height: auto
+  visibility: hidden
+  white-space: nowrap
+
+.flatblock
+  cursor: default
+  border: none
+  background-color: transparent
+
+.source-code
+  font-family: 'Source Code Pro', Inconsolata, monospace
+
+.cleared
+  clear: both
+
+.hidden
+  display: none
+
+.symbol
+  font-family: Symbol
+
+.transparent
+  color: transparent !important
+
+.nowrap
+  white-space: nowrap

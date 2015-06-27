@@ -1,0 +1,7 @@
+- if reply_editable?(item_reply)
+  = form_tag url_for(action: 'show', id: @item[:id]), method: :put, class: 'js-editzone hidden', remote: true do
+    = hidden_field_tag 'reply_id', item_reply[:id]
+    = text_area_tag 'message', item_reply[:message], class: 'js-innertext'
+    .buttons
+      = button_tag t('form.cancel'), class: 'js-button-cancel', type: 'button'
+      = submit_tag t('form.update'), data: {disable: true}

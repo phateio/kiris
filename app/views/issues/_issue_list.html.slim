@@ -1,0 +1,14 @@
+.issue-list
+  - if items.to_a.length > 0
+    ul
+      - items.each do |item|
+        li
+          span.number ##{get_issue_serial(item[:id])}
+          - typeid_locale = t("issues.typeid_#{item[:typeid]}")
+          - title = "[#{typeid_locale}] #{item[:subject]}"
+          .subject
+            = link_to title, {action: 'show', id: item[:id]}, class: 'subject', remote: true
+          = render_dateline(item)
+  - else
+    p
+      = t('issues.issue_list_empty')

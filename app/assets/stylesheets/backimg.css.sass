@@ -1,0 +1,46 @@
+//= depend_on_asset 'bg_line.png'
+
+@import mixins
+
+#backimg_filter, #backimg_front, #backimg_back, #backimg_dark
+  position: fixed
+  top: 0px
+  left: 0px
+  width: 100%
+  height: 100%
+
+#backimg_front, #backimg_back
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: 50% 30%
+  background-color: #000000
+
+#backimg_filter
+  z-index: -10
+  background-image: image-url("bg_line.png")
+
+#backimg_dark
+  z-index: -10
+  background-color: rgba(0, 0, 0, 0.7)
+
+#backimg_front
+  z-index: -20
+  background-image: none
+  +vendor-prefix(animation, fadeInBackimg 5s ease-out forwards)
+
+#backimg_back
+  z-index: -30
+  background-image: none
+  +vendor-prefix(animation, fadeOutBackimg 5s linear forwards)
+
++keyframes(fadeInBackimg)
+  from
+    opacity: 0
+  to
+    opacity: 1
+
++keyframes(fadeOutBackimg)
+  from
+    opacity: 1
+  to
+    opacity: 0

@@ -1,0 +1,27 @@
+@import template
+
+[data-route^="track_migrations-"]
+  td
+    padding-right: 8px
+    vertical-align: top
+  td:first-child
+    padding-left: 8px
+  input[type="text"], input[type="datetime"], input[type="url"]
+    @extend .default-input-text
+    width: 320px
+  .button-field
+    margin-bottom: $default-line-spacing
+    @extend .clearfix
+    & > *
+      float: right
+  .track_migration-list
+    @extend .data-list
+    .title, .artist, .album
+      overflow: hidden
+      text-overflow: ellipsis
+    .count
+      margin-left: 2px
+      color: #888888
+  .submit-button
+    margin-top: $default-line-spacing
+    float: right

@@ -1,0 +1,10 @@
+.subpage
+  - if @item.to_a.length > 0
+    = link_to t('form.refresh'), {}, id: 'issuerefresh', class: 'button', remote: true
+    = render_issue_thread(@item)
+    = render_issue_replies(@item_replies)
+    = render_issue_reply_form(@item)
+  - else
+    p
+      = t('issues.issue_not_found')
+= render_debug_information

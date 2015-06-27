@@ -1,0 +1,73 @@
+//= depend_on_asset 'gear.png'
+
+@import template
+
+$light-blue: #66ccff
+$light-blue-grand: rgba(69, 143, 214, 0.3)
+$light-blue-edges: rgba(69, 143, 214, 0.5)
+
+#navbar
+  height: 29px
+  line-height: 29px
+  background-color: rgba(0, 0, 0, 0.6)
+  font-size: 13px
+  #sitemap
+    display: inline-block
+    position: absolute
+    bottom: 0px
+    right: 0px
+    vertical-align: bottom
+    white-space: nowrap
+    & > ul
+      @extend .list-style-type-none
+      display: inline-block
+      vertical-align: bottom
+      white-space: nowrap
+      & > li
+        display: inline-block
+        vertical-align: bottom
+        white-space: nowrap
+    li > a
+      display: block
+      padding: 0px 5px
+      border-top: 1px solid transparent
+      color: #EEEEEE
+    li[data-hover]:hover > a
+      border-top: 1px solid $light-blue-edges
+      box-shadow: 0px 4px 32px -4px $light-blue
+      background-color: $light-blue-grand
+    li > a[href="/preferences"]
+      width: 16px
+      border-left: 1px solid rgb(50, 51, 52)
+      background-image: image-url("gear.png")
+      background-repeat: no-repeat
+      background-position: 50% 50%
+      overflow: hidden
+      text-indent: 100%
+      color: transparent
+      white-space: nowrap
+    .sub-menu
+      @extend .list-style-type-none
+      position: fixed
+      right: 25px
+      bottom: 40px
+      background-color: rgba(0, 0, 0, 0.6)
+      li
+        padding: 0px 5px
+      li[data-hover]:hover > a
+        border-top: 1px solid $light-blue-edges
+        box-shadow: 0px 4px 32px -4px $light-blue
+        background-color: $light-blue-grand
+    .member-menu>li>a
+      padding-right: 10px
+
+@media (min-width: 569px)
+  .mobile-sub-menu
+    display: inline-block !important
+    position: static !important
+    background-color: transparent !important
+    li
+      display: inline-block !important
+      padding: 0px !important
+  .mobile-dropdown-menu-button
+    display: none !important

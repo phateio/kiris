@@ -1,0 +1,344 @@
+zh-Hans:
+  activerecord:
+    attributes:
+      history:
+        created_at: "播放时间"
+        id: ID
+        updated_at: "最后更新时间"
+      image:
+        created_at: "新增时间"
+        id: ID
+        identity: "身分"
+        nickname: "昵称"
+        rate: "评价"
+        source: "图片来源"
+        status: "状态"
+        updated_at: "最后更新时间"
+        url: "图片网址"
+        userip: IP地址
+        verified: "已认证"
+      track:
+        album: "专辑"
+        album_cover: "专辑封面"
+        artist: "演出者"
+        asin: ASIN
+        cooldown_time: "冷却时间"
+        count: "播放次数"
+        created_at: "新增时间"
+        detail_page_url: "商品页面"
+        duration: "时间长度"
+        id: ID
+        identity: "身分"
+        label: "唱片公司"
+        legacy: "遗产"
+        mtime: "修改时间"
+        nexttime: "冷却结束时间"
+        niconico: Niconico ID
+        number: No.
+        release_date: "发售日期"
+        source_bitrate: "来源比特率"
+        source_bitrate_type: "来源比特率类型"
+        source_channels: "来源声道数"
+        source_format: "来源格式"
+        source_frequency: "来源取样频率"
+        status: "状态"
+        szhash: "哈希值"
+        tags: "标签"
+        title: "歌曲名称"
+        updated_at: "最后更新时间"
+        uploader: "上传者"
+        userip: IP地址
+      track_migration:
+        album: "专辑"
+        album_cover: "专辑封面"
+        artist: "演出者"
+        asin: ASIN
+        cooldown_time: "冷却时间"
+        count: "播放次数"
+        created_at: "新增时间"
+        detail_page_url: "商品页面"
+        duration: "时间长度"
+        id: ID
+        identity: "身分"
+        label: "唱片公司"
+        legacy: "遗产"
+        mtime: "修改时间"
+        nexttime: "冷却结束时间"
+        niconico: Niconico ID
+        number: No.
+        release_date: "发售日期"
+        source_bitrate: "来源比特率"
+        source_bitrate_type: "来源比特率类型"
+        source_channels: "来源声道数"
+        source_format: "来源格式"
+        source_frequency: "来源取样频率"
+        status: "状态"
+        szhash: "哈希值"
+        tags: "标签"
+        title: "歌曲名称"
+        updated_at: "最后更新时间"
+        uploader: "上传者"
+        userip: IP地址
+      track_migration_comment:
+        created_at: "新增时间"
+        id: ID
+        identity: "身分"
+        message: "讯息"
+        nickname: "昵称"
+        rate: "评价"
+        status: "状态"
+        updated_at: "最后更新时间"
+        useragent: "用户代理"
+        userip: IP地址
+    errors:
+      models:
+        image:
+          attributes:
+            source:
+              invalid_format: "有误！目前仅接受 pixiv, piapro 或ニコニコ静画 的作品链接"
+            url:
+              invalid_content_type: "文件格式有误！仅接受 JPG 及 PNG 档案"
+              invalid_format: "格式有误！仅接受 JPG 及 PNG 档案"
+  admin:
+    images:
+      background_management: "背景管理"
+    notices:
+      new_notification: "新增通知"
+      notification_management: "通知管理"
+    playlist:
+      playlist_management: "播放列表管理"
+      title: "播放列表"
+    track:
+      review_title: "歌曲复审"
+      review_title_with_index: "歌曲复审#%{id}"
+      title: "歌曲"
+      title_with_index: "歌曲#%{id}"
+      track_management: "歌曲管理"
+    track_migration:
+      title: "歌曲变更"
+      track_migration_management: "歌曲变更管理"
+  form:
+    cancel: "取消"
+    close: "关闭"
+    content: "内文"
+    delete: "删除"
+    edit: "编辑"
+    email: "信箱"
+    export: "汇出"
+    import: "汇入"
+    invalid_parameters: "窗体参数无效"
+    nickname: "昵称"
+    open: "开启"
+    preview: "预览"
+    refresh: "重新整理"
+    save: "储存"
+    submit: "送出"
+    title: "标题"
+    tripcode: Tripcode
+    update: "更新"
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total
+      one_page:
+        display_entries: Displaying <b>all %{count}</b> %{entry_name}
+    select:
+      prompt: "请选择"
+    submit:
+      create: "新增"
+      submit: "储存"
+      update: "更新"
+  images:
+    image_not_found: "此图片不存在或已经被移除"
+    image_rank_level: |-
+      Rank 5 - 有图片来源且与歌曲相符
+      Rank 4 - 无图片来源但与歌曲相符
+      Rank 3 - 有图片来源但与歌曲无直接关系
+      Rank 2 - 无图片来源且与歌曲无直接关系
+      Rank 1 - R15
+      Rank 0 - 无法判断
+      Rank ⑨ - BAKA
+    image_rank_standard: "图片评分标准"
+    image_rules_caption: "歌曲背景规则"
+    image_rules_content: |-
+      请勿上传动画截图。
+      请避免任何包含放大缩小之类的修图行为。
+      图片分辨率必须 960 × 720 以上，若有特殊情况则依个案处理。
+      图片网址只允许 <a href="http://imgur.com/" target="_blank">imgur.com</a> 的 Direct Link (<a href="http://i.imgur.com/gM09wTV.jpg" target="_blank">范例</a>)
+      评分为 Rank 2 以上的图片才会列入该首歌曲随机背景来源。
+    image_url: "图片网址"
+    image_url_placeholder: http://i.imgur.com/example.png
+    invalid_status: "无效状态"
+    nickname_tip: "会显示在首页上请认真输入，若不知道要填什么留空即可"
+    no_images_to_show: "目前尚无任何图片"
+    posted_date: "上传日期"
+    source_url: "图片来源"
+    source_url_placeholder: "绘师的 pixiv, piapro 或 ニコニコ静画 作品链接 (若没有或不清楚留空即可)"
+    status: "状态"
+    status_msg:
+      rank_0: Rank 0
+      rank_1: Rank 1
+      rank_2: Rank 2
+      rank_3: Rank 3
+      rank_4: Rank 4
+      rank_5: Rank 5
+      rank_baka: Rank ⑨
+      rejected_duplicate: "重复图片"
+      rejected_jpeg_artifacts: JPEG 壓縮失真
+      rejected_low_resolution: "分辨率过低"
+      rejected_other: "其他"
+      rejected_poor_quality: "画质不佳"
+      rejected_post_processing: "后期加工"
+      rejected_replaced: "取代"
+      rejected_resized: "图片明显经过变形处理"
+      rejected_screenshot: "螢幕截图"
+      rejected_source_inconsistent: "图片与图片来源不一致"
+      rejected_subpar_artwork: "欠佳的作品"
+      rejected_user_created_content: "用户制作的内容"
+      rejected_watermark: "含有后期加工浮水印"
+      rejected_wrong_place: "圖片與歌曲無關"
+    track_title: "歌曲名称"
+  issues:
+    content_cannot_be_empty: "内容不能为空"
+    issue: "议题"
+    issue_list_empty: "目前还没有任何议题"
+    issue_not_found: "此议题不存在或已经被删除"
+    issues: "议题"
+    list_of_issues: "议题列表"
+    new_issue: "建立新议题"
+    title_cannot_be_empty: "标题不能为空"
+    typeid_appeal: "申诉"
+    typeid_invalid: Type ID 无效
+    typeid_question: "问题"
+    typeid_suggestion: "建议"
+  members:
+    email: "信箱"
+    login: "登入"
+    login_failed: "用户名称或密码有误"
+    logout: "注销"
+    password: "密码"
+    username: "账号"
+  metainfo:
+    description: "飞特网络电台是以播放动漫配乐及同人音乐为主的实验性网络电台，仅用来测试自行研发之自动化网络系统，纯学术用途"
+    sitename: "飞特网络电台"
+    sitetags: ACG,Radio,动漫音乐,游戏音乐,同人音乐
+  navbar:
+    category: "标签目录"
+    chat: "聊天室"
+    faq: "常见问题"
+    feedback: "意见提供"
+    forum: "动漫论坛"
+    history: "历史纪录"
+    home: "首页"
+    images: "歌曲背景"
+    latest: "最近新增"
+    menu: "菜单"
+    news: "最新消息"
+    preferences: "偏好设定"
+    search: "点歌系统"
+    speed: "网络测速"
+    support: "技术支持"
+    upload: "上传音乐"
+  player:
+    mute: "静音"
+    play: "播放"
+    stop: "停止"
+    unmute: "取消静音"
+    volume_down: "降低音量"
+    volume_up: "提高音量"
+  preferences:
+    auto_background: "自动更换背景"
+    function: "功能"
+    hotkeys: "快捷键"
+    nickname_placeholder: No Name
+    show_danmaku: "显示弹幕讯息"
+    show_lyrics: "显示歌词"
+  search:
+    comments: "评论"
+    images: "背景"
+    lyrics: "歌词"
+    random_search: "随机搜索"
+    request: "点歌"
+    request_msg:
+      artist_in_range_on_playlist: "两首范围内已经有相同的演出者！"
+      invalid_referrer: "不明的来源网址，请使用 %{host} 域名浏览和点歌"
+      ip_already_on_playlist: "播放列表上已经至少有一首您点播的歌曲！"
+      ip_of_proxies: "请勿使用代理服务器点歌。"
+      ip_of_torel: "请勿使用 Tor 网络点歌。"
+      ip_range_on_playlist: "播放列表上已经有 %{count} 首以上来自您的网段点播的歌曲！"
+      ip_reverse_dns_not_match: "您的 IP 正反解不一致因此无法点歌，请联络您的 ISP 或网络管理者修正此问题。"
+      max_tracks_on_playlist: "已达播放列表上限！请稍候再试…"
+      request_success: "点歌成功！"
+      track_already_on_playlist: "点播的歌曲已经在播放列表上！"
+      track_in_cooldown_time: "点播的歌曲还在冷却时间中！"
+      track_not_found: "此歌曲不存在或已经被移除！"
+      track_not_ready: "点播的歌曲还在准备中。"
+      track_same_artist_on_playlist: "相同的演出者已经在播放列表上！"
+      track_same_name_in_history: "相同的歌曲名称已经在 %{hours} 小时内播放过！"
+      track_same_name_on_playlist: "相同的歌曲名称已经在播放列表上！"
+      track_with_cooldown_time_in_history: "指定冷却时间的歌曲在 %{hours} 小时内只能播放一首！"
+      track_with_cooldown_time_on_playlist: "固定冷却时间的歌曲已经有一首在播放列表上！"
+    request_rules_caption: "点歌规则"
+    request_rules_content: |-
+      同一首歌曲 25 小时内只能点播一次。
+      相同的演出者不能重复出现在播放列表上。
+      一次限点播一首，播放列表上没有其它人点播时才能连续点播。
+      冷却时间结束后 8 天内又再度被点播的歌曲会增加额外的冷却时间。
+    search: "搜索"
+    search_not_found: "找不到与您的查询相符的数据"
+  support:
+    jp_no_solution: "提示：您正在使用的浏览器无法支持 HTML5 播放器，请升级至最新版本或是改使用 Google Chrome 浏览器。"
+    lte_ie8_banner: "警告：您正在使用的浏览器版本已经过旧，可能会有许多功能无法正常运作，请升级至 Internet Explorer 9 以上或是改使用 Google Chrome 浏览器。"
+    nojs_banner: "提示：您必须启用 JavaScript 才能让所有功能正常运作，包括歌单显示、点歌功能、网页播放器、聊天室……等等。"
+  system_mailer:
+    new_issue_notify:
+      subject: "新议题: %{subject}"
+    new_issue_reply_notify:
+      subject: "[%{subject}] 有新回复"
+  tracks:
+    comments:
+      title: "歌曲讨论"
+      title_with_track_index: "歌曲#%{id} 讨论"
+    title_with_index: "歌曲#%{id}"
+  upload:
+    niconico:
+      acceptable_tags_not_found: "影片未包含可接受的标签"
+      blank_niconico_id: Niconico ID 不能为空
+      comments:
+        comments_title: Niconico#%{id} 讨论
+      duplicate_niconico_id: "重复的 Niconico ID"
+      invalid_niconico_id: "无效的 Niconico ID"
+      movie_type_not_supported: "%{movie_type}: 未知的影片格式，請聯絡管理員以支援此格式"
+      new_track: "新增歌曲"
+      niconico_id_not_found: "此 Niconico 影片不存在或已经被删除"
+      reserved_tags_not_found: "未包含预留的标签"
+      title: Niconico 歌曲
+      track_tag_format_caption: "歌曲标签格式"
+      track_tag_format_content: |-
+        一般作品：{预留标签},原文名称,其他翻译名称(中文、英文…之类的)
+        VOCALOID：{预留标签},作曲者
+        东方Project：{预留标签},作曲者(同人团体名称)
+        　
+        范例：
+        一般作品：niconico,北斗の拳,北斗神拳
+        VOCALOID：niconico,VOCALOID,ギガP
+        东方Project：niconico,東方Project,DiGiTAL WiNG
+        　
+        中文标签请统一使用正体中文。
+        没有正确标签的歌曲将删除上传者昵称。
+      upload_rules_caption: "上传规则"
+      upload_rules_content: |-
+        影片播放次数必须大于 10,000。
+        影片必须包含任一标签：VOCALOID、UTAU、東方アレンジ、東方ヴォーカル、歌ってみた、音楽。
+        新增的音乐还需要经过转档处理后才能开始接受点播。
+        最后是否新增网站管理员拥有最终决定权。
+        原始影片如果遭到删除电台也会在例行检查之后删除相关纪录。
+        目前系统仍在测试中，如有任何建议欢迎至右下角「意见提供」提出。
+      view_counter_not_enough: "影片播放次数必须大于 %{count}"
+  views:
+    pagination:
+      first: "&laquo; 第一页"
+      last: "最后一页 &raquo;"
+      next: "下一页 &rsaquo;"
+      previous: "&lsaquo; 上一页"
+      truncate: "&hellip;"

@@ -1,0 +1,20 @@
+<div class="subpage">
+  <%= button_to t('form.export'), {action: 'export'}, method: :get, class: 'button' %>
+  <%= form_tag({action: 'import'}, method: :post, multipart: true) do %>
+    <%= label_tag 'destroy_all', 'Destroy all?' %>
+    <%= check_box_tag 'destroy_all' %>
+    <%= file_field_tag 'attachment' %>
+    <%= submit_tag t('form.import'), data: {disable: true} %>
+  <% end %>
+</div>
+<div class="subpage image-list">
+  <% if @images.length > 0 %>
+    <% @images.each do |image| %>
+      <%= render_admin_image_list_item(image) %>
+    <% end %>
+    <%= render_pagination(@images) %>
+  <% else %>
+    <p><%= t('images.no_images_to_show') %></p>
+  <% end %>
+</div>
+<%= render_debug_information %>

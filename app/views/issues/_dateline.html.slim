@@ -1,0 +1,5 @@
+.dateline
+  ul.fence
+    = get_author_with_tripcode_and_admin_address_peek_column(item)
+    li
+      = datetime_tag item[:dateline]

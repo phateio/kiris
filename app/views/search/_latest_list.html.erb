@@ -1,0 +1,7 @@
+<table class="search-list" data-flexible-table>
+  <%= render_latest_columns_header %>
+  <% tracks.each do |track| %>
+    <%= render_latest_columns(track) %>
+  <% end %>
+</table>
+<%= render_pagination(tracks) %>

@@ -1,0 +1,25 @@
+<%= form_for image, url: track_images_path(image.track), method: :post, remote: true do |f| %>
+  <table>
+    <tbody class="title">
+      <tr><td><%= t('images.track_title') %></td><td><%= image.track.long_title %></td></tr>
+    </tbody>
+    <tbody class="data">
+      <tr>
+        <td><%= f.label :url %></td>
+        <td><%= f.url_field :url, placeholder: t('images.image_url_placeholder') %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :source %></td>
+        <td><%= f.url_field :source, placeholder: t('images.source_url_placeholder') %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :nickname %></td>
+        <td><%= f.text_field :nickname, placeholder: t('preferences.nickname_placeholder'), data: {option: 'nickname'} %> (<%= t('images.nickname_tip') %>)</td>
+      </tr>
+    </tbody>
+    <tfoot class="buttons">
+      <tr><td colspan="2"><%= button_tag t('form.preview'), type: 'button', class: 'js-preview' %> <%= f.submit nil, data: {disable: true} %></td></tr>
+    </tfoot>
+  </table>
+  <%= render_object_error_messages(image) %>
+<% end %>

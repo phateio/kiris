@@ -1,0 +1,6 @@
+<table class="track-list" data-flexible-table>
+  <%= render_admin_track_list_item_header %>
+  <% tracks.each do |track| %>
+    <%= render_admin_track_list_item(track) %>
+  <% end %>
+</table>

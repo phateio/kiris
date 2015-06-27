@@ -1,0 +1,217 @@
+.subpage
+  #support
+    p
+      | 飛特電台目前還沒有專用播放器或 App，但電台使用的串流為標準 SHOUTcast 協定，因此市面上很多現有程式都能支援播放。
+    hr.horline
+    = link_to 'https://itunes.apple.com/us/app/fstream/id289892007?mt=8', target: '_blank'
+      = image_tag 'app-store-button-95.png', size: '134x45', class: 'appicon', alt: 'App Store'
+    = link_to 'https://play.google.com/store/apps/details?id=com.android.DroidLiveLite', target: '_blank'
+      = image_tag 'google-play-button-95.png', size: '137x45', class: 'appicon', alt: 'Google Play'
+    table.support-list
+      thead
+
+      tbody
+        tr
+          td
+            | 名稱
+          td
+            | 平台需求
+          td
+            | 播放功能
+          td
+            | 同步顯示歌名
+          td
+            | 支援 UTF-8 歌名
+          td
+            | 其他說明
+        tr
+          td
+            | Internet Explorer
+          td
+            | Windows 7 以上
+          td
+            | -
+          td
+            | -
+          td
+            | -
+          td
+            | 9.0+
+        tr
+          td
+            | Mozilla Firefox
+          td
+            | 支援多種平台
+          td
+            | -
+          td
+            | -
+          td
+            | -
+          td
+            | 26.0+
+        tr
+          td
+            | Google Chrome
+          td
+            | 支援多種平台
+          td
+            | -
+          td
+            | -
+          td
+            | -
+          td
+            | 31.0+
+        tr
+          td
+            | Apple Safari
+          td
+            | OS X
+          td
+            | -
+          td
+            | -
+          td
+            | -
+          td
+            | 7.0+
+      tbody
+        tr
+          td
+            | FStream
+          td
+            | iOS 4.0+
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | -
+        tr
+          td
+            | XiiaLive
+          td
+            | Android 1.6+
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | -
+      tbody
+        tr
+          td
+            | foobar2000
+          td
+            | Windows XP SP2 以上
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | -
+        tr
+          td
+            | iTunes
+          td
+            | Windows, OS X
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | -
+      tbody
+        tr
+          td
+            | Winamp
+          td
+            | 支援多種平台
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | 某些預設系統語系以外的文字，如韓文可能會讓播放器發生錯誤
+        tr
+          td
+            | KMPlayer
+          td
+            | Windows XP SP2 以上
+          td
+            | Yes
+          td
+            | Yes
+          td
+            | No
+          td
+            | -
+        tr
+          td
+            | PotPlayer
+          td
+            | Windows XP SP2 以上
+          td
+            | Yes
+          td
+            | No
+          td
+            | No
+          td
+            | -
+        tr
+          td
+            | Windows Media Player
+          td
+            | Windows 全版本
+          td
+            | Yes
+          td
+            | No
+          td
+            | No
+          td
+            | 有重複播放暫存檔問題 *極不推薦*
+        tr
+          td
+            | PSP Radio
+          td
+            | PlayStation Portable
+          td
+            | Yes
+          td
+            | No
+          td
+            | No
+          td
+            | 下載「PLS 播放清單」放到 PlayLists 資料夾內即可收聽
+    hr.horline
+    ul.fence
+      li
+        a href="/phate.m3u"
+          | M3U播放清單
+      li
+        a href="/phate.pls"
+          | PLS播放清單
+      li
+        | 音樂串流網址：
+        input.address.source-code type="text" value="http://phate.io/listen.mp3"
+    hr.horline
+    p
+      | 收聽方式：下載 M3U 或 PLS 播放清單後以 App 或播放器開啟，或手動新增「音樂串流網址」播放。
+= render_debug_information
+script
+  | $('#support .address').on('click', function() {
+  |   this.select();
+  | }); 

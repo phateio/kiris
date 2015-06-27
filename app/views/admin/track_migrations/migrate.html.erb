@@ -1,0 +1,4 @@
+<div class="subpage">
+  <%= audio_tag(@track.szhash_url, controls: true) %>
+  <%= render_admin_track_form(@track, migrate_admin_track_migration_path(@track_migration)) %>
+</div>

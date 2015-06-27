@@ -1,0 +1,7 @@
+<div class="subpage">
+  <%= content_tag :div, class: 'button-field' do %>
+    <%= link_to 'Add new playlist', new_admin_playlist_path, class: 'button', remote: true %>
+  <% end %>
+  <%= render_admin_playlist_list(@playlist_colle) %>
+  <%= render_pagination(@playlist_colle) %>
+</div>

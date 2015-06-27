@@ -1,0 +1,6 @@
+<table class="statistic-list">
+  <%= render_upload_statistic_list_columns_header %>
+  <% statistics.each_with_index do |statistic, index| %>
+    <%= render_upload_statistic_list_columns(statistic, index) %>
+  <% end %>
+</table>

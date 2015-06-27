@@ -1,0 +1,6 @@
+.subpage
+  #issuepanel
+    .buttons
+      = link_to t('issues.new_issue'), {action: 'new'}, class: 'button', remote: true
+    = render_issue_list(@items)
+= render_debug_information

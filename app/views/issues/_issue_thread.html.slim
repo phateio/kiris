@@ -1,0 +1,20 @@
+#issuethread
+  .title
+    .subject
+      | [
+      = t("issues.typeid_#{item[:typeid]}")
+      | ] 
+      = item[:subject]
+  .itemblock
+    .header
+      = render_issue_thread_action(item)
+      = render_dateline(item)
+    .message
+      = markdown_format item[:message], class: 'rendered-text js-outertext'
+      = render_issue_thread_edit_zone(item)
+      = render_issue_thread_open_zone(item)
+      = render_issue_thread_close_zone(item)
+      = render_issue_thread_delete_zone(item)
+    hr.horizon
+    .signature
+      = item[:useragent]

@@ -1,0 +1,5 @@
+<%= form_tag do %>
+  <%= hidden_field_tag 'image_id', image.id %>
+  <%= select_tag 'status', options_for_select(status_msgs, 'RANK_0') %>
+  <%= submit_tag t('form.submit'), data: {disable: true} %>
+<% end %>

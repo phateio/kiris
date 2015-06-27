@@ -1,0 +1,7 @@
+- if thread_editable?(item)
+  = form_tag url_for(action: 'show', id: item[:id]), method: :put, class: 'js-editzone hidden', remote: true do
+    = hidden_field_tag 'issue_id', item[:id]
+    = text_area_tag 'message', item[:message], class: 'js-innertext'
+    .buttons
+      = button_tag t('form.cancel'), class: 'js-button-cancel', type: 'button'
+      = submit_tag t('form.update'), data: {disable: true}

@@ -1,0 +1,17 @@
+<div class="subpage">
+<%= form_tag login_path, method: :post, id: 'loginform', remote: true do %>
+  <table>
+    <tbody class="account">
+      <tr><td><label for="username"><%= t('members.email') %></label></td></tr>
+      <tr><td><input id="username" name="username" type="text" value="<%= @username %>" placeholder="example@gmail.com" autofocus></td></tr>
+      <tr><td><label for="password"><%= t('members.password') %></label></td></tr>
+      <tr><td><input id="password" name="password" type="password" value=""></td></tr>
+    </tbody>
+    <tfoot class="buttons">
+      <tr><td><input type="submit" value="<%= t('members.login') %>" data-disable="true"></td></tr>
+    </tfoot>
+  </table>
+  <div class="errormsg"><%= flash[:error] %></div>
+<% end %>
+</div>
+<%= render_debug_information %>

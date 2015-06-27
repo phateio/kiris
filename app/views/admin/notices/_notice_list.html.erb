@@ -1,0 +1,13 @@
+<table class="js-notice-list">
+    <% notices.each do |notice| %>
+      <tbody class="item">
+        <tr>
+          <td class="id"><input name="id[]" type="hidden" value="<%= notice.id %>"></td>
+          <td class="dateline"><input name="dateline[]" class="js-flatedit flatblock" type="text" value="<%= notice.dateline %>"></td>
+          <td class="subject"><input name="subject[]" class="js-flatedit flatblock" type="text" value="<%= notice.subject %>"></td>
+          <td><a class="cross js-button-delete" data-parent-level="3"></a></td>
+        </tr>
+        <tr><td colspan="4"><textarea name="message[]" class="hidden" placeholder="<%= t('form.content') %>"><%= notice.message %></textarea></td></tr>
+      </tbody>
+    <% end %>
+</table>

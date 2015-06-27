@@ -1,0 +1,6 @@
+ul.js-dropdown-menu.noselect
+  li data-hover="true"
+    ul.sub-menu.mobile-sub-menu.hidden
+      - navbar_items.each do |item|
+          = content_tag :li, link_to(item[:text], item[:url], item[:link_options]), data: {hover: true}
+    a.mobile-dropdown-menu-button = t('navbar.menu')

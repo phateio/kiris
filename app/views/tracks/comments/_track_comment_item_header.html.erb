@@ -1,0 +1,4 @@
+<%= content_tag :ul, class: 'nickname-datetime' do %>
+  <%= content_tag :li, render_track_nickname_with_tripcode(track_comment) %>
+  <%= content_tag :li, datetime_tag(track_comment.created_at) %>
+<% end %>

@@ -1,0 +1,10 @@
+<div class="subpage">
+  <%= render partial: 'search_form' %>
+  <% if @tracks.length > 0 %>
+    <%= render_search_list(@tracks) %>
+  <% else %>
+    <p><%= t('search.search_not_found') %></p>
+  <% end %>
+</div>
+<script>$('.search-list .request a[data-track-id]').trigger('refresh');</script>
+<%= render_debug_information %>

@@ -1,0 +1,10 @@
+<div class="subpage">
+  <%= render partial: 'search_form' %>
+  <% if @tracks.length > 0 %>
+    <%= render_latest_list(@tracks) %>
+  <% else %>
+    <p>最近 30 天內沒有新增歌曲</p>
+  <% end %>
+</div>
+<script>$('.search-list .request a[data-track-id]').trigger('refresh');</script>
+<%= render_debug_information %>

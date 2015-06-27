@@ -1,0 +1,36 @@
+#player
+  #jquery_jplayer_1.jp-jplayer
+  #jp_container_1.jp-audio-container
+    .jp-audio
+      .jp-type-single
+        #jp_interface_1.jp-interface
+          ul.jp-controls
+            li
+              a.jp-play tabindex="1"
+                | play
+            li
+              a.jp-pause tabindex="1"
+                | pause
+          ul#playing.jp-playing
+            li.metainfo
+              | Loading . . .
+          .jp-side-bar
+            .jp-listeners
+              ul#listeners
+                li
+                  | &nbsp;-&nbsp;
+              span
+                | &nbsp;listen
+            .jp-volume-bar-container
+              ul.jp-mute-container
+                li
+                  a.jp-mute[tabindex="1"]
+                    | mute
+                li
+                  a.jp-unmute[tabindex="1"]
+                    | unmute
+              .jp-volume-bar
+                .jp-volume-bar-value
+        .jp-no-solution.hidden
+          = t('support.jp_no_solution')
+          a.cross.js-button-hide

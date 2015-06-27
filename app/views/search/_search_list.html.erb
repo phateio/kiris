@@ -1,0 +1,7 @@
+<table class="search-list" data-flexible-table>
+  <%= render_search_columns_header %>
+  <% tracks.each_with_index do |track, index| %>
+    <%= render_search_columns(track, index) %>
+  <% end %>
+</table>
+<%= render_pagination(tracks) %>

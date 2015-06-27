@@ -1,0 +1,11 @@
+<tr>
+  <td class="datetime"><%= datetime_tag track.created_at %></td>
+  <td class="request noselect" data-tooltips-text="-"><%= render_search_list_column_request(track) %></td>
+  <td class="title" data-tooltips-text="<%= track.tags %>"><%= render_search_list_column_track_link(track) %></td>
+  <td class="artist"><%= track.artist %></td>
+  <td class="album"><%= track.album %></td>
+  <td class="duration"><%= track.duration_abbrtime %></td>
+  <td class="images"><%= render_search_list_column_track_images_link(track) %></td>
+  <td class="lyrics"><%= render_search_list_column_track_lyrics_link(track) %></td>
+  <td class="comments"><%= render_search_list_column_track_comments_link(track) %></td>
+</tr>

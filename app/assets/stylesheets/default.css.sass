@@ -1,0 +1,118 @@
+//= depend_on_asset 'chk_switch.png'
+
+@import mixins
+@import template
+
+// FAQ
+#resume>dl>dt
+  font-weight: bold
+.horline
+  margin-top: 18px
+  margin-bottom: 18px
+.question
+  font-weight: bold
+.answer
+  padding-left: 24px
+.answer:not(:last-of-type)
+  padding-bottom: 18px
+
+// Chat
+#chatportal
+  .info
+    font-weight: bold
+    color: #FFFFCC
+  .rules
+    padding-top: 8px
+    padding-bottom: 12px
+  .buttons
+    padding-bottom: 12px
+
+// Preferences
+[data-route^="default-preferences"]
+  #settings-panel
+    display: table
+    width: 320px
+    border: 1px solid #000
+    background-color: #5a6066
+    border-radius: 4px 4px
+    header
+      position: relative
+      padding: 3px 10px
+      background: linear-gradient(to bottom, #444444 1%, #030303 100%)
+      border-top-left-radius: 3px
+      border-top-right-radius: 3px
+    ul
+      @extend .list-style-type-none
+      & > li
+        display: table
+        width: 100%
+        list-style: none
+        border-top: 1px solid #838c95
+        border-bottom: 1px solid #373737
+        padding: 5px 10px
+        +vendor-prefix(box-sizing, border-box !important)
+        .content
+          display: table-cell
+          vertical-align: middle
+          color: #fff
+          text-shadow: 0px -1px -1px rgba(0, 0, 0, 0.4)
+          border-left: 1px solid #70777e
+          padding-left: 10px
+        .check
+          display: table-cell
+          vertical-align: middle
+          opacity: 0.8
+          padding-left: 10px
+  .keybinding-container
+    margin-top: $default-line-spacing
+    text-align: center
+    .keybindings
+      @extend .default-table-layout
+      display: inline-block
+      tr>td
+        padding: 4px
+        border: $default-border-decoration
+        text-align: center
+  .i18n-form
+    margin-top: $default-line-spacing
+    a
+      font-size: smaller
+    & > div
+      margin-top: 4px
+    .submit-button
+      float: right
+
+.regular-checkbox
+  display: none
+  + label
+    display: inline-block
+    position: relative
+    float: right
+    width: 101px
+    height: 37px
+    background: image-url("chk_switch.png") 0px 0px no-repeat
+    cursor: pointer
+  &:checked + label
+    background: image-url("chk_switch.png") 0px -37px no-repeat
+
+// Speed
+#speed
+  video
+    max-width: 100%
+  .downrate
+    float: right
+
+// Support
+#support
+  .appicon
+    border: 1px solid rgba(255, 255, 255, 0.5)
+  .support-list
+    @extend .data-list
+    .caption
+      color: #888888
+  .address
+    width: 220px
+    border: none
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+    background-color: transparent
+    text-align: center
