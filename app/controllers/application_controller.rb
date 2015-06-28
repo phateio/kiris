@@ -99,8 +99,8 @@ class ApplicationController < ActionController::Base
 
   def http_request(uri, req)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.open_timeout = 1
-    http.read_timeout = 1
+    http.open_timeout = 3
+    http.read_timeout = 3
     http.use_ssl = true if uri.scheme == 'https'
     http.request(req)
   end
