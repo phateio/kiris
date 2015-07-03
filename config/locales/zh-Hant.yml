@@ -288,8 +288,7 @@ zh-Hant:
     search_not_found: "找不到與您的查詢相符的資料"
   support:
     jp_no_solution: "提示：您正在使用的瀏覽器無法支援 HTML5 播放器，請升級至最新版本或是改使用 Google Chrome 瀏覽器。"
-    lte_ie8_banner: "警告：您正在使用的瀏覽器版本已經過舊，可能會有許多功能無法正常運作，請升級至 Internet Explorer 9 以上或是改使用 Google Chrome 瀏覽器。"
-    nojs_banner: "提示：您必須啟用 JavaScript 才能讓所有功能正常運作，包括歌單顯示、點歌功能、網頁播放器、聊天室……等等。"
+    noscript_notification: "提示：您必須啟用 JavaScript 才能讓所有功能正常運作，包括歌單顯示、點歌功能、網頁播放器、聊天室……等等。"
   system_mailer:
     new_issue_notify:
       subject: "新議題: %{subject}"

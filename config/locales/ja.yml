@@ -272,8 +272,7 @@ ja:
     search_not_found: "一致する情報は見つかりませんでした"
   support:
     jp_no_solution: "キーポイント：お使いのブラウザーは HTML5 プレイヤーを支援出来ません、最終バージョンを更新してまたは Google Chromeを使ってください"
-    lte_ie8_banner: "注目：お使いのブラウザのバージョンはすでに古すぎるのて、正常に動作していないファンクションが多いかもしれません、Internet Explorer 9 以上を更新してまたは Google Chrome を使ってください"
-    nojs_banner: "キーポイント：すべてのファンクション正常なためには JavaScript を有効にするべし、例えば：リスト表示、ソング注文、ウェブプレイヤー、チャットルームなど......"
+    noscript_notification: "キーポイント：すべてのファンクション正常なためには JavaScript を有効にするべし、例えば：リスト表示、ソング注文、ウェブプレイヤー、チャットルームなど......"
   system_mailer:
     new_issue_notify:
       subject: "新しい問題: %{subject}"

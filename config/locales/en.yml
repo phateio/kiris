@@ -292,9 +292,8 @@ en:
     search: Search
     search_not_found: Your search did not match any documents
   support:
-    jp_no_solution: 'Notice: To play the media you will need to either update your browser to a recent version or use Google Chrome browser.'
-    lte_ie8_banner: 'Update Required: The browser you are using is too old. Please upgrade your browser to Internet Explorer 9+ or using Google Chrome browser.'
-    nojs_banner: 'Notice: Please enable JavaScript for full functionality of this site.'
+    jp_no_solution: 'Notice: Your browser doesn''t support play using HTML5, you will need to either update your browser to a recent version or use Google Chrome browser.'
+    noscript_notification: 'Notice: Please enable JavaScript for full functionality of this site.'
   system_mailer:
     new_issue_notify:
       subject: 'New issue: %{subject}'
