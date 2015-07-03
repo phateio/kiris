@@ -35,7 +35,8 @@ module ApplicationHelper
     render_options = {
       escape_html: true,
       safe_links_only: true,
-      hard_wrap: true
+      hard_wrap: true,
+      link_attributes: { :'data-remote'=> true }
     }
     extensions = {
       no_intra_emphasis: true,

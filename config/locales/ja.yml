@@ -117,6 +117,8 @@ ja:
     track_migration:
       title: "歌曲変更"
       track_migration_management: "歌曲変更管理"
+  default:
+    faq_page_content: 
   form:
     cancel: "キャンセル"
     close: "クローズ"

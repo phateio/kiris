@@ -51,14 +51,17 @@ $(document).on 'ajax:before', ->
     window.pjax = null
 
 $(document).on 'ajax:beforeSend', (event, xhr, settings) ->
-  window.pjax = xhr
   $self = $(event.target)
-  xhr.setRequestHeader('Accept', '*/*')
+  xhr.setRequestHeader('Accept', 'text/html')
   xhr.setRequestHeader('X-XHR-Referer', document.location.href)
-  xhr.url = settings.url #.replace(/(?:\?_=[0-9]+$|_=[0-9]+&|&_=[0-9]+)/, '')
+  xhr.url = settings.url  # .replace(/(?:\?_=[0-9]+$|_=[0-9]+&|&_=[0-9]+)/, '')
   history_method = $self.data('history-method')
   xhr.historyMethod = history_method if history_method
   settings.dataType = 'html'
+  if settings.crossDomain
+    window.open(xhr.url)
+    return false
+  window.pjax = xhr
 
 $(document).on 'ajax:success', (event, data, status, xhr) ->
   DEBUG('ajax:success')
