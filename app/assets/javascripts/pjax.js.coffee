@@ -94,15 +94,18 @@ $(document).on 'ajax:success', (event, data, status, xhr) ->
   href = xhr.url
   title = doc.querySelector('title').textContent
   history_method = xhr.historyMethod
-  window_location = window.location.pathname
-  DEBUG("old url: #{window_location}")
+  window_location_href = window.location.href
+  window_location_pathname = window.location.pathname
+  DEBUG("old url: #{window_location_href}")
+  DEBUG("old url: #{window_location_pathname}")
   DEBUG("new url: #{href}, #{history_method}")
-  if window_location == href or history_method == 'replace'
+  if window_location_href == href or window_location_pathname == href or history_method == 'replace'
     DEBUG("replaceState: #{href}")
     window.history.replaceState(pjax: true, title, href)
   else
     DEBUG("pushState: #{href}")
-    window.scrollTo(0, 0)
+    $('#scrolldiv').scrollTop(0)
+    $('.slimScrollBar').css('top', '0px')
     window.history.pushState(pjax: true, title, href)
   document.title = title
 

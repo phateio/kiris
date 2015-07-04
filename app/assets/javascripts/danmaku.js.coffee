@@ -75,7 +75,7 @@ class @Danmaku
       scrolltitle.start()
     self.count++
 
-    $span = $('<div/>',
+    $span = $('<div></div>',
       text: text
       class: span_class
     ).css(
