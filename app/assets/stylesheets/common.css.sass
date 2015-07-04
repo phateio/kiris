@@ -29,9 +29,7 @@
   a
     @extend .noselect
     display: inline-block
-    position: relative
     margin-right: 16px
-    z-index: 2000
     font-weight: normal
     color: #666666
     &:hover
@@ -39,6 +37,17 @@
     &::before
       content: "×"
       display: inline-block
+      position: fixed
+      right: 16px
+      z-index: 2000  // Let button visible in chat room
+      line-height: 48px
+      font-size: 48px
+      cursor: pointer
+      text-align: center
+    &::after
+      content: "×"
+      display: inline-block
+      visibility: hidden
       line-height: 48px
       font-size: 48px
       cursor: pointer
