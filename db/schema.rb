@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20141021150831) do
     t.string   "source_bitrate",                 default: "",                    null: false
     t.string   "source_bitrate_type",            default: "",                    null: false
     t.string   "source_frequency",               default: "",                    null: false
-    t.string   "source_channel",                 default: "",                    null: false
+    t.string   "source_channels",                default: "",                    null: false
     t.string   "action",                         default: "",                    null: false
     t.string   "userip",                         default: "",                    null: false
     t.string   "status",                         default: "",                    null: false
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 20141021150831) do
     t.string   "source_bitrate",       default: "",                    null: false
     t.string   "source_bitrate_type",  default: "",                    null: false
     t.string   "source_frequency",     default: "",                    null: false
-    t.string   "source_channel",       default: "",                    null: false
+    t.string   "source_channels",      default: "",                    null: false
     t.string   "userip",               default: "",                    null: false
     t.string   "status",               default: "",                    null: false
     t.string   "identity",             default: "",                    null: false
