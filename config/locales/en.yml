@@ -120,7 +120,7 @@ en:
   default:
     faq_page_content: |-
       Internet radio Introduction
-      : So-called "Internet radio" by definition is "A radio transmitted via the Internet". On the radio all the listeners at the same time are listening to the same song. If someone requested a song all listeners will hear this song.
+      > So-called "Internet radio" by definition is "A radio transmitted via the Internet". On the radio all the listeners at the same time are listening to the same song. If someone requested a song all listeners will hear this song.
 
       This station doesn't have any DJ, all the songs on playlist are requested by users or random played by the system when playlist empty.
 
