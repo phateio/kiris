@@ -23,7 +23,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string :source_bitrate, null: false, default: ''
       t.string :source_bitrate_type, null: false, default: ''
       t.string :source_frequency, null: false, default: ''
-      t.string :source_channel, null: false, default: ''
+      t.string :source_channels, null: false, default: ''
       t.string :userip, null: false, default: ''
       t.string :status, null: false, default: ''
       t.string :identity, null: false, default: ''

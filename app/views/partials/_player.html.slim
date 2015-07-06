@@ -31,6 +31,4 @@
                     | unmute
               .jp-volume-bar
                 .jp-volume-bar-value
-        .jp-no-solution.hidden
-          = t('support.jp_no_solution')
-          a.cross.js-button-hide
+        = render partial: 'partials/notification_bar_field'

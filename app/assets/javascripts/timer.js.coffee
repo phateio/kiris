@@ -281,7 +281,10 @@ class @Timer
     self = this
     lyrics = if self.playlist.length > 0 && memcache.get('lyrics') then self.playlist[0].lyrics else ''
 
-    $('#lyrics').html('').append($('<pre/>',
+    $('#lyrics').html('').append($('<pre></pre>',
       html: lyrics
       lang: 'ja'
     ))
+    if $('[data-route="default-index"]').length > 0
+      $('#scrolldiv').scrollTop(0)
+      $('.slimScrollBar').css('top', '0px')
