@@ -248,9 +248,8 @@ en:
     password: Password
     username: Username
   metainfo:
-    description: Phate Radio is an experimental internet radio for testing automated system
+    description: Phate Radio is an experimental internet radio about anime, games and pop music.
     sitename: Phate Radio
-    sitetags: ACG,Radio,Anime music,Game music,Doujin music
   navbar:
     category: Category
     chat: Chat

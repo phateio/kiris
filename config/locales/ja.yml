@@ -211,7 +211,6 @@ ja:
   metainfo:
     description: "フェットネット放送局はアニソンや OST と同人音楽をメインとしての実験的なインターネットラジオ、ただ研究用のオトメショーンインターネットシステムをテストして行っている"
     sitename: "フェイトネット放送局"
-    sitetags: ACG,Radio,アニメソン,ゲーム音楽,同人音楽
   navbar:
     category: "カテゴリ"
     chat: "チャットルーム"

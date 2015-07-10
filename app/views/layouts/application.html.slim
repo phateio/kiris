@@ -2,11 +2,14 @@ doctype html
 html lang=I18n.locale
   head
     meta charset="utf-8"
-    meta name="description" content=@page_description
-    meta name="keywords" content=@page_keywords
+    meta property="og:title" content=@page_name
+    meta property="og:site_name" content=@site_name
+    meta property="og:image" content="https://i.imgur.com/8BOmHBN.jpg"
+    meta name="description" property="og:description" content=@page_description
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     = csrf_meta_tags.to_s.gsub(/\n/, '').html_safe
-    title = @page_title
+    title
+      = @page_title
     = stylesheet_link_tag 'application', media: 'all'
     = google_fonts_link_tag 'Source Code Pro', media: 'all'
     = javascript_include_tag 'application'

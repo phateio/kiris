@@ -247,7 +247,6 @@ zh-Hans:
   metainfo:
     description: "飞特网络电台是以播放动漫配乐及同人音乐为主的实验性网络电台，仅用来测试自行研发之自动化网络系统，纯学术用途"
     sitename: "飞特网络电台"
-    sitetags: ACG,Radio,动漫音乐,游戏音乐,同人音乐
   navbar:
     category: "标签目录"
     chat: "聊天室"
