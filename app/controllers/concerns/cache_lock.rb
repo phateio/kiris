@@ -3,17 +3,13 @@ class RailsLock
 
   def self.synchronize(identifier)
     key = "#{identifier}_lock".to_sym
-    while cache.read(key)
+    while Rails.cache.read(key)
       sleep(rand)
     end
-    cache.write(key, Time.now.utc.to_f, expires_in: DEFAULT_TIMEOUT)
+    Rails.cache.write(key, Time.now.utc.to_f, expires_in: DEFAULT_TIMEOUT)
     yield
   ensure
-    cache.delete(key)
-  end
-
-  def self.cache
-    Rails.cache
+    Rails.cache.delete(key)
   end
 end
 
@@ -22,17 +18,14 @@ class RedisLock
 
   def self.synchronize(identifier)
     key = "#{identifier}_lock".to_sym
-    while cache.read(key)
+    while $redis.exists(key)
       sleep(rand)
     end
-    cache.write(key, Time.now.utc.to_f, expires_in: DEFAULT_TIMEOUT)
+    $redis.set(key, Time.now.utc.to_f)
+    $redis.expire(key, DEFAULT_TIMEOUT)
     yield
   ensure
-    cache.delete(key)
-  end
-
-  def self.cache
-    Rails.cache
+    $redis.del(key)
   end
 end
 
