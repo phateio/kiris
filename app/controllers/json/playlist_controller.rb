@@ -21,18 +21,22 @@ class Json::PlaylistController < ApplicationController
             image = images.present? ? images.at(playlist.id % images.size) : nil
 
             if image
-              image_info = {url: image.url,
-                            source: image.source,
-                            nickname: image.nickname,
-                            illustrator: image.illustrator}
+              image_info = {
+                url: image.url,
+                source: image.source,
+                nickname: image.nickname,
+                illustrator: image.illustrator
+              }
             else
-              image_info = {url: nil,
-                            source: nil,
-                            nickname: nil,
-                            illustrator: nil}
+              image_info = {
+                url: nil,
+                source: nil,
+                nickname: nil,
+                illustrator: nil
+              }
             end
 
-            lyric = track.lyric ? track.lyric.text.gsub(/\[[\w\.: ]+\][\s\r\n]*/, '') : ''
+            lyric = track.lyric ? track.lyric.text : ''
           else
             images = []
             image_info = {}
