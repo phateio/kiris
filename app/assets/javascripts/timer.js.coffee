@@ -79,12 +79,13 @@ class @Timer
     timeleft_sec = '0' + timeleft_sec if timeleft_sec < 10
     $("##{self.unique} .timeleft").text("#{timeleft_min}:#{timeleft_sec}")
 
-  refresh: =>
+  refresh: (options = {}) =>
     self = this
-    $.ajax
+    settings =
       url: '/playlist.json'
       dataType: 'json'
       cache: false
+      global: false
       success: (data) ->
         self.metainfo(null, clearStatus: true)
         self.metainfo('Loading . . .') if self.playlist.length == 0
@@ -102,6 +103,8 @@ class @Timer
           self.otherUpdate(duration: null, evalCallback: false)
           self.queueUpdate()
         self.metainfo('Random playing . . .') if self.playlist.length == 1
+    $.extend(settings, options)
+    $.ajax(settings)
 
   scrollUp: (options = {}) =>
     self = this

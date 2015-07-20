@@ -93,18 +93,21 @@ $(window).on 'resize', ->
     .parent('DIV.slimScrollDiv').width(container_width)
                                 .height(container_height)
 
-$(window).on 'page:refresh', ->
+$(window).on 'page:refresh', (event, options = {}) ->
   window.updated_at = jQuery_now_in_seconds()
-  $.ajax
+  settings =
     url: '/status.json'
     dataType: 'json'
     cache: false
+    global: false
     success: (data) ->
       listeners = data['listeners']
       if listeners
         $('#listeners').append("<li>#{listeners}</li>")
         $('#listeners>li:not(:last-child)').slideUp 1000, ->
           $(this).remove()
+  $.extend(settings, options)
+  $.ajax(settings)
   $.ajax
     url: '//stream.phate.io/ping.js'
     dataType: 'jsonp'
