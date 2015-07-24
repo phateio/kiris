@@ -122,7 +122,7 @@ en:
       Internet radio Introduction
       > So-called "Internet radio" by definition is "A radio transmitted via the Internet". On the radio all the listeners at the same time are listening to the same song. If someone requested a song all listeners will hear this song.
 
-      This station doesn't have any DJ, all the songs on playlist are requested by users or random played by the system when playlist empty.
+      This station doesn't have any DJ, all the songs on playlist are requested by users, or random played by the system when playlist is empty.
 
       Q: What platforms does this Internet radio support?
       > A: In addition to using a web browser to listen to, any platform, whether mobile or tablet as long as there have an app which support SHOUTcast protocol will be able to listen to this radio. For details, see [Player Support List](/support)
@@ -142,7 +142,7 @@ en:
       Q: Why the radio is choppy when listening?
       > A: Listen to the radio bandwidth requirements for 24KiB/s, as long as the download speed can reach the speed it should listen normally. The actual transmission speed  to server, refer to [Download Speed Test](/speed)(Beta)
 
-      Welcome to join our development effort [phateio@GitHub](https://github.com/phateio).
+      Welcome to join our development effort [phateio/kiris@GitHub](https://github.com/phateio/kiris).
   form:
     cancel: Cancel
     close: Close
@@ -240,6 +240,8 @@ en:
     typeid_invalid: Type ID invalid
     typeid_question: Question
     typeid_suggestion: Suggestion
+  javascript:
+    danmaku_report_confirm: Are you sure you want to report this danmaku?
   members:
     email: Email
     login: Sign in

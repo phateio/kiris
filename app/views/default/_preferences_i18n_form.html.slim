@@ -1,6 +1,5 @@
 = form_tag preferences_path, method: :patch, class: 'i18n-form' do
   = content_tag :div do
     = select_tag 'preferences[locale]', locale_options_for_select
-    = link_to '#phateio', 'https://www.localeapp.com/projects/6196', target: '_blank', title: 'Help improve translations'
   = content_tag :div, time_zone_select('preferences', 'time_zone', nil, default: Time.zone.name)
   = content_tag :div, submit_tag(t('form.submit'), class: 'submit-button', data: {disable: true})

@@ -10,7 +10,7 @@ class ListenController < ApplicationController
     elsif request.host != default_url_options.to_h[:host]
       stream_server = 'stream-cdn.phate.io'
     elsif icy_metadata && icy_metadata == '1' || useragent.downcase.include?('mobile')
-      stream_server = 'stream.dallas.phate.io'
+      stream_server = 'stream.rhc.phate.io'
     else
       stream_server = 'stream.phate.io'
     end

@@ -142,7 +142,7 @@ zh-Hans:
       Q: 收听电台时一直断断续续的怎么办?
       > A: 收听电台的带宽需求为 24KiB/s，只要下载速度达到这个速度以上即可正常收听，实际与服务器的传输速度请参考 [下载速度测试](/speed)(Beta)
 
-      欢迎一起参与开发 [phateio@GitHub](https://github.com/phateio)。
+      欢迎一起参与开发 [phateio/kiris@GitHub](https://github.com/phateio/kiris)。
   form:
     cancel: "取消"
     close: "关闭"
@@ -237,6 +237,8 @@ zh-Hans:
     typeid_invalid: Type ID 无效
     typeid_question: "问题"
     typeid_suggestion: "建议"
+  javascript:
+    danmaku_report_confirm: 
   members:
     email: "信箱"
     login: "登入"

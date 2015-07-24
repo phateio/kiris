@@ -1,31 +1,16 @@
-$(document).ajaxStart ->
-  NProgress.start()
-  $(document.body).addClass('progress')
-$(document).ajaxStop ->
-  NProgress.done()
-  $(document.body).removeClass('progress')
+String::strip = ->
+  @replace(/^\s+|\s+$/g, '')
+
+@DEBUG = () ->
+  if not @debug
+    return
+  parameters = Array.prototype.slice.call(arguments)
+  parameters[0] = "%s [DEBUG] #{parameters[0]}"
+  parameters.splice(1, 0, getTimeString('Y-m-d H:i:s'))
+  console.log.apply(console, parameters)
 
 @htmlspecialchars = (text) ->
-  $('<span/>').text(text).html()
-
-String::repeat = (n) ->
-  Array(n + 1).join(this)
-
-String::downcase = ->
-  @toLowerCase()
-
-String::upcase = ->
-  @toUpperCase()
-
-String::find = (str) ->
-  @indexOf(str)
-
-String::has = (str) ->
-  @indexOf(str) > 0
-
-@DEBUG = (string) ->
-  if (@debug)
-    console.log(string)
+  $('<span></span>').text(text).html()
 
 @getTimeString = (format, datetime = (new Date())) ->
   Year   = datetime.getFullYear()
@@ -60,6 +45,13 @@ String::has = (str) ->
 @is_touch_device = ->
   'ontouchstart' in window || 'onmsgesturechange' in window
 
+$(document).ajaxStart ->
+  NProgress.start()
+  $(document.body).addClass('progress')
+$(document).ajaxStop ->
+  NProgress.done()
+  $(document.body).removeClass('progress')
+
 $(window).on 'resize', ->
   $window = $(window)
   $('#playing li[id]').trigger('playlist:resize')
@@ -88,6 +80,8 @@ $(window).on 'resize', ->
       color: '#888888'
       distance: '0px'
       disableFadeOut : true
+      wheelStep: 10
+      touchScrollStep : 75
     .width(container_width)
     .height(container_height)
     .parent('DIV.slimScrollDiv').width(container_width)
@@ -109,7 +103,7 @@ $(window).on 'page:refresh', (event, options = {}) ->
   $.extend(settings, options)
   $.ajax(settings)
   $.ajax
-    url: '//stream.phate.io/ping.js'
+    url: '//stream.rhc.phate.io/ping.js'
     dataType: 'jsonp'
     jsonpCallback: 'jsonp_callback'
     cache: false
@@ -118,8 +112,9 @@ $(window).on 'page:refresh', (event, options = {}) ->
 $(document).on 'page:change', ->
   $(window).trigger('resize')
   $('[data-option]').trigger('memcache:restore')
+  $('#tooltips').hide()
 
-$(document).on('mouseenter', '[data-tooltips-text]', (event) ->
+$(document).on 'mouseenter', '[data-tooltips-text]', (event) ->
   $self = $(event.currentTarget)
   $tooltips = $('#tooltips')
 
@@ -133,7 +128,7 @@ $(document).on('mouseenter', '[data-tooltips-text]', (event) ->
   text = 'N/A' if not text
   offset = $self.offset()
 
-  switch direction.downcase()
+  switch direction.toLowerCase()
     when 'top'
       x = offset.left + Math.abs($self.width() / 2 - $tooltips.width() / 2) - 6 # #tooltips padding-left
       y = offset.top + $tooltips.height() + padding
@@ -168,22 +163,22 @@ $(document).on('mouseenter', '[data-tooltips-text]', (event) ->
     top: y
     left: x
   ).show()
-).on('mouseover', '[data-tooltips-text]', (event) ->
+.on 'mouseover', '[data-tooltips-text]', (event) ->
   if window.tooltips_tid
     clearTimeout(window.tooltips_tid)
     window.tooltips_tid = false
-).on 'mouseout', '[data-tooltips-text]', (event) ->
+.on 'mouseout', '[data-tooltips-text]', (event) ->
   $tooltips = $('#tooltips')
   if not window.tooltips_tid && $tooltips.is(':visible')
     window.tooltips_tid = setTimeout(->
       $tooltips.hide()
     , 800)
 
-$(document).on('mouseenter', '#tooltips', (event) ->
+$(document).on 'mouseenter', '#tooltips', (event) ->
   if window.tooltips_tid
     clearTimeout(window.tooltips_tid)
     window.tooltips_tid = false
-).on 'mouseleave', '#tooltips', (event) ->
+.on 'mouseleave', '#tooltips', (event) ->
   self = this
   window.tooltips_tid = setTimeout(->
     $(self).hide()

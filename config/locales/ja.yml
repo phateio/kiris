@@ -201,6 +201,8 @@ ja:
     typeid_invalid: Type ID 無効
     typeid_question: "問題"
     typeid_suggestion: "提案"
+  javascript:
+    danmaku_report_confirm: 
   members:
     email: "メール"
     login: "ログイン"
