@@ -7,24 +7,24 @@ class @Danmaku
     self.size = null
     self.ajax = false
     self.server = 'danmaku.phate.io'
+    self.danmaku_lyrics = []
+    self.danmaku_lyrics_index = 0
 
   connect: =>
     self = this
-
     if self.tid
       clearTimeout(self.tid)
       self.tid = false
     self.tid = setTimeout(->
       self.connect()
     , 120000)
-
     DEBUG('Danmaku: Hooking')
     self.ajax = $.ajax
       url: "//#{self.server}/poll"
       dataType: 'jsonp'
-      global: false
       data:
         last_id: self.last_id
+      global: false
       success: (items, textStatus, jqXHR) ->
         loop
           break if self.ajax isnt jqXHR
@@ -101,11 +101,9 @@ class @Danmaku
 
   post: =>
     self = this
-
     $danmaku_input = $('#danmakubar form input')
     text = $.trim($danmaku_input.val())
     $danmaku_input.val('').trigger('blur')
-
     return if not text
     $.ajax
       url: "//#{self.server}/post"
@@ -148,6 +146,30 @@ class @Danmaku
     $('#danmakubar form input').blur().val('')
     self
 
+  sync: (seconds) =>
+    self = this
+    for danmaku_lyric, index in self.danmaku_lyrics
+      if seconds > danmaku_lyric.time - 3 && seconds < danmaku_lyric.time + 3 && danmaku_lyric.sent == false
+        self.danmaku_lyrics_index = index
+        placeholder = $('#danmakubar form input').attr('placeholder')
+        return if danmaku_lyric.text == placeholder
+        $('#danmakubar form input').attr('placeholder', danmaku_lyric.text)
+        return
+    placeholder = $('#danmakubar form input').attr('placeholder')
+    $('#danmakubar form input').removeAttr('placeholder') if placeholder
+    self
+
+  danmaku_lyrics_replace: =>
+    self = this
+    $danmaku_input = $('#danmakubar form input')
+    placeholder = $danmaku_input.attr('placeholder')
+    text = $.trim($danmaku_input.val())
+    return if text || not placeholder
+    index = self.danmaku_lyrics_index
+    self.danmaku_lyrics[index].sent = true
+    $danmaku_input.val(placeholder)
+    self
+
 $(document).on 'click', '.danmakuspan', (event) ->
   $self = $(event.currentTarget)
   $self.fadeOut
@@ -157,17 +179,15 @@ $(document).on 'contextmenu', '.danmakuspan', (event) ->
   event.preventDefault()
   $self = $(event.currentTarget)
   target_uid = $self.data('uid')
+  text = $self.text()
   return if not target_uid
-  option = confirm('Are you sure you want to report this danmaku as inappropriate?')
+  message = "“#{text}”\nAre you sure you want to report this danmaku?"
+  option = confirm(message)
   return if option != true
   danmaku.report(target_uid)
   $self.trigger('click')
 
 $(document).on 'ready', ->
-
-  $(document).on 'submit', '#danmakubar form', (event) ->
-    event.preventDefault()
-    danmaku.post()
 
   $(document).keydown (event) ->
     KEY_ESC = 27
@@ -184,3 +204,10 @@ $(document).on 'ready', ->
       DEBUG('Keydown: ENTER')
       event.preventDefault()
       danmaku.inputFocus()
+
+  $('#danmakubar form input').inputHistory
+    before_enter: (event) ->
+      danmaku.danmaku_lyrics_replace()
+    after_enter: (event) ->
+      event.preventDefault()
+      danmaku.post()

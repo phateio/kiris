@@ -31,6 +31,7 @@ $(document).on 'click', '.search-list .request a[data-track-id]', (event) ->
       data:
         track_id: track_id
         nickname: nickname
+      global: false
       beforeSend: ->
       success: (item) ->
         $self.data('nexttime', item.nexttime) if item.nexttime

@@ -34,12 +34,12 @@ $(document).on 'click', '#playing li:first-child', ->
   $self = $(this).parent()
   return if String(getSelected())
 
-  timer.refresh()
+  timer.refresh(global: true)
   $('#lyrics').css('opacity', 0.5)
   $self.addClass('playlist-expanded')
 
 $(document).on 'click', '#listeners', ->
-  $(window).trigger('page:refresh')
+  $(window).trigger('page:refresh', global: true)
 
 $(window).ready ->
   playing = false

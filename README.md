@@ -1,9 +1,9 @@
 ## Technical
-Language: Ruby
-Framework: Ruby on Rails
+- Language: Ruby
+- Framework: Ruby on Rails
 
 ## Requirement
-1. Ruby 2.0.0+
+1. Ruby 2.1.6
 2. Rails 4.2.0+
 
 ## Installation
@@ -20,6 +20,7 @@ $ rake db:migrate
 $ rake db:seed
 $ rails server -e development
 ```
+Open http://localhost:3000/
 
 ## Testing
 ```
@@ -28,7 +29,9 @@ $ rake test
 ```
 
 ## Translations
-We use [Locale](https://www.localeapp.com/) to manage our translation files. [phateio-i18n](https://www.localeapp.com/projects/6196)
+We use [phateio-i18n@Locale](https://www.localeapp.com/projects/6196) to manage our translation files.
+
+Everyone is welcome to help correct, improve, or complete the translations.
 
 ## License
 [MIT license](http://opensource.org/licenses/MIT)

@@ -104,10 +104,10 @@ $(document).on 'ajax:success', (event, data, status, xhr) ->
     window.history.replaceState(pjax: true, title, href)
   else
     DEBUG("pushState: #{href}")
-    $('#scrolldiv').scrollTop(0)
-    $('.slimScrollBar').css('top', '0px')
     window.history.pushState(pjax: true, title, href)
   document.title = title
+  $('#scrolldiv').scrollTop(0)
+  $('.slimScrollBar').css('top', '0px')
 
   window.pjax = null if window.pjax == xhr
   $(document).trigger('page:change')

@@ -16,6 +16,7 @@ class @Timer
     self.image_element = false
     self.prefix = 'pli_'
     self.nexttime = 0
+    self.duration = 0
     self.callback = false
     self.fast = 600
     self.normal = 1000
@@ -45,9 +46,11 @@ class @Timer
     if self.playlist[0].timeleft > 0
       self.unique = "#{self.prefix}#{self.playlist[0].id}"
       self.nexttime = nowtime + self.playlist[0].timeleft
+      self.duration = self.playlist[0].duration
     else
       self.unique = false
       self.nexttime = nowtime + rand(10, 30)
+      self.duration = self.playlist[0].duration
 
   metainfo: (text, option = {}) =>
     self = this
@@ -76,15 +79,19 @@ class @Timer
         self.nexttime = nowtime + rand(30, 60)
         self.refresh()
       return
+    return if not self.unique
+    elapsed_time = self.duration - timeleft
+    danmaku.sync(elapsed_time)
     timeleft_sec = '0' + timeleft_sec if timeleft_sec < 10
     $("##{self.unique} .timeleft").text("#{timeleft_min}:#{timeleft_sec}")
 
-  refresh: =>
+  refresh: (options = {}) =>
     self = this
-    $.ajax
+    settings =
       url: '/playlist.json'
       dataType: 'json'
       cache: false
+      global: false
       success: (data) ->
         self.metainfo(null, clearStatus: true)
         self.metainfo('Loading . . .') if self.playlist.length == 0
@@ -102,6 +109,8 @@ class @Timer
           self.otherUpdate(duration: null, evalCallback: false)
           self.queueUpdate()
         self.metainfo('Random playing . . .') if self.playlist.length == 1
+    $.extend(settings, options)
+    $.ajax(settings)
 
   scrollUp: (options = {}) =>
     self = this
@@ -279,12 +288,29 @@ class @Timer
 
   lyrics: =>
     self = this
-    lyrics = if self.playlist.length > 0 && memcache.get('lyrics') then self.playlist[0].lyrics else ''
-
+    if self.playlist.length == 0 || not memcache.get('lyrics')
+      $('#lyrics').html('')
+      return false
+    raw_lyrics = self.playlist[0].lyrics
+    raw_lyrics_lines = raw_lyrics.split('\n')
+    lyrics = raw_lyrics.replace(/\[[\w\.: ]+\]\s*/g, '')  # [00:00.00]
+                       .replace(/<[\w\.: ]+>\s*/g, '// ')  # <00:00.00>
     $('#lyrics').html('').append($('<pre></pre>',
       html: lyrics
       lang: 'ja'
     ))
+    danmaku_lyrics = []
+    for raw_lyrics_line in raw_lyrics_lines
+      if matches = /<(\d{2,})\:(\d{2})(?:\.(\d{2,3}))?>\s*(.*)/.exec(raw_lyrics_line)
+        minutes = parseInt(matches[1])
+        seconds = parseInt(matches[2])
+        time = minutes * 60 + seconds
+        text = matches[4]
+        danmaku_lyrics.push
+          time: time
+          text: text
+          sent: false
+    danmaku.danmaku_lyrics = danmaku_lyrics
     if $('[data-route="default-index"]').length > 0
       $('#scrolldiv').scrollTop(0)
       $('.slimScrollBar').css('top', '0px')

@@ -18,6 +18,7 @@
 //= require asseturls
 //= require common
 //= require memcache
+//= require input_history
 //= require pjax
 //= require timer
 //= require danmaku

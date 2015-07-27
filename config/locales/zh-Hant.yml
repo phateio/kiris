@@ -142,7 +142,7 @@ zh-Hant:
       Q: 收聽電台時一直斷斷續續的怎麼辦?
       > A: 收聽電台的頻寬需求為 24KiB/s，只要下載速度達到這個速度以上即可正常收聽，實際與伺服器的傳輸速度請參考 [下載速度測試](/speed)(Beta)
 
-      歡迎一起參與開發 [phateio@GitHub](https://github.com/phateio)。
+      歡迎一起參與開發 [phateio/kiris@GitHub](https://github.com/phateio/kiris)。
   form:
     cancel: "取消"
     close: "關閉"
@@ -237,6 +237,8 @@ zh-Hant:
     typeid_invalid: Type ID 無效
     typeid_question: "問題"
     typeid_suggestion: "建議"
+  javascript:
+    danmaku_report_confirm: "您確定要舉報此彈幕嗎?"
   members:
     email: "信箱"
     login: "登入"
