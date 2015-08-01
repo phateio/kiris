@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="robots" content="noindex,nofollow">
-<title>500 Internal Server Error</title>
-<style type="text/css">
-body {font: 18px/1.9 Verdana, Helvetica, Arial, sans-serif;}
-</style>
+  <meta charset="utf-8">
+  <title>500 Internal Server Error</title>
+  <style type="text/css">
+    .section {
+      margin: 3% 0px;
+      text-align: center;
+    }
+    .section img {
+      width: 640px;
+      height: 480px;
+      border: 0px;
+    }
+    .section a {
+      cursor: pointer;
+      font-weight: bold;
+      user-select:none;
+    }
+  </style>
 </head>
 <body>
-<div style="margin: 5% auto; width: 640px; text-align: center;">
-<img style="width: 640px; height: 480px; border: 0px;" src="http://i.imgur.com/V5uss7f.jpg" alt="500">
-<a onclick="javascript:location.reload();" style="cursor: pointer; font-weight: bold;">伺服器發生不明原因錯誤… 請稍後再試</a>
-</div>
+  <div class="section">
+    <img src="http://i.imgur.com/V5uss7f.jpg" alt="Logo" />
+    <p><a onclick="javascript:location.reload();">伺服器發生不明原因錯誤… 請稍後再試</a></p>
+  </div>
 </body>
 </html>
