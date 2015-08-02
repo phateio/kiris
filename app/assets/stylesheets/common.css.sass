@@ -1,8 +1,9 @@
+@import mixins
 @import template
 
 #screenframe
-  display: flex
-  flex-flow: column
+  +vendor-value-prefix(display, flex)
+  +vendor-prefix(flex-flow, column)
   position: fixed
   top: 0px
   left: 0px
@@ -10,7 +11,7 @@
   height: 100%
 
 #container
-  flex: 1
+  +vendor-prefix(flex, 1)
   position: relative
   overflow: hidden
   #scrolldiv

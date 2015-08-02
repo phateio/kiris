@@ -5,6 +5,13 @@
   -o-#{$name}: #{$argument}
   #{$name}: #{$argument}
 
+=vendor-value-prefix($name, $argument)
+  #{$name}: -webkit-#{$argument}
+  #{$name}: -ms-#{$argument}
+  #{$name}: -moz-#{$argument}
+  #{$name}: -o-#{$argument}
+  #{$name}: #{$argument}
+
 =keyframes($name)
   @-webkit-keyframes #{$name}
     @content
