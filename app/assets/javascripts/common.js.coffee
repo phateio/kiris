@@ -102,12 +102,6 @@ $(window).on 'page:refresh', (event, options = {}) ->
           $(this).remove()
   $.extend(settings, options)
   $.ajax(settings)
-  $.ajax
-    url: '//stream.rhc.phate.io/ping.js'
-    dataType: 'jsonp'
-    jsonpCallback: 'jsonp_callback'
-    cache: false
-    global: false
 
 $(document).on 'page:change', ->
   $(window).trigger('resize')
