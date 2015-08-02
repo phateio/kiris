@@ -2,8 +2,8 @@
 @import template
 
 #screenframe
-  +vendor-value-prefix(display, flex)
-  +vendor-prefix(flex-flow, column)
+  +vendor-prefix-value(display, flex)
+  +vendor-prefix-property(flex-flow, column)
   position: fixed
   top: 0px
   left: 0px
@@ -11,7 +11,7 @@
   height: 100%
 
 #container
-  +vendor-prefix(flex, 1)
+  +vendor-prefix-property(flex, 1)
   position: relative
   overflow: hidden
   #scrolldiv

@@ -26,12 +26,12 @@
 #backimg_front
   z-index: -20
   background-image: none
-  +vendor-prefix(animation, fadeInBackimg 5s ease-out forwards)
+  +vendor-prefix-property(animation, fadeInBackimg 5s ease-out forwards)
 
 #backimg_back
   z-index: -30
   background-image: none
-  +vendor-prefix(animation, fadeOutBackimg 5s linear forwards)
+  +vendor-prefix-property(animation, fadeOutBackimg 5s linear forwards)
 
 +keyframes(fadeInBackimg)
   from

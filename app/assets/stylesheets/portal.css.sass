@@ -49,54 +49,54 @@
     background-color: #000000
     background-image: url(http://i.imgur.com/BRR48rH.jpg)
   .frame-1
-    +vendor-prefix(animation, blurFadeInOut 5s ease-in backwards)
-    +vendor-prefix(animation-delay, 0s)
+    +vendor-prefix-property(animation, blurFadeInOut 5s ease-in backwards)
+    +vendor-prefix-property(animation-delay, 0s)
   .frame-2
-    +vendor-prefix(animation, blurFadeInOut 5s ease-in backwards)
-    +vendor-prefix(animation-delay, 5s)
+    +vendor-prefix-property(animation, blurFadeInOut 5s ease-in backwards)
+    +vendor-prefix-property(animation-delay, 5s)
   .frame-3
-    +vendor-prefix(animation, blurFadeIn 1s ease-in backwards)
-    +vendor-prefix(animation-delay, 10s)
+    +vendor-prefix-property(animation, blurFadeIn 1s ease-in backwards)
+    +vendor-prefix-property(animation-delay, 10s)
   .frame-4
-    +vendor-prefix(animation, blurFadeIn 1s ease-in backwards)
-    +vendor-prefix(animation-delay, 11s)
+    +vendor-prefix-property(animation, blurFadeIn 1s ease-in backwards)
+    +vendor-prefix-property(animation-delay, 11s)
   .frame-5
-    +vendor-prefix(animation, blurFadeIn 1s ease-in backwards)
-    +vendor-prefix(animation-delay, 14s)
+    +vendor-prefix-property(animation, blurFadeIn 1s ease-in backwards)
+    +vendor-prefix-property(animation-delay, 14s)
   .frame-6
-    +vendor-prefix(animation, fadeInBack 2s linear backwards)
-    +vendor-prefix(animation-delay, 12s)
+    +vendor-prefix-property(animation, fadeInBack 2s linear backwards)
+    +vendor-prefix-property(animation-delay, 12s)
 
 +keyframes(blurFadeInOut)
   0%
     opacity: 0
     text-shadow: 0px 0px 40px #FFFFFF
-    +vendor-prefix(transform, scale(1.3))
+    +vendor-prefix-property(transform, scale(1.3))
   10%,80%
     opacity: 1
     text-shadow: 0px 0px 1px #FFFFFF
-    +vendor-prefix(transform, scale(1))
+    +vendor-prefix-property(transform, scale(1))
   100%
     opacity: 0
     text-shadow: 0px 0px 50px #FFFFFF
-    +vendor-prefix(transform, scale(0))
+    +vendor-prefix-property(transform, scale(0))
 
 
 +keyframes(blurFadeIn)
   0%
     opacity: 0
     text-shadow: 0px 0px 40px #FFFFFF
-    +vendor-prefix(transform, scale(1.3))
+    +vendor-prefix-property(transform, scale(1.3))
   100%
     opacity: 1
     text-shadow: 0px 0px 1px #FFFFFF
-    +vendor-prefix(transform, scale(1))
+    +vendor-prefix-property(transform, scale(1))
 
 
 +keyframes(fadeInBack)
   0%
     opacity: 0
-    +vendor-prefix(transform, scale(0))
+    +vendor-prefix-property(transform, scale(0))
   100%
     opacity: 1
-    +vendor-prefix(transform, scale(1))
+    +vendor-prefix-property(transform, scale(1))
