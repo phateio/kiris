@@ -128,7 +128,11 @@ class @Timer
     self.callback() if options.evalCallback && self.callback
     return if self.playlist.length == 0
     return if $('#backimg_front').length == 0
-    self.background(self.image_url, self.image_illustrator).always ->
+    self.background(
+      image_url: self.image_url
+      image_illustrator: self.image_illustrator
+      by_system: true
+    ).always ->
       self.background_preload()
 
 #   # doodle
@@ -186,26 +190,32 @@ class @Timer
       $("##{id}").slideDown(options.duration)
     $('#playing li[id]').trigger('playlist:resize')
 
-  background: (image_url, image_illustrator= null) =>
+  background: (options) =>
     self = this
     deferred = $.Deferred()
     self.image_element = $(document.createElement('img'))
-    if not memcache.get('background')
-      if image_url == self.root.asseturls.default_image
-        DEBUG('background: Disabled')
-        deferred.resolve()
-        return deferred.promise()
-      image_url = self.root.asseturls.default_image
-    image_url = image_url || self.root.asseturls.default_image
+    if not options.image_url || options.by_system && not memcache.get('background')
+      default_background_url = memcache.get('default_background_url')
+      if default_background_url
+        options.image_url = default_background_url
+        options.image_source = null
+        options.image_illustrator = null
+      else
+        options.image_url = self.root.asseturls.default_background_url
+        options.image_source = 'http://www.pixiv.net/member_illust.php?mode=medium&illust_id=45715430'
+        options.image_illustrator = 'YahaKo'
+    image_url = options.image_url
     image_status = if self.backimg_success && self.backimg_url == image_url then 'Skip' else 'Change'
     DEBUG("background: '#{self.backimg_url}' => '#{image_url}' (#{self.backimg_success}, #{image_status})")
-    if image_status == 'Skip'
+    if image_status == 'Skip' || self.backimg_url && options.by_system && not memcache.get('background')
       self.background_before_action()
-      self.background_after_action(image_illustrator)
+      self.background_after_action()
       deferred.resolve()
     else
       self.backimg_url = image_url
       self.backimg_success = false
+      self.background_setTimeout()
+      self.background_before_update_image_info()
       self.background_before_action()
       self.image_element.on 'load', ->
         DEBUG('background: onload')
@@ -216,7 +226,8 @@ class @Timer
           return
         deferred.resolve()
         self.background_swap(image_url)
-        self.background_after_action(image_illustrator)
+        self.background_after_update_image_info(options)
+        self.background_after_action()
         self.backimg_success = true
       self.image_element.on 'abort error', ->
         DEBUG('background: onerror')
@@ -230,7 +241,8 @@ class @Timer
   background_preload: =>
     self = this
     if self.playlist.length > 1
-      new_image_url = self.playlist[1].image.url || self.root.asseturls.default_image
+      default_background_url = memcache.get('default_background_url')
+      new_image_url = self.playlist[1].image.url || default_background_url || self.root.asseturls.default_background_url
       image_preload_element = $(document.createElement('img'))
       image_preload_element.attr('src', new_image_url)
       image_preload_element.on 'load', ->
@@ -261,24 +273,31 @@ class @Timer
       self.image_element.trigger('error')
     , 30 * 1000)
 
-  background_before_action: =>
+  background_before_update_image_info: =>
     self = this
-    self.background_setTimeout()
     $('#image-info').hide()
-    $('#lyrics').html('<span>Loading . . .</span>')
 
-  background_after_action: (image_illustrator) =>
+  background_after_update_image_info: (options) =>
     self = this
+    image_source = options.image_source
+    image_illustrator = options.image_illustrator
     if self.background_tid
       clearTimeout(self.background_tid)
       self.background_tid = false
     if image_illustrator
       template = $.trim($('#template-image-info').html())
-      html = template.replace(/{{source_url}}/g, self.image_source)
+      html = template.replace(/{{source_url}}/g, image_source)
                      .replace(/{{illustrator}}/g, htmlspecialchars(image_illustrator))
     else
       html = ''
     $('#image-info').html(html).show()
+
+  background_before_action: =>
+    self = this
+    $('#lyrics').html('<span>Loading . . .</span>')
+
+  background_after_action: =>
+    self = this
     self.lyrics()
 
   background_rescue_action: =>
