@@ -94,6 +94,7 @@ $(window).on 'page:refresh', (event, options = {}) ->
     dataType: 'json'
     cache: false
     global: false
+    timeout: 15000
     success: (data) ->
       listeners = data['listeners']
       if listeners

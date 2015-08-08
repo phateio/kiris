@@ -92,6 +92,7 @@ class @Timer
       dataType: 'json'
       cache: false
       global: false
+      timeout: 15000
       success: (data) ->
         self.metainfo(null, clearStatus: true)
         self.metainfo('Loading . . .') if self.playlist.length == 0

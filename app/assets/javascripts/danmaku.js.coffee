@@ -25,6 +25,7 @@ class @Danmaku
       data:
         last_id: self.last_id
       global: false
+      timeout: 120000
       success: (items, textStatus, jqXHR) ->
         loop
           break if self.ajax isnt jqXHR
@@ -110,6 +111,7 @@ class @Danmaku
       dataType: 'jsonp'
       data:
         text: text
+      timeout: 60000
       success: (items) ->
         if items.code != 200
           DEBUG("Danmaku: #{items.code} #{items.status}")
