@@ -1,7 +1,6 @@
 class @Danmaku
   constructor: ->
     self = this
-    self.tid = 0
     self.last_id = 0
     self.count = 0
     self.size = null
@@ -12,12 +11,6 @@ class @Danmaku
 
   connect: =>
     self = this
-    if self.tid
-      clearTimeout(self.tid)
-      self.tid = false
-    self.tid = setTimeout(->
-      self.connect()
-    , 120000)
     DEBUG('Danmaku: Hooking')
     self.ajax = $.ajax
       url: "//#{self.server}/poll"
@@ -40,8 +33,7 @@ class @Danmaku
             self.create(item.text, item, delay)
             self.last_id = item.id
           break
-        self.reconnect()
-      error: ->
+      complete: ->
         self.reconnect()
 
   reconnect: =>
