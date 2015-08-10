@@ -131,7 +131,7 @@ zh-Hans:
       > A: 不建议这么做，除了授权问题以外本电台内藏不少地雷歌，为了您的人身安全和面子问题，建议个人收听就好。
 
       Q: 为什么会听到非日文的歌曲?
-      > A: 本电台以 ACG(Anime, Comic and Games) 为主，只要跟 ACG 有关不管是日文、中文、英文、西班牙文，通通来者不拒。
+      > A: 本电台以动漫为主，只要跟动漫有关不管是日文、中文、英文、西班牙文，通通来者不拒。
 
       Q: 为什么听到的歌和网页上显示的歌名不一样?
       > A: 电台网页播放器的音源和播放列表是互相独立运作的，因此在经过长时间的播放后可能会产生误差。
@@ -142,7 +142,13 @@ zh-Hans:
       Q: 收听电台时一直断断续续的怎么办?
       > A: 收听电台的带宽需求为 24KiB/s，只要下载速度达到这个速度以上即可正常收听，实际与服务器的传输速度请参考 [下载速度测试](/speed)(Beta)
 
-      欢迎一起参与开发 [phateio/kiris@GitHub](https://github.com/phateio/kiris)。
+      Q: 我能做些什么来帮助这个电台?
+      > A: 您可以……
+
+      >- 上传您喜欢的歌曲 [http://phate.io/upload](/upload)
+      >- 喜欢我们的 facebook 专页 https://www.facebook.com/phateio
+      >- 加入一起参与开发 https://github.com/phateio/kiris
+      >- 分享这个电台给您的朋友 http://phate.io/
   form:
     cancel: "取消"
     close: "关闭"

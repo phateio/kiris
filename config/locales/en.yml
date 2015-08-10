@@ -120,29 +120,35 @@ en:
   default:
     faq_page_content: |-
       Internet radio Introduction
-      > So-called "Internet radio" by definition is "A radio transmitted via the Internet". On the radio all the listeners at the same time are listening to the same song. If someone requested a song all listeners will hear this song.
+      > So-called "Internet radio" by definition is "A radio station transmitted via the Internet". On the radio station all the listeners at the same time are listening to the same song. If someone requested a song all listeners will hear this song.
 
       This station doesn't have any DJ, all the songs on playlist are requested by users, or random played by the system when playlist is empty.
 
       Q: What platforms does this Internet radio support?
-      > A: In addition to using a web browser to listen to, any platform, whether mobile or tablet as long as there have an app which support SHOUTcast protocol will be able to listen to this radio. For details, see [Player Support List](/support)
+      > A: In addition to using a web browser to listen to, any platform, whether mobile or tablet as long as there have an app which support SHOUTcast protocol will be able to listen to this radio station. For details, see [Player Support List](/support)
 
-      Q: Can I play this radio in public?
+      Q: Can I play this radio station in public?
       > A: Not recommended. In addition to licensing issues, this station contain many "special song" in database. For your personal safety and reputation, please individual listening only.
 
       Q: Why does the non-Japanese song hear?
-      > A: This radio is focus on ACG (Anime, Comic and Games), as long as the matter is concerned with ACG, Japanese, Chinese, English, Spanish, all comers.
+      > A: This radio station is focus on animes, as long as the matter is concerned with animes, Japanese, Chinese, English, Spanish, all comers.
 
       Q: Why does the song heard is different from pages show?
-      > A: audio and playlists Radio Web Player are mutually independent, so an error may occur after a long period of play.
+      > A: Audio and playlists on website are mutually independent, so an error may occur after a long period of play.
 
       Q: Can I skip a song? Why a song be cut?
-      > A: The radio doesn't have this function nor future. Most of them were mistaken for the song of the songs are already so. If it is determined that there is a problem, please go to "feedback" report the song name and playback time.
+      > A: This radio station doesn't have this function nor future. Most of them were mistaken for the song of the songs are already so. If it is determined that there is a problem, please go to "feedback" report the song name and playback time.
 
-      Q: Why the radio is choppy when listening?
-      > A: Listen to the radio bandwidth requirements for 24KiB/s, as long as the download speed can reach the speed it should listen normally. The actual transmission speed  to server, refer to [Download Speed Test](/speed)(Beta)
+      Q: Why the audio is choppy when listening?
+      > A: Listen to this radio station bandwidth requirements for 24KiB/s, as long as the download speed can reach the speed it should listen normally. The actual transmission speed  to server, refer to [Download Speed Test](/speed)(Beta)
 
-      Welcome to join our development effort [phateio/kiris@GitHub](https://github.com/phateio/kiris).
+      Q: What can I do to help this this radio station?
+      > A: You can...
+
+      >- Upload your favorite songs [http://phate.io/upload](/upload)
+      >- Like us on facebook https://www.facebook.com/phateio
+      >- Join our development effort https://github.com/phateio/kiris
+      >- Share this website with your friends http://phate.io/
   form:
     cancel: Cancel
     close: Close
