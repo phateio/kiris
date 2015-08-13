@@ -194,7 +194,7 @@ class Json::RequestController < ApplicationController
     reversed_server_addr = server_addr.split('.').reverse.join('.')
     qh = "#{reversed_remote_addr}.#{server_port}.#{reversed_server_addr}.ip-port.exitlist.torproject.org"
     address = @dns.getaddress(qh)
-    address == '127.0.0.2'
+    address.to_s == '127.0.0.2'
   rescue Resolv::ResolvError => e
     false
   rescue Resolv::ResolvTimeout => e
@@ -204,7 +204,7 @@ class Json::RequestController < ApplicationController
   def ip_reverse_dns_match?(address)
     hostname = @dns.getname(address)
     hostaddr = @dns.getaddress(hostname)
-    hostaddr == address
+    hostaddr.to_s == address
   rescue Resolv::ResolvError => e
     false
   rescue Resolv::ResolvTimeout => e
