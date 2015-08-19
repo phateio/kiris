@@ -131,6 +131,7 @@ class @Timer
     return if $('#backimg_front').length == 0
     self.background(
       image_url: self.image_url
+      image_source: self.image_source
       image_illustrator: self.image_illustrator
       by_system: true
     ).always ->
