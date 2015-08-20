@@ -35,7 +35,7 @@
     unless testDoc?.body?.childNodes.length is 1
       return createDocumentUsingWrite
 
-$.pjax = (url, history_method='replace') ->
+$.pjax = (url, history_method = 'replace') ->
   DEBUG("pjax: #{url}, #{history_method}")
   $link = $('#js-pjax-medium')
   if $link.length == 0
@@ -79,8 +79,8 @@ $(document).on 'ajax:success', (event, data, status, xhr) ->
 
   createDocument = browserCompatibleDocumentParser()
   doc = createDocument(data)
-  container = document.getElementById('subpages')
-  new_container = doc.getElementById('subpages')
+  container = document.getElementById('pjax-container')
+  new_container = doc.getElementById('pjax-container')
   container.parentNode.replaceChild(new_container, container)
 
   internal_style_sheet = document.getElementById('internal-style-sheet')

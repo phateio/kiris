@@ -26,7 +26,7 @@ html lang=I18n.locale
         #scrolldiv
           #homelinkdiv
             = link_to '', root_path, remote: true
-          #subpages data-route="#{controller_name}-#{action_name}"
+          #pjax-container data-route="#{controller_name}-#{action_name}"
             = yield
           = render partial: 'partials/lyrics'
         = render partial: 'partials/danmaku_bar_field'
