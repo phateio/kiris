@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.jplayer
-//= require jquery.slimscroll
 //= require nprogress
 //= require asseturls
 //= require common

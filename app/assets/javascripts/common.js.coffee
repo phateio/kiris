@@ -72,21 +72,6 @@ $(window).on 'resize', ->
         $body_td = $(this)
         $body_td.css('max-width', object_width * column_scale)
 
-  if not is_mobile()
-    container_width = $('#container').width()
-    container_height = $('#container').height()
-    $('#scrolldiv').slimScroll
-      height: "#{container_height}px"
-      color: '#888888'
-      distance: '0px'
-      disableFadeOut : true
-      wheelStep: 10
-      touchScrollStep : 75
-    .width(container_width)
-    .height(container_height)
-    .parent('DIV.slimScrollDiv').width(container_width)
-                                .height(container_height)
-
 $(window).on 'page:refresh', (event, options = {}) ->
   window.updated_at = jQuery_now_in_seconds()
   settings =

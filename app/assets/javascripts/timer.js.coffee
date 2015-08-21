@@ -334,4 +334,3 @@ class @Timer
     danmaku.danmaku_lyrics = danmaku_lyrics
     if $('[data-route="default-index"]').length > 0
       $('#scrolldiv').scrollTop(0)
-      $('.slimScrollBar').css('top', '0px')
