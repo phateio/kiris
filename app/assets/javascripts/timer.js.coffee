@@ -17,6 +17,7 @@ class @Timer
     self.prefix = 'pli_'
     self.nexttime = 0
     self.duration = 0
+    self.delay = 1
     self.callback = false
     self.fast = 600
     self.normal = 1000
@@ -47,9 +48,11 @@ class @Timer
       self.unique = "#{self.prefix}#{self.playlist[0].id}"
       self.nexttime = nowtime + self.playlist[0].timeleft
       self.duration = self.playlist[0].duration
+      self.delay /= 2 if self.delay > 1
     else
       self.unique = false
-      self.nexttime = nowtime + rand(10, 30)
+      self.delay *= 2 if self.delay < 64
+      self.nexttime = nowtime + rand(self.delay, self.delay * 2)
       self.duration = self.playlist[0].duration
 
   metainfo: (text, option = {}) =>
@@ -75,9 +78,14 @@ class @Timer
         self.otherUpdate(duration: null, evalCallback: true)
         self.metainfo('Loading . . .') if self.playlist.length == 1
       else
+        # when playlist empty or playlist[0].timeleft <= 0
         self.unique = false
-        self.nexttime = nowtime + rand(30, 60)
-        self.refresh()
+        self.nexttime = nowtime + rand(60, 90)
+        self.refresh callback: ->
+          return if self.playlist.length > 0
+          self.unique = false
+          self.delay *= 2 if self.delay < 64
+          self.nexttime = nowtime + rand(self.delay, self.delay * 2)
       return
     return if not self.unique
     elapsed_time = self.duration - timeleft
@@ -92,8 +100,8 @@ class @Timer
       dataType: 'json'
       cache: false
       global: false
-      timeout: 15000
-      success: (data) ->
+      timeout: 60000
+      success: (data, textStatus, jqXHR) ->
         self.metainfo(null, clearStatus: true)
         self.metainfo('Loading . . .') if self.playlist.length == 0
         return if data.length == 0
@@ -110,6 +118,8 @@ class @Timer
           self.otherUpdate(duration: null, evalCallback: false)
           self.queueUpdate()
         self.metainfo('Random playing . . .') if self.playlist.length == 1
+      complete: (jqXHR, textStatus, errorThrown) ->
+        options.callback() if options.callback
     $.extend(settings, options)
     $.ajax(settings)
 
