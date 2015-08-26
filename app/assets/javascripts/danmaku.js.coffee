@@ -46,6 +46,7 @@ class @Danmaku
     self = this
     $container = $('#container')
 
+    id = attributes.id
     top = if attributes.top == undefined then Math.random() else attributes.top
     color = attributes.color || [255, 255, 255, 0.9]
     size = if self.size then self.size else (attributes.size || 1.0)
@@ -77,7 +78,7 @@ class @Danmaku
       color: span_color
       'font-size': font_size
       'font-weight': font_weight
-    ).data('uid', uid).appendTo($container)
+    ).data('id', id).appendTo($container)
 
     span_left_end = $span.width() * (-1)
     trajectory_length = parseInt($span.css('left'))
@@ -117,13 +118,13 @@ class @Danmaku
         DEBUG('Danmaku: ERROR: ' + items)
         self.create(text, offline: true)
 
-  report: (target_uid) =>
+  report: (target_id) =>
     self = this
     $.ajax
       url: "//#{self.server}/report"
       dataType: 'jsonp'
       data:
-        target_uid: target_uid
+        target_id: target_id
 
   clear: =>
     self = this
@@ -172,13 +173,13 @@ $(document).on 'click', '.danmakuspan', (event) ->
 $(document).on 'contextmenu', '.danmakuspan', (event) ->
   event.preventDefault()
   $self = $(event.currentTarget)
-  target_uid = $self.data('uid')
+  target_id = $self.data('id')
   text = $self.text()
-  return if not target_uid
+  return if not target_id
   message = "“#{text}”\nAre you sure you want to report this danmaku?"
   option = confirm(message)
   return if option != true
-  danmaku.report(target_uid)
+  danmaku.report(target_id)
   $self.trigger('click')
 
 $(document).on 'ready', ->
