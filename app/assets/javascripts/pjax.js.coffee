@@ -59,7 +59,7 @@ $(document).on 'ajax:beforeSend', (event, xhr, settings) ->
   xhr.historyMethod = history_method if history_method
   settings.dataType = 'html'
   if settings.crossDomain
-    window.open(xhr.url)
+    window.open($self.attr('href') || xhr.url)
     return false
   window.pjax = xhr
 
