@@ -65,20 +65,19 @@ class ApplicationController < ActionController::Base
     remote_addr   = request.ip
     referer       = request.env['HTTP_REFERER']
     useragent     = request.env['HTTP_USER_AGENT']
-    forwarded_ips = request.env['HTTP_X_FORWARDED_FOR']
+    forwarded     = request.env['HTTP_X_FORWARDED_FOR']
     server_addr   = request.env['HTTP_SERVER_ADDR'] || '8.8.8.8'
     server_port   = request.env['HTTP_X_FORWARDED_PORT'] || 80
 
-    remote_addr   = remote_addr.to_s.force_encoding('UTF-8')
-    useragent     = useragent.to_s.force_encoding('UTF-8')
-    forwarded_ips = forwarded_ips.to_s.force_encoding('UTF-8').split(/\s*,\s*/).last(3)
-    server_addr   = server_addr.to_s.force_encoding('UTF-8')
+    forwarded_ips = forwarded.to_s.split(/\s*,\s*/).last(3)
     server_port   = server_port.to_i
 
     @client = {
       ip: remote_addr,
+      ipaddress: remote_addr,
       referer: referer,
       useragent: useragent,
+      forwarded: forwarded,
       forwarded_ips: forwarded_ips,
       server_addr: server_addr,
       server_port: server_port
@@ -203,5 +202,25 @@ class ApplicationController < ActionController::Base
       end
     end
     return nil
+  end
+
+  def markdown_render(text)
+    render_options = {
+      escape_html: true,
+      safe_links_only: true,
+      hard_wrap: true,
+      link_attributes: { :'data-remote'=> true }
+    }
+    extensions = {
+      no_intra_emphasis: true,
+      tables: true,
+      fenced_code_blocks: true,
+      autolink: true,
+      space_after_headers: true,
+      strikethrough: true
+    }
+    renderer = CodeRayify.new(render_options)
+    markdown = Redcarpet::Markdown.new(renderer, extensions)
+    markdown.render(text).html_safe
   end
 end

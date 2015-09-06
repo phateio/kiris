@@ -259,7 +259,8 @@ en:
     description: Phate Radio is an experimental internet radio about anime, games and pop music.
     sitename: Phate Radio
   navbar:
-    category: Category
+    catalog: Catalog·Kai
+    category: Catalog
     chat: Chat
     faq: FAQ
     feedback: Feedback

@@ -30,7 +30,7 @@ zh-Hans:
         id: ID
         identity: "身分"
         label: "唱片公司"
-        legacy: "遗产"
+        legacy: Legacy
         mtime: "修改时间"
         nexttime: "冷却结束时间"
         niconico: Niconico ID
@@ -256,6 +256,7 @@ zh-Hans:
     description: "飞特网络电台是以播放动漫配乐及同人音乐为主的实验性网络电台，仅用来测试自行研发之自动化网络系统，纯学术用途"
     sitename: "飞特网络电台"
   navbar:
+    catalog: "标签目录・改"
     category: "标签目录"
     chat: "聊天室"
     faq: "常见问题"

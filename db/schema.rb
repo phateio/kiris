@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021150831) do
+ActiveRecord::Schema.define(version: 20150810142823) do
+
+  create_table "catalogs", force: :cascade do |t|
+    t.text     "text",       default: "", null: false
+    t.text     "html",       default: "", null: false
+    t.string   "comment",    default: "", null: false
+    t.string   "nickname",   default: "", null: false
+    t.string   "ipaddress",  default: "", null: false
+    t.string   "forwarded",  default: "", null: false
+    t.string   "useragent",  default: "", null: false
+    t.string   "sessionid",  default: "", null: false
+    t.integer  "length",     default: 0,  null: false
+    t.string   "revision",   default: "", null: false
+    t.integer  "parent_id",  default: 0,  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.integer  "gid",        default: 0,  null: false

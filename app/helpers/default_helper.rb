@@ -17,7 +17,7 @@ module DefaultHelper
       ['English', 'en'],
       ['Japanese - 日本語', 'ja'],
       ['Chinese (Simplified Han) - 简体中文', 'zh-Hans'],
-      ['Chinese (Traditional Han) - 正體中文', 'zh-Hant']
+      ['Chinese (Traditional Han) - 繁體中文', 'zh-Hant']
     ]
   end
 end

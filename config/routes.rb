@@ -36,6 +36,16 @@ Rails.application.routes.draw do
   post 'request'  => 'json/request#create'
   get  'status'   => 'json/status#index'
 
+  resource :catalog, except: [:show, :new, :create, :edit, :update, :destroy], format: false do
+    root               'catalogs#index',            on: :collection
+    get   'edit'    => 'catalogs#edit_or_new',      on: :collection
+    match 'edit'    => 'catalogs#update_or_create', on: :collection, via: [:post, :patch]
+    get   'history' => 'catalogs#show_history',     on: :collection
+  end
+  resources :catalogs, except: [:index, :new, :create, :edit, :update, :destroy], format: false do
+    get 'diff' => 'catalogs#diff', on: :member
+  end
+
   resources :tracks, except: [:new, :create, :edit, :update, :destroy], format: false do
     resources :comments, controller: 'tracks/comments'
     resources :images, controller: 'tracks/images'
