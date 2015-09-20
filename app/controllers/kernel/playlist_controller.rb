@@ -7,9 +7,13 @@ class Kernel::PlaylistController < ApplicationController
 
   def index
     items = []
-    playlist_colle = Playlist.includes(:track).where(playedtime: Time.at(0).utc).order(id: :asc).limit(3).load
+    playlist_colle = Playlist.includes(:track).order(playedtime: :desc, id: :asc).limit(4).load
     playlist_colle.each do |playlist|
       track = playlist.track
+      if playlist.playedtime > Time.at(0).utc
+        next unless playlist.playedtime + track.duration + 45.seconds < Time.now
+        track = Track.find($OFFLINE_TRACK_ID || 1)
+      end
       items << track_item(track)
     end
     respond_to do |format|
