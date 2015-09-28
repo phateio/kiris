@@ -180,6 +180,8 @@ class ApplicationController < ActionController::Base
         server_addr: server_addr,
         server_port: server_port
       }
+      @ipaddress = request.ip
+      @useragent = request.env['HTTP_USER_AGENT']
     end
 
     def sanitize_session_locale(available_locales)
