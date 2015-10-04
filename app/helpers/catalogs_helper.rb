@@ -9,6 +9,10 @@ module CatalogsHelper
     link_to t('form.edit'), edit_catalog_path(@catalog), remote: true
   end
 
+  def render_catalog_google_sheets_edit_link
+    link_to t('catalogs.edit_with_google_sheets'), 'https://goo.gl/3lbOef', target: "_blank"
+  end
+
   def render_catalog_form
     render partial: 'catalog_form'
   end

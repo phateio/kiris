@@ -117,6 +117,8 @@ en:
     track_migration:
       title: Track Migration
       track_migration_management: Track Migration Management
+  catalogs:
+    edit_with_google_sheets: Edit with Google Sheets
   default:
     faq_page_content: |-
       Internet radio Introduction
