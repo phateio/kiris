@@ -13,6 +13,7 @@ class CatalogsController < ApplicationController
   end
 
   def update_or_create
+    set_site_title(I18n.t('navbar.catalog'))
     @catalog_old = Catalog.order(id: :desc).limit(1).first
     @catalog_new = Catalog.new(catalog_params)
 

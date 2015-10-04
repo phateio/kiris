@@ -9,12 +9,17 @@ class CatalogsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:catalog)
+    # puts @response.body
+    assert_select 'title', /^.+$/
+    assert_select 'html', /^((?!translation missing:).)+$/i
   end
 
   test 'should get new' do
     get :edit_or_new
     assert_response :success
     assert_not_nil assigns(:catalog)
+    assert_select 'title', /^.+$/
+    assert_select 'html', /^((?!translation missing:).)+$/i
   end
 
   test 'should create catalog' do
@@ -35,6 +40,8 @@ class CatalogsControllerTest < ActionController::TestCase
       }
     end
     assert_response :success
+    assert_select 'title', /^.+$/
+    assert_select 'html', /^((?!translation missing:).)+$/i
   end
 
   test 'should update catalog' do
