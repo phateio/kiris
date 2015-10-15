@@ -1,0 +1,13 @@
+= form_for @catalog, url: edit_catalog_path(@catalog), remote: true do |f|
+  = f.hidden_field :updated_at
+  table
+    tr
+      td
+        = f.text_area :text, cols: 80, rows:25
+    tr
+      td
+        = f.hidden_field :nickname, data: {option: 'nickname'}
+    tr
+      td
+        = f.submit nil, data: {disable: true}
+  = render_object_error_messages(@catalog)

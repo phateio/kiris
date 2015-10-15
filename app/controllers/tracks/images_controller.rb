@@ -43,35 +43,35 @@ class Tracks::ImagesController < ApplicationController
   end
 
   private
-  def track_id
-    params[:track_id]
-  end
+    def track_id
+      params[:track_id]
+    end
 
-  def image_params
-    params.require(:image).permit(:url, :source, :nickname)
-  end
+    def image_params
+      params.require(:image).permit(:url, :source, :nickname)
+    end
 
-  def is_valid_content_type?(url)
-    res = http_head_response(url) rescue nil
-    return nil if res.nil?
-    ['image/jpeg', 'image/png'].include?(res['Content-Type'])
-  end
+    def is_valid_content_type?(url)
+      res = http_head_response(url) rescue nil
+      return nil if res.nil?
+      ['image/jpeg', 'image/png'].include?(res['Content-Type'])
+    end
 
-  def get_pixiv_illust_info(illust_id)
-    headers = {
-      'Authorization' => $PIXIV_AUTHORIZATION
-    }
-    res_body = http_get_response_body("https://public-api.secure.pixiv.net/v1/works/#{illust_id}.json?image_sizes=large", headers) rescue nil
-    return nil if res_body.nil?
-    illust_hash = JSON.parse(res_body)
-    return false if illust_hash['status'] != 'success'
-    illust_hash_response = illust_hash['response'].first
-    {
-      illust_id: illust_hash_response['id'],
-      image_url: illust_hash_response['image_urls']['large'],
-      nickname: illust_hash_response['user']['name'],
-      tags: illust_hash_response['tags'],
-      type: illust_hash_response['type']
-    }
-  end
+    def get_pixiv_illust_info(illust_id)
+      headers = {
+        'Authorization' => $PIXIV_AUTHORIZATION
+      }
+      res_body = http_get_response_body("https://public-api.secure.pixiv.net/v1/works/#{illust_id}.json?image_sizes=large", headers) rescue nil
+      return nil if res_body.nil?
+      illust_hash = JSON.parse(res_body)
+      return false if illust_hash['status'] != 'success'
+      illust_hash_response = illust_hash['response'].first
+      {
+        illust_id: illust_hash_response['id'],
+        image_url: illust_hash_response['image_urls']['large'],
+        nickname: illust_hash_response['user']['name'],
+        tags: illust_hash_response['tags'],
+        type: illust_hash_response['type']
+      }
+    end
 end

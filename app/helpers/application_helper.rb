@@ -31,25 +31,6 @@ module ApplicationHelper
     content_tag :p, html_escape(text).gsub(/(?:\n\r?|\r\n?)/, '<br />').html_safe, options
   end
 
-  def markdown_render(text)
-    render_options = {
-      escape_html: true,
-      safe_links_only: true,
-      hard_wrap: true,
-      link_attributes: { :'data-remote'=> true }
-    }
-    extensions = {
-      no_intra_emphasis: true,
-      fenced_code_blocks: true,
-      autolink: true,
-      space_after_headers: true,
-      strikethrough: true
-    }
-    renderer = CodeRayify.new(render_options)
-    markdown = Redcarpet::Markdown.new(renderer, extensions)
-    markdown.render(text).html_safe
-  end
-
   def markdown_format(text, options = {})
     markdown_html = markdown_render(text)
     content_tag :div, markdown_html, options
@@ -101,17 +82,18 @@ module ApplicationHelper
 
   def navbar_items
     [
-      {url: news_path     , text: t('navbar.news'),     link_options: {remote: true}},
-      {url: search_path   , text: t('navbar.search'),   link_options: {remote: true}},
-      {url: category_path , text: t('navbar.category'), link_options: {remote: true}},
-      {url: history_path  , text: t('navbar.history'),  link_options: {remote: true}},
-      {url: latest_path   , text: t('navbar.latest'),   link_options: {remote: true}},
-      {url: upload_path   , text: t('navbar.upload'),   link_options: {remote: true}},
-      {url: images_path   , text: t('navbar.images'),   link_options: {remote: true}},
-      {url: chat_path     , text: t('navbar.chat'),     link_options: {remote: true}},
-      {url: faq_path      , text: t('navbar.faq'),      link_options: {remote: true}},
-      {url: issues_path   , text: t('navbar.feedback'), link_options: {remote: true}},
-      {url: '/phate.m3u'  , text: 'phate.m3u'}
+      {url: news_path,         text: t('navbar.news'),     link_options: {remote: true}},
+      {url: search_path,       text: t('navbar.search'),   link_options: {remote: true}},
+      {url: category_path,     text: t('navbar.category'), link_options: {remote: true}},
+      {url: root_catalog_path, text: t('navbar.catalog'),  link_options: {remote: true}},
+      {url: history_path,      text: t('navbar.history'),  link_options: {remote: true}},
+      {url: latest_path,       text: t('navbar.latest'),   link_options: {remote: true}},
+      {url: upload_path,       text: t('navbar.upload'),   link_options: {remote: true}},
+      {url: images_path,       text: t('navbar.images'),   link_options: {remote: true}},
+      {url: chat_path,         text: t('navbar.chat'),     link_options: {remote: true}},
+      {url: faq_path,          text: t('navbar.faq'),      link_options: {remote: true}},
+      {url: issues_path,       text: t('navbar.feedback'), link_options: {remote: true}},
+      {url: '/phate.m3u',      text: 'phate.m3u'}
     ]
   end
 

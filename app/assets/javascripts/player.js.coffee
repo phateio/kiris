@@ -25,9 +25,7 @@ $(document).on 'click', '#playing li:first-child', ->
   if $self.hasClass('playlist-expanded')
     $self.animate {'height': '30'}, 600, ->
       $self.css('height', '').removeClass('playlist-expanded')
-      $('#lyrics').css('opacity', '')
   else
-    $('#lyrics').css('opacity', 0.5)
     $self.addClass('playlist-expanded')
 
 .on 'click', '#playing li:not(:first-child)', ->
@@ -35,7 +33,6 @@ $(document).on 'click', '#playing li:first-child', ->
   return if String(getSelected())
 
   timer.refresh(global: true)
-  $('#lyrics').css('opacity', 0.5)
   $self.addClass('playlist-expanded')
 
 $(document).on 'click', '#listeners', ->

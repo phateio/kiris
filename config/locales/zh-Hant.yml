@@ -30,7 +30,7 @@ zh-Hant:
         id: ID
         identity: "身分"
         label: "唱片公司"
-        legacy: "遺產"
+        legacy: Legacy
         mtime: "修改時間"
         nexttime: "冷卻結束時間"
         niconico: Niconico ID
@@ -117,6 +117,8 @@ zh-Hant:
     track_migration:
       title: "歌曲變更"
       track_migration_management: "歌曲變更管理"
+  catalogs:
+    edit_with_google_sheets: "使用 Google 試算表 編輯"
   default:
     faq_page_content: |-
       網路電台簡介
@@ -256,6 +258,7 @@ zh-Hant:
     description: "飛特網路電台是以播放動漫配樂及同人音樂為主的實驗性網路電台，僅用來測試自行研發之自動化網路系統，純學術用途"
     sitename: "飛特網路電台"
   navbar:
+    catalog: "標籤目錄・改"
     category: "標籤目錄"
     chat: "聊天室"
     faq: "常見問題"

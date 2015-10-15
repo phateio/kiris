@@ -1,9 +1,12 @@
 require 'test_helper'
 
 class Tracks::ImagesControllerTest < ActionController::TestCase
-  test 'index' do
-    assert_raises ActiveRecord::RecordNotFound do
-      get :index, track_id: 1, id: 1
-    end
+  test 'should get index' do
+    get :index, track_id: 1
+    assert_response :success
+    assert_not_nil assigns(:image)
+    assert_not_nil assigns(:images)
+    assert_select 'title', /^.+$/
+    assert_select 'html', /^((?!translation missing:).)+$/i
   end
 end

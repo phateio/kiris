@@ -2,15 +2,14 @@ class ListenController < ApplicationController
   layout false
 
   def redirect
-    useragent = @client[:useragent]
-    icy_metadata = request.env['HTTP_ICY_METADATA']
+    @icy_metadata = request.env['HTTP_ICY_METADATA']
 
     if $ICECAST_SERVER
       stream_server = $ICECAST_SERVER
     elsif request.host != default_url_options.to_h[:host]
       stream_server = 'cdnstream.phate.io'
-    elsif icy_metadata && icy_metadata == '1' || useragent.downcase.include?('mobile')
-      stream_server = 'stream.dallas.phate.io'
+    # elsif @icy_metadata.to_s == '1' || @useragent.to_s.downcase.include?('mobile')
+    #   stream_server = 'stream.dallas.phate.io'
     else
       stream_server = 'stream.phate.io'
     end

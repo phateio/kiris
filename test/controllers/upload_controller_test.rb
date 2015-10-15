@@ -1,9 +1,10 @@
 require 'test_helper'
 
 class UploadControllerTest < ActionController::TestCase
-  test 'index' do
+  test 'should get index' do
     get :index
     assert_response :success
-    assert_select 'title', /^((?!translation missing:).)+$/i
+    assert_select 'title', /^.+$/
+    assert_select 'html', /^((?!translation missing:).)+$/i
   end
 end

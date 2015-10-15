@@ -3,7 +3,7 @@ require 'test_helper'
 class ListenControllerTest < ActionController::TestCase
   stream_server_url = 'http://stream.phate.io/phatecc'
 
-  test 'redirect' do
+  test 'should redirect to stream server' do
     get :redirect
     assert_redirected_to stream_server_url
     get :redirect, format: 'mp3'

@@ -36,6 +36,16 @@ Rails.application.routes.draw do
   post 'request'  => 'json/request#create'
   get  'status'   => 'json/status#index'
 
+  resource :catalog, except: [:show, :new, :create, :edit, :update, :destroy], format: false do
+    root               'catalogs#index',            on: :collection
+    get   'edit'    => 'catalogs#edit_or_new',      on: :collection
+    match 'edit'    => 'catalogs#update_or_create', on: :collection, via: [:post, :patch]
+    get   'history' => 'catalogs#show_history',     on: :collection
+  end
+  resources :catalogs, except: [:index, :new, :create, :edit, :update, :destroy], format: false do
+    get 'diff' => 'catalogs#diff', on: :member
+  end
+
   resources :tracks, except: [:new, :create, :edit, :update, :destroy], format: false do
     resources :comments, controller: 'tracks/comments'
     resources :images, controller: 'tracks/images'
@@ -95,16 +105,19 @@ Rails.application.routes.draw do
   post 'login'  => 'members#login', format: false
   get  'logout' => 'members#logout', format: false
 
-  namespace :kernel do
+  namespace :bridge do
     get  'playlist' => 'playlist#index'
     post 'playlist' => 'playlist#update'
     get  'randlist' => 'playlist#randlist'
 
-    get  'tracks'           => 'niconico#index'
-    post 'tracks'           => 'niconico#update'
-    get  'track_migrations' => 'track_migrations#index'
-    post 'track_migrations' => 'track_migrations#update'
+    get  'tracks' => 'tracks#index'
+    post 'tracks' => 'tracks#update'
   end
+
+  # Legacy client support
+  get  'kernel/playlist' => 'bridge/playlist#index'
+  post 'kernel/playlist' => 'bridge/playlist#update'
+  get  'kernel/randlist' => 'bridge/playlist#randlist'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
