@@ -34,11 +34,11 @@ class Tracks::LyricsController < ApplicationController
   end
 
   private
-  def track_id
-    params[:track_id]
-  end
+    def track_id
+      params[:track_id]
+    end
 
-  def lyric_params
-    params.require(:lyric).permit(:text,)
-  end
+    def lyric_params
+      params.require(:lyric).permit(:text,)
+    end
 end

@@ -40,29 +40,29 @@ class Tracks::CommentsController < ApplicationController
   end
 
   private
-  def track_id
-    params[:track_id]
-  end
-
-  def track_comment_id
-    params[:id]
-  end
-
-  def track_comment_params
-    params.require(:track_comment).permit(track_comment_attribute_names)
-  end
-
-  def track_comment_attribute_names
-    [
-      :message,
-      :nickname
-    ]
-  end
-
-  def redirect_to_index_if_not_permitted(track_comment)
-    if not track_comment.editable?(@client[:ip], @identity)
-      flash[:error] = 'Access Denied.'
-      x_redirect_to tracks_path and return
+    def track_id
+      params[:track_id]
     end
-  end
+
+    def track_comment_id
+      params[:id]
+    end
+
+    def track_comment_params
+      params.require(:track_comment).permit(track_comment_attribute_names)
+    end
+
+    def track_comment_attribute_names
+      [
+        :message,
+        :nickname
+      ]
+    end
+
+    def redirect_to_index_if_not_permitted(track_comment)
+      if not track_comment.editable?(@client[:ip], @identity)
+        flash[:error] = 'Access Denied.'
+        x_redirect_to tracks_path and return
+      end
+    end
 end

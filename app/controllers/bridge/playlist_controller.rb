@@ -1,6 +1,6 @@
 require 'yp_directory'
 
-class Kernel::PlaylistController < ApplicationController
+class Bridge::PlaylistController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   layout false
@@ -24,12 +24,12 @@ class Kernel::PlaylistController < ApplicationController
 
   def update
     secret_key = request.POST[:secret_key]
-    szhash = request.POST[:hash]
-    track = Track.where(szhash: szhash).first
-    track_id = request.POST[:id] || track.id
-    if secret_key != $KERNEL_SECRET_KEY
+    szhash = request.POST[:szhash] || request.POST[:hash]
+    if secret_key != $BRIDGE_SECRET_KEY
       render nothing: true, status: :forbidden and return
     end
+    track = Track.where(szhash: szhash).first
+    track_id = request.POST[:id] || track.id
     Playlist.where.not(playedtime: Time.at(0).utc).destroy_all
     playlist = Playlist.find_or_create_by!(track_id: track_id)
     playlist.with_lock do
@@ -71,7 +71,7 @@ class Kernel::PlaylistController < ApplicationController
   def randlist
     items = []
     track_size = Track.requestable.size
-    offset = track_size >= 1000 ? rand(1000) : rand(track_size)
+    offset = track_size >= 100 ? rand(100) : rand(track_size)
     tracks = Track.requestable.order(updated_at: :asc).offset(offset).limit(1)
     tracks.each do |track|
       items << track_item(track)
@@ -83,12 +83,13 @@ class Kernel::PlaylistController < ApplicationController
   end
 
   private
-  def track_item(track)
-    {
-      id: track.id,
-      hash: track.szhash,
-      title: track.title,
-      artist: (track.artist.blank? ? 'Null' : track.artist)
-    }
-  end
+    def track_item(track)
+      {
+        id: track.id,
+        hash: track.szhash,
+        szhash: track.szhash,
+        title: track.title,
+        artist: (track.artist.blank? ? 'Null' : track.artist)
+      }
+    end
 end

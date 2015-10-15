@@ -105,16 +105,19 @@ Rails.application.routes.draw do
   post 'login'  => 'members#login', format: false
   get  'logout' => 'members#logout', format: false
 
-  namespace :kernel do
+  namespace :bridge do
     get  'playlist' => 'playlist#index'
     post 'playlist' => 'playlist#update'
     get  'randlist' => 'playlist#randlist'
 
-    get  'tracks'           => 'niconico#index'
-    post 'tracks'           => 'niconico#update'
-    get  'track_migrations' => 'track_migrations#index'
-    post 'track_migrations' => 'track_migrations#update'
+    get  'tracks' => 'tracks#index'
+    post 'tracks' => 'tracks#update'
   end
+
+  # Legacy client support
+  get  'kernel/playlist' => 'bridge/playlist#index'
+  post 'kernel/playlist' => 'bridge/playlist#update'
+  get  'kernel/randlist' => 'bridge/playlist#randlist'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

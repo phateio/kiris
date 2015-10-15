@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+  id: 1
   title: TITLE
   szhash: da39a3ee5e6b4b0d3255bfef95601890afd80709
   artist: ARTIST
