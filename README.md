@@ -3,7 +3,7 @@
 - Framework: Ruby on Rails
 
 ## Requirement
-1. Ruby 2.1.6
+1. Ruby 2.1.7
 2. Rails 4.2.0+
 
 ## Installation
