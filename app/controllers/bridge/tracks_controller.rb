@@ -40,7 +40,7 @@ class Bridge::TracksController < ApplicationController
   def update
     @track = Track.find(track_id)
     secret_key = request.POST[:secret_key]
-    if secret_key != $KERNEL_SECRET_KEY
+    if secret_key != $BRIDGE_SECRET_KEY
       render nothing: true, status: :forbidden and return
     end
     @track.update(track_params.merge(mtime: Time.now.utc))
