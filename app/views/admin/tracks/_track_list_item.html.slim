@@ -1,0 +1,23 @@
+tr
+  td
+   = datetime_tag(track.created_at)
+  td class="title" data={tooltips_text: track.tags}
+    = track.title
+  td class="artist"
+    = track.artist
+  td
+    = render_admin_track_niconico_link(track)
+  td
+    = track.duration_abbrtime
+  td
+    = track.uploader
+  td
+    = track.status
+  td
+    = render_admin_track_comments_link(track)
+  td
+    = render_admin_track_edit_link(track)
+  td
+    = render_admin_track_review_link(track)
+  td
+    = render_admin_track_delete_link(track)

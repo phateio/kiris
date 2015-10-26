@@ -15,6 +15,10 @@ module Admin::TracksHelper
     render partial: 'track_list_item_header'
   end
 
+  def render_admin_track_comments_link(track)
+    render partial: 'track_list_column_track_comments_link', :locals => {track: track}
+  end
+
   def render_admin_track_edit_link(track)
     return unless @access > 0
     link_to t('form.edit'), edit_admin_track_path(track), class: 'track-edit-link', remote: true

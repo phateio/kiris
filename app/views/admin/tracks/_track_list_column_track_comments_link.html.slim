@@ -1,0 +1,2 @@
+= link_to t('search.comments'), track_comments_path(track), remote: true
+= content_tag :span, "(#{track.track_comments.size})", class: 'comment-count'
