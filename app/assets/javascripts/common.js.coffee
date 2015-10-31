@@ -218,25 +218,32 @@ $(document).on 'keydown', '.js-flatedit', (event) ->
   KEY_ENTER = 13
   KEY_ESC = 27
   if event.which == KEY_ENTER
-    DEBUG('Keydown: ENTER')
+    DEBUG('.js-flatedit Keydown: ENTER')
     event.preventDefault()
     $self.blur()
   else if event.which == KEY_ESC
-    DEBUG('Keydown: ESC')
+    DEBUG('.js-flatedit Keydown: ESC')
     event.preventDefault()
     $self.blur()
 
-$(document).on 'keydown', (event) ->
+$(document).keydown (event) ->
   KEY_ESC = 27
-  KEY_L   = 76
+  KEY_L = 76
+  return if event.target.tagName in [
+    'A',
+    'INPUT',
+    'BUTTON',
+    'TEXTAREA',
+    'SELECT'
+  ]
   if event.which == KEY_ESC
-    DEBUG('Keydown: ESC')
+    DEBUG('Global Keydown: ESC')
     event.preventDefault()
     if window.pjax
       window.pjax.abort()
       window.pjax = null
   else if event.altKey && event.which == KEY_L
-    DEBUG('Keydown: ALT + L')
+    DEBUG('Global Keydown: ALT + L')
     $.pjax('/login', 'push') if window.history.pushState
 
 $(window).ready ->

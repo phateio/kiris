@@ -184,21 +184,32 @@ $(document).on 'contextmenu', '.danmakuspan', (event) ->
 
 $(document).on 'ready', ->
 
-  $(document).keydown (event) ->
+  $(document).on 'keydown', '#danmakubar form > input', (event) ->
+    $self = $(event.currentTarget)
     KEY_ESC = 27
-    KEY_ENTER = 13
     if event.which == KEY_ESC
-      DEBUG('Keydown: ESC')
+      DEBUG('#danmakubar Keydown: ESC')
       event.preventDefault()
-      danmaku.clear().inputBlur()
-    else if event.which == KEY_ENTER && event.target.tagName != 'A' \
-                                     && event.target.tagName != 'INPUT' \
-                                     && event.target.tagName != 'BUTTON' \
-                                     && event.target.tagName != 'TEXTAREA' \
-                                     && event.target.tagName != 'SELECT'
-      DEBUG('Keydown: ENTER')
+      danmaku.inputBlur()
+
+  $(document).keydown (event) ->
+    KEY_ENTER = 13
+    KEY_ESC = 27
+    return if event.target.tagName in [
+      'A',
+      'INPUT',
+      'BUTTON',
+      'TEXTAREA',
+      'SELECT'
+    ]
+    if event.which == KEY_ENTER
+      DEBUG('Global Danmaku Keydown: ENTER')
       event.preventDefault()
       danmaku.inputFocus()
+    else if event.which == KEY_ESC
+      DEBUG('Global Danmaku Keydown: ESC')
+      event.preventDefault()
+      danmaku.clear()
 
   $('#danmakubar form input').inputHistory
     before_enter: (event) ->
