@@ -25,7 +25,7 @@ $(document).on 'ready', ->
     filesize = 22241976
     starttime = Math.floor($.now() / 1000)
 
-    $video.attr('src', '//stream.phate.io/sm17289336.mp4?_=' + $.now())
+    $video.attr('src', '//stream.phate.io/video/sm17289336.mp4?_=' + $.now())
     $video.on 'progress', (event) ->
       return if not _video.buffered.length >= 1
       buffered = Math.ceil(_video.buffered.end(0))
