@@ -9,8 +9,10 @@ class Bridge::TracksController < ApplicationController
       render nothing: true, status: :not_found and return
     end
     case params[:type]
-    when 'empty_niconico'
-      search_empty_niconico
+    when 'niconico_for_new'
+      search_niconico_for_new
+    when 'niconico_for_renew'
+      search_niconico_for_renew
     when 'szhash'
       search_by_szhash
     else
@@ -22,8 +24,15 @@ class Bridge::TracksController < ApplicationController
     end
   end
 
-  def search_empty_niconico
-    tracks = Track.where.not(niconico: '').where(szhash: '').order(id: :asc)
+  def search_niconico_for_new
+    tracks = Track.niconico_tracks.where(szhash: '').order(id: :asc)
+    tracks.each do |track|
+      @items << track_item(track)
+    end
+  end
+
+  def search_niconico_for_renew
+    tracks = Track.niconico_tracks.requestable.where(source_channels: '').order(id: :asc)
     tracks.each do |track|
       @items << track_item(track)
     end
