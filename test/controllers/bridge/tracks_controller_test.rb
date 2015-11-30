@@ -6,13 +6,13 @@ class Bridge::TracksControllerTest < ActionController::TestCase
     assert_response :not_found
   end
 
-  test 'should get empty niconico' do
-    get :index, format: 'json', type: 'empty_niconico'
+  test 'should get niconico_for_new list' do
+    get :index, format: 'json', type: 'niconico_for_new'
     assert_response :success
   end
 
-  test 'should get empty list' do
-    get :index, format: 'json', type: 'szhash'
+  test 'should get niconico_for_renew list' do
+    get :index, format: 'json', type: 'niconico_for_renew'
     assert_response :success
   end
 
