@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Ruby version
-ruby '2.1.7'
+ruby '2.2.3'
 
 group :production do
   # Use Rails 12factor for The Twelve Factors
@@ -36,7 +36,7 @@ gem 'redcarpet'
 gem 'coderay'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.4'
+gem 'rails', '~> 4.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', groups: [:development, :test]
 # Use postgresql as the database for Active Record
@@ -47,7 +47,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-gem 'coffee-script-source', '1.8.0', groups: [:development, :test]
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
