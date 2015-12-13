@@ -75,6 +75,7 @@ class Bridge::PlaylistController < ApplicationController
     tracks = Track.requestable.order(updated_at: :asc).offset(offset).limit(1)
     tracks.each do |track|
       items << track_item(track)
+      track.touch
     end
     respond_to do |format|
       format.xml { render xml: items }
