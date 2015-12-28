@@ -36,7 +36,7 @@ String::strip = ->
 @rand = (min, max) ->
   Math.floor(Math.random() * (max - min + 1) + min)
 
-@jQuery_now_in_seconds = ->
+@unix_timestamp = ->
   Math.floor($.now() / 1000)
 
 @is_mobile = ->
@@ -73,7 +73,7 @@ $(window).on 'resize', ->
         $body_td.css('max-width', object_width * column_scale)
 
 $(window).on 'page:refresh', (event, options = {}) ->
-  window.updated_at = jQuery_now_in_seconds()
+  window.updated_at = unix_timestamp()
   settings =
     url: '/status.json'
     dataType: 'json'
@@ -81,11 +81,10 @@ $(window).on 'page:refresh', (event, options = {}) ->
     global: false
     timeout: 60000
     success: (data) ->
-      listeners = data['listeners']
-      if listeners
-        $('#listeners').append("<li>#{listeners}</li>")
-        $('#listeners>li:not(:last-child)').slideUp 1000, ->
-          $(this).remove()
+      listeners = parseInt(data['listeners'])
+      $('#listeners').append("<li>#{listeners}</li>")
+      $('#listeners>li:not(:last-child)').slideUp 1000, ->
+        $(this).remove()
   $.extend(settings, options)
   $.ajax(settings)
 
@@ -260,8 +259,8 @@ $(window).ready ->
   window.timer.start()
 
   setInterval ->
-    pasttime = jQuery_now_in_seconds() - window.updated_at
-    timeleft = timer.nexttime - jQuery_now_in_seconds()
+    pasttime = unix_timestamp() - window.updated_at
+    timeleft = timer.nexttime - unix_timestamp()
     $(window).trigger('page:refresh') if pasttime > 30 && timeleft > 30
   , 60000
   $(window).trigger('page:refresh')
