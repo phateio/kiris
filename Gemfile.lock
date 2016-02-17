@@ -149,6 +149,8 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.7)
       redis (>= 2.2)
+    rollbar (2.7.1)
+      multi_json
     ruby-hmac (0.4.0)
     sass (3.4.19)
     sass-rails (5.0.4)
@@ -218,6 +220,7 @@ DEPENDENCIES
   redcarpet
   redis
   redis-rails
+  rollbar
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim-rails

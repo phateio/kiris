@@ -34,6 +34,8 @@ gem 'slim-rails'
 gem 'redcarpet'
 # Use CodeRay for syntax highlighting
 gem 'coderay'
+# Use Rollbar as an error tracking service
+gem 'rollbar'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.5'
