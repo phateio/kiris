@@ -186,6 +186,7 @@ class Json::RequestController < ApplicationController
     respond_to do |format|
       format.xml { render xml: items }
       format.json { render json: items }
+      format.any { head :not_found }
     end
   end
 
