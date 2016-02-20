@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'default#index'
+  root 'default#index', defaults: { format: 'html' }
 
   get 'news'     => 'notices#index', format: false
   get 'search'   => 'search#index', format: false
