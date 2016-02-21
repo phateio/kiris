@@ -319,7 +319,7 @@ class @Timer
 
   lyrics: =>
     self = this
-    if self.playlist.length == 0 || not memcache.get('lyrics')
+    unless self.playlist.length > 0 && self.playlist[0].lyrics && memcache.get('lyrics')
       $('#lyrics').html('')
       return false
     raw_lyrics = self.playlist[0].lyrics
