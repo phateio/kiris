@@ -60,7 +60,14 @@ Rollbar.configure do |config|
     accessToken: ENV['ROLLBAR_CLIENT_ACCESS_TOKEN'],
     captureUncaught: true,
     payload: {
-      environment: Rails.env
+      environment: Rails.env,
+      client: {
+        javascript: {
+          source_map_enabled: true,
+          code_version: ENV['HEROKU_RELEASE_VERSION'] || Time.now,
+          guess_uncaught_frames: true
+        }
+      }
     }
   }
 end
