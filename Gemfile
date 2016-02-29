@@ -76,6 +76,8 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  # Use pry-rails for pry initializer
+  gem 'pry-rails'
   # Use pry-remote to binding remote pry in pow
   gem 'pry-remote'
 

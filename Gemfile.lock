@@ -90,6 +90,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
@@ -217,6 +219,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   pg (~> 0.15)
+  pry-rails
   pry-remote
   puma
   rails (~> 4.2.5)
