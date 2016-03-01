@@ -59,12 +59,13 @@ Rollbar.configure do |config|
   config.js_options = {
     accessToken: ENV['ROLLBAR_CLIENT_ACCESS_TOKEN'],
     captureUncaught: true,
+    hostWhiteList: ['phate.io'],
     payload: {
       environment: Rails.env,
       client: {
         javascript: {
           source_map_enabled: true,
-          code_version: ENV['HEROKU_RELEASE_VERSION'] || Time.now,
+          code_version: ENV['HEROKU_RELEASE_VERSION'] || Time.now.utc,
           guess_uncaught_frames: true
         }
       }
