@@ -1,4 +1,5 @@
-<div class="subpage">
-  <%= render_notice_list(@notices) %>
+<div class="row">
+  <div class="small-12 large-8 columns"><%= render_notice_list(@notices) %></div>
+  <div class="small-12 large-4 columns"><%= render partial: 'partials/fb_page_iframe' %></div>
 </div>
 <%= render_debug_information %>
