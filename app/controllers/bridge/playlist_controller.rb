@@ -57,12 +57,14 @@ class Bridge::PlaylistController < ApplicationController
       Thread.exit if cached_status.nil?
       listeners = cached_status[:listeners]
       ypd = YPDirectory.new('http://dir.xiph.org/cgi-bin/yp-cgi')
-      ypd.add(sn: 'Phate Radio',
-              listenurl: listen_url(format: 'mp3'),
-              genre: 'JPop',
-              b: 192,
-              type: 'audio/mpeg',
-              url: root_url) if not ypd.connected?
+      ypd.add(
+        sn: 'Phate Radio',
+        listenurl: listen_url(format: 'mp3'),
+        genre: 'JPop',
+        b: 192,
+        type: 'audio/mpeg',
+        url: 'https://phate.io/'
+      ) unless ypd.connected?
       ypd.touch(st: track.long_title, listeners: listeners)
     end
     render nothing: true
