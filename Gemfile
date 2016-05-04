@@ -32,6 +32,8 @@ gem 'slim-rails'
 gem 'rollbar'
 # Use Ransack as search model
 gem 'ransack'
+# Use HTTParty as an HTTP client
+gem 'httparty'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.5'

@@ -245,6 +245,7 @@ DEPENDENCIES
   font-awesome-sass
   foundation-rails
   http_accept_language
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
