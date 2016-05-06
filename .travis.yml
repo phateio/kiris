@@ -1,0 +1,10 @@
+language: ruby
+sudo: false
+
+services:
+  - redis
+
+before_script:
+  - 'bundle exec rake db:test:prepare'
+
+cache: bundler
