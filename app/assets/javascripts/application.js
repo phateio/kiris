@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require jquery.jplayer
+//= require intro.js.js
 //= require nprogress
 //= require asseturls
 //= require common

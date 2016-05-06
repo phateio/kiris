@@ -85,6 +85,10 @@ gem 'foundation-rails'
 # Use Font Awesome for vector icons
 gem 'font-awesome-sass'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-intro.js'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
