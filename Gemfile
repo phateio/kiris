@@ -12,6 +12,8 @@ group :production do
   gem 'redis'
   # Use redis-rails for cache store
   gem 'redis-rails'
+  # Use Lograge for taming Rails' Default Request Logging
+  gem 'lograge'
   # Use New Relic for monitoring
   gem 'newrelic_rpm'
 end
