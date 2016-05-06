@@ -13,7 +13,6 @@
  *= stub _i18n
  *= stub _mixins
  *= stub _template
- *= require normalize
  *= require overwrite
  *= require nprogress
  *= require nprogress-custom
