@@ -370,6 +370,12 @@ zh-Hant:
         目前系統仍在測試中，如有任何建議歡迎至右下角「意見提供」提出。
       view_counter_not_enough: "影片播放次數必須大於 %{count}"
   views:
+    layouts:
+      application:
+        danmakubar_input_data_intro: "點擊展開彈幕輸入框"
+        jp_play_data_intro: "點擊這裡開始播放"
+        jp_playing_data_intro: "點擊這裡展開播放清單"
+      sitemap_preferences_data_intro: "更改時區或語系請至此"
     pagination:
       first: "&laquo; 第一頁"
       last: "最後一頁 &raquo;"

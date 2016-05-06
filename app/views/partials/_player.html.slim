@@ -6,12 +6,12 @@
         #jp_interface_1.jp-interface
           ul.jp-controls
             li
-              a.jp-play tabindex="1"
+              a.jp-play tabindex="1" data-intro="#{t('views.layouts.application.jp_play_data_intro')}"
                 | play
             li
               a.jp-pause tabindex="1"
                 | pause
-          ul#playing.jp-playing
+          ul#playing.jp-playing data-intro="#{t('views.layouts.application.jp_playing_data_intro')}"
             li.metainfo
               | Loading . . .
           .jp-side-bar

@@ -308,6 +308,12 @@ ja:
       upload_rules_content: 
       view_counter_not_enough: "再生数は %{count} 回以上が必要となります"
   views:
+    layouts:
+      application:
+        danmakubar_input_data_intro: 
+        jp_play_data_intro: 
+        jp_playing_data_intro: 
+      sitemap_preferences_data_intro: 
     pagination:
       first: "&laquo; 最初へ"
       last: "最後へ &raquo;"

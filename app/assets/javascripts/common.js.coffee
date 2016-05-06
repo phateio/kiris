@@ -275,3 +275,11 @@ $(window).on 'load', ->
       window.danmaku.connect()
     , 3000
     $(document).trigger('page:change')
+
+  unless memcache.get('intro')
+    intro = introJs()
+    intro.setOptions
+      showStepNumbers: false
+      showBullets: true
+    intro.start()
+    memcache.set('intro', new Date())

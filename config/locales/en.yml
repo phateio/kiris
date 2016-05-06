@@ -365,6 +365,12 @@ en:
         The system still in development. If you have any feedback, please don't hesitate to contact us.
       view_counter_not_enough: Views must greater than %{count}
   views:
+    layouts:
+      application:
+        danmakubar_input_data_intro: Click to expand danmaku input box
+        jp_play_data_intro: Click to play
+        jp_playing_data_intro: Click to expand playlist
+      sitemap_preferences_data_intro: Change the time zone or language here
     pagination:
       first: "&laquo; First"
       last: Last &raquo;

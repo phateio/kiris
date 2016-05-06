@@ -14,7 +14,7 @@
       <li data-hover="true"><%= link_to t('navbar.faq'), faq_path, remote: true %></li>
       <li data-hover="true"><%= link_to t('navbar.feedback'), issues_path, remote: true %></li>
       <li data-hover="true"><%= link_to 'phate.m3u', '/phate.m3u' %></li>
-      <li data-hover="true"><%= link_to %(<i class="fa fa-cog"></i>).html_safe + t('navbar.preferences'), preferences_path, remote: true %></li>
+      <li data-hover="true"><%= link_to %(<i class="fa fa-cog"></i>).html_safe + t('navbar.preferences'), preferences_path, remote: true, data: { intro: t('views.layouts.sitemap_preferences_data_intro'), position: 'top' } %></li>
     </ul>
     <%= render_navbar_list_member %>
   </nav>

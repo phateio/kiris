@@ -371,6 +371,12 @@ zh-Hans:
         目前系统仍在测试中，如有任何建议欢迎至右下角「意见提供」提出。
       view_counter_not_enough: "影片播放次数必须大于 %{count}"
   views:
+    layouts:
+      application:
+        danmakubar_input_data_intro: "点击展开弹幕输入框"
+        jp_play_data_intro: "点击这里开始播放"
+        jp_playing_data_intro: "点击这里展开播放列表"
+      sitemap_preferences_data_intro: "更改时区或语系请至此"
     pagination:
       first: "&laquo; 第一页"
       last: "最后一页 &raquo;"

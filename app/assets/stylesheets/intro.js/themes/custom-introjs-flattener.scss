@@ -1,3 +1,5 @@
+@import 'mixins';
+
 .introjs-helperNumberLayer {
   font-family: tahoma, Arial, verdana, sans-serif;
   font-size: 14px;
@@ -9,20 +11,17 @@
   border-radius: 50%;
   background: #e74c3c;
 }
-
 .introjs-helperLayer {
   background-color: transparent;
   border: 2px solid rgba(117, 117, 117, 1);
   border-radius: 2px;
 }
-
 .introjs-tooltip {
   letter-spacing: .1em;
   color: #2c3e50;
   font-family: tahoma, Arial, verdana, sans-serif;
   border-radius: 2px;
 }
-
 .introjs-button {
   padding: 0.6em 0.8em;
   text-shadow: none;
@@ -31,25 +30,19 @@
   font-family: tahoma, Arial, verdana, sans-serif;
   background: #ecf0f1;
   background-image: none;
-  -webkit-border-radius: .2em;
-  -moz-border-radius: .2em;
-  border-radius: .2em;
-  -webkit-transition: background .3s, border .3s;
-     -moz-transition: background .3s, border .3s;
-      -ms-transition: background .3s, border .3s;
-       -o-transition: background .3s, border .3s;
-          transition: background .3s, border .3s;
+  @include vendor-prefix-property(border-radius, .2em);
+  @include vendor-prefix-property(transition, 'background .3s, border .3s');
 }
-
 .introjs-prevbutton {
   border-radius: .2em 0 0 .2em;
 }
-
 .introjs-nextbutton {
   border-radius: 0 .2em .2em 0;
 }
-
-.introjs-button:hover, .introjs-button:focus {
+.introjs-disabled {
+  color: #9a9a9a;
+}
+.introjs-button:not(.introjs-disabled):hover, .introjs-button:not(.introjs-disabled):focus {
   background: #2c3e50;
   color: #fff;
   box-shadow: none;
