@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  namespace :api, defaults: { format: 'json' } do
+    match '/ips' => '/application#remote_ips', via: :all
+  end
+
   root 'default#index', defaults: { format: 'html' }
 
   get 'news'     => 'notices#index', format: false

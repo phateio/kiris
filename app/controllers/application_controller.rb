@@ -113,6 +113,23 @@ class ApplicationController < ActionController::Base
     markdown.render(text).html_safe
   end
 
+  def remote_ips
+    @remote_addresses = {
+      'request.env[\'REMOTE_ADDR\']' => request.env['REMOTE_ADDR'],
+      'request.env[\'HTTP_CLIENT_IP\']' => request.env['HTTP_CLIENT_IP'],
+      'request.env[\'HTTP_X_FORWARDED_FOR\']' => request.env['HTTP_X_FORWARDED_FOR'],
+      'request.env[\'HTTP_CF_CONNECTING_IP\']' => request.env['HTTP_CF_CONNECTING_IP'],
+      'request.ip' => request.ip, # HTTP_X_FORWARDED_FOR
+      'request.remote_ip' => request.remote_ip # HTTP_X_FORWARDED_FOR, HTTP_CLIENT_IP
+    }
+
+    respond_to do |format|
+      # format.xml { render xml: @remote_addresses }
+      format.json { render json: @remote_addresses }
+      format.any { head :not_found }
+    end
+  end
+
   private
 
   def set_locale!
