@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
       req[name] = value
     end
     res = http_request(uri, req)
-    res.kind_of?(Net::HTTPSuccess) ? res.body : nil
+    res.is_a?(Net::HTTPSuccess) ? res.body : nil
   end
 
   def http_get_post_form_body(url, params = {})
@@ -58,11 +58,11 @@ class ApplicationController < ActionController::Base
     req = Net::HTTP::Post.new(uri.request_uri)
     req.set_form_data(params)
     res = http_request(uri, req)
-    res.kind_of?(Net::HTTPSuccess) ? res.body : nil
+    res.is_a?(Net::HTTPSuccess) ? res.body : nil
   end
 
   def authenticate
-    render file: 'public/403.html', status: :forbidden, layout: false and return unless @access >= 5
+    render file: 'public/403.html', status: :forbidden, layout: false && return unless @access >= 5
   end
 
   def x_redirect_to(options = {}, response_status = {})
@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
       escape_html: true,
       safe_links_only: true,
       hard_wrap: true,
-      link_attributes: { :'data-remote'=> true }
+      link_attributes: { :'data-remote' => true }
     }
     extensions = {
       no_intra_emphasis: true,
@@ -114,116 +114,117 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def set_locale!
-      I18n.locale = I18n.default_locale
-      @@available_locales ||= I18n.available_locales.map(&:to_s)
-      if preference_params['locale']
-        locale = preference_params['locale']
-        session[:locale] = locale if @@available_locales.include?(locale)
+
+  def set_locale!
+    I18n.locale = I18n.default_locale
+    @@available_locales ||= I18n.available_locales.map(&:to_s)
+    if preference_params['locale']
+      locale = preference_params['locale']
+      session[:locale] = locale if @@available_locales.include?(locale)
+    end
+    locale = sanitize_session_locale(@@available_locales) || extract_locale_from_accept_language_header(@@available_locales)
+    I18n.locale = locale.to_sym if @@available_locales.include?(locale)
+  end
+
+  def set_timezone!
+    if preference_params['time_zone']
+      time_zone = preference_params['time_zone']
+      session[:time_zone] = time_zone
+    end
+    time_zone = session[:time_zone] || extract_time_zone_name_from_accept_language_header
+    Time.zone = time_zone
+    request_start = request.env['HTTP_X_REQUEST_START']
+    @start_time = request_start && Time.at(request_start.to_i / 1000).utc || Time.now.utc
+  end
+
+  def set_headers!
+    expires_now if request.headers['X-XHR-Referer'] # Prevent Idiot Explorer pjax failed
+    response.headers['X-UA-Compatible'] = 'IE=Edge'
+    response.headers['X-XHR-Route'] = "#{controller_name}-#{action_name}" if request.headers['X-XHR-Referer']
+  end
+
+  def load_instance_variables!
+    @dns = Resolv::DNS.new
+    @dns.timeouts = 3
+  end
+
+  def load_config!
+    @site_name = I18n.t('metainfo.sitename')
+    @identity = session.id
+    @nickname = session[:nickname]
+    @access = session[:access] || 0
+  end
+
+  def load_client!
+    # request.env['REMOTE_ADDR']
+    # request.env['HTTP_CF_CONNECTING_IP']
+    # request.ip (HTTP_X_FORWARDED_FOR)
+    # request.remote_ip (HTTP_X_FORWARDED_FOR, HTTP_CLIENT_IP)
+
+    remote_addr   = request.ip
+    referer       = request.env['HTTP_REFERER']
+    useragent     = request.env['HTTP_USER_AGENT']
+    forwarded     = request.env['HTTP_X_FORWARDED_FOR']
+    server_addr   = request.env['HTTP_SERVER_ADDR'] || '8.8.8.8'
+    server_port   = request.env['HTTP_X_FORWARDED_PORT'] || 80
+
+    forwarded_ips = forwarded.to_s.split(/\s*,\s*/).last(3)
+    server_port   = server_port.to_i
+
+    @client = {
+      ip: remote_addr,
+      ipaddress: remote_addr,
+      referer: referer,
+      useragent: useragent,
+      forwarded: forwarded,
+      forwarded_ips: forwarded_ips,
+      server_addr: server_addr,
+      server_port: server_port
+    }
+    @ipaddress = request.ip
+    @useragent = request.env['HTTP_USER_AGENT']
+  end
+
+  def sanitize_session_locale(available_locales)
+    locale = session[:locale]
+    return nil if locale.nil?
+    session[:locale] = nil unless available_locales.include?(locale)
+    session[:locale]
+  end
+
+  def extract_locale_from_accept_language_header(available_locales)
+    # request.env['HTTP_ACCEPT_LANGUAGE'].to_s.gsub(/\-[a-z]+/, &:upcase).scan(/^[A-Za-z\-]+/).first
+    chinese_locales = ['zh', 'zh-CN', 'zh-HK', 'zh-MO', 'zh-MY', 'zh-SG', 'zh-TW']
+    preferred_language = http_accept_language.preferred_language_from(available_locales + chinese_locales)
+    case preferred_language
+    when 'zh-HK', 'zh-MO', 'zh-TW'
+      return 'zh-Hant'
+    when 'zh-CN', 'zh-MY', 'zh-SG', 'zh'
+      return 'zh-Hans'
+    end
+    preferred_language
+  end
+
+  def extract_time_zone_name_from_accept_language_header
+    preferred_languages = http_accept_language.user_preferred_languages
+    preferred_languages.each do |language|
+      case language
+      when 'en-GB'
+        return 'London'
+      when 'en-US', /\Aen(?:\-[A-Za-z\-]+)?\z/i
+        return 'Eastern Time (US & Canada)'
+      when 'ja-JP', /\Aja(?:\-[A-Za-z\-]+)?\z/i
+        return 'Tokyo'
+      when 'zh-SG'
+        return 'Singapore'
+      when 'zh-HK'
+        return 'Hong Kong'
+      when 'zh-TW'
+        return 'Taipei'
+      when 'zh-CN', /\Azh(?:\-[A-Za-z\-]+)?\z/i
+        return 'Beijing'
       end
-      locale = sanitize_session_locale(@@available_locales) || extract_locale_from_accept_language_header(@@available_locales)
-      I18n.locale = locale.to_sym if @@available_locales.include?(locale)
     end
-
-    def set_timezone!
-      if preference_params['time_zone']
-        time_zone = preference_params['time_zone']
-        session[:time_zone] = time_zone
-      end
-      time_zone = session[:time_zone] || extract_time_zone_name_from_accept_language_header
-      Time.zone = time_zone
-      request_start = request.env['HTTP_X_REQUEST_START']
-      @start_time = request_start && Time.at(request_start.to_i / 1000).utc || Time.now.utc
-    end
-
-    def set_headers!
-      expires_now if request.headers['X-XHR-Referer'] # Prevent Idiot Explorer pjax failed
-      response.headers['X-UA-Compatible'] = 'IE=Edge'
-      response.headers['X-XHR-Route'] = "#{controller_name}-#{action_name}" if request.headers['X-XHR-Referer']
-    end
-
-    def load_instance_variables!
-      @dns = Resolv::DNS.new
-      @dns.timeouts = 3
-    end
-
-    def load_config!
-      @site_name = I18n.t('metainfo.sitename')
-      @identity = session.id
-      @nickname = session[:nickname]
-      @access = session[:access] || 0
-    end
-
-    def load_client!
-      # request.env['REMOTE_ADDR']
-      # request.env['HTTP_CF_CONNECTING_IP']
-      # request.ip (HTTP_X_FORWARDED_FOR)
-      # request.remote_ip (HTTP_X_FORWARDED_FOR, HTTP_CLIENT_IP)
-
-      remote_addr   = request.ip
-      referer       = request.env['HTTP_REFERER']
-      useragent     = request.env['HTTP_USER_AGENT']
-      forwarded     = request.env['HTTP_X_FORWARDED_FOR']
-      server_addr   = request.env['HTTP_SERVER_ADDR'] || '8.8.8.8'
-      server_port   = request.env['HTTP_X_FORWARDED_PORT'] || 80
-
-      forwarded_ips = forwarded.to_s.split(/\s*,\s*/).last(3)
-      server_port   = server_port.to_i
-
-      @client = {
-        ip: remote_addr,
-        ipaddress: remote_addr,
-        referer: referer,
-        useragent: useragent,
-        forwarded: forwarded,
-        forwarded_ips: forwarded_ips,
-        server_addr: server_addr,
-        server_port: server_port
-      }
-      @ipaddress = request.ip
-      @useragent = request.env['HTTP_USER_AGENT']
-    end
-
-    def sanitize_session_locale(available_locales)
-      locale = session[:locale]
-      return nil if locale.nil?
-      session[:locale] = nil unless available_locales.include?(locale)
-      return session[:locale]
-    end
-
-    def extract_locale_from_accept_language_header(available_locales)
-      # request.env['HTTP_ACCEPT_LANGUAGE'].to_s.gsub(/\-[a-z]+/, &:upcase).scan(/^[A-Za-z\-]+/).first
-      chinese_locales = ['zh', 'zh-CN', 'zh-HK', 'zh-MO', 'zh-MY', 'zh-SG', 'zh-TW']
-      preferred_language = http_accept_language.preferred_language_from(available_locales + chinese_locales)
-      case preferred_language
-      when 'zh-HK', 'zh-MO', 'zh-TW'
-        return 'zh-Hant'
-      when 'zh-CN', 'zh-MY', 'zh-SG', 'zh'
-        return 'zh-Hans'
-      end
-      return preferred_language
-    end
-
-    def extract_time_zone_name_from_accept_language_header
-      preferred_languages = http_accept_language.user_preferred_languages
-      preferred_languages.each do |language|
-        case language
-        when 'en-GB'
-          return 'London'
-        when 'en-US', /\Aen(?:\-[A-Za-z\-]+)?\z/i
-          return 'Eastern Time (US & Canada)'
-        when 'ja-JP', /\Aja(?:\-[A-Za-z\-]+)?\z/i
-          return 'Tokyo'
-        when 'zh-SG'
-          return 'Singapore'
-        when 'zh-HK'
-          return 'Hong Kong'
-        when 'zh-TW'
-          return 'Taipei'
-        when 'zh-CN', /\Azh(?:\-[A-Za-z\-]+)?\z/i
-          return 'Beijing'
-        end
-      end
-      return nil
-    end
+    nil
+  end
 end
