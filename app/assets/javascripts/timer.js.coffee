@@ -193,9 +193,9 @@ class @Timer
       timeleft_sec = '0' + timeleft_sec if timeleft_sec < 10
       duration_sec = '0' + duration_sec if duration_sec < 10
       html = template.replace(/{{id}}/g, id)
-                     .replace(/{{artist}}/g, artist)
-                     .replace(/{{title}}/g, title)
-                     .replace(/{{tags}}/g, tags)
+                     .replace(/{{artist}}/g, htmlspecialchars(artist))
+                     .replace(/{{title}}/g, htmlspecialchars(title))
+                     .replace(/{{tags}}/g, htmlspecialchars(tags))
                      .replace(/{{timeleft}}/g, timeleft_min + ':' + timeleft_sec)
                      .replace(/{{duration}}/g, duration_min + ':' + duration_sec)
       $('#playing').append(html)
@@ -298,7 +298,7 @@ class @Timer
       self.background_tid = false
     if image_illustrator
       template = $.trim($('#template-image-info').html())
-      html = template.replace(/{{source_url}}/g, image_source)
+      html = template.replace(/{{source_url}}/g, encodeURI(image_source))
                      .replace(/{{illustrator}}/g, htmlspecialchars(image_illustrator))
     else
       html = ''

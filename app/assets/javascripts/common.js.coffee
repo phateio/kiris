@@ -10,7 +10,11 @@ String::strip = ->
   console.log.apply(console, parameters)
 
 @htmlspecialchars = (text) ->
-  $('<span></span>').text(text).html()
+  text.replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;")
 
 @getTimeString = (format, datetime = (new Date())) ->
   Year   = datetime.getFullYear()
