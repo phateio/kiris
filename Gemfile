@@ -10,6 +10,8 @@ group :production do
   gem 'lograge'
   # Use New Relic for monitoring
   gem 'newrelic_rpm'
+  # Use cloudflare-rails for filtering CloudFlare IPs
+  gem 'cloudflare-rails'
 end
 
 # Use dotenv for environment variables management

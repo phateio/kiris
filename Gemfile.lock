@@ -44,6 +44,9 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.2)
+    cloudflare-rails (0.1.1)
+      httparty
+      rails (>= 4.0)
     coderay (1.1.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -68,6 +71,9 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     http_accept_language (2.0.5)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -93,6 +99,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     newrelic_rpm (3.14.3.313)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -228,6 +235,7 @@ PLATFORMS
 DEPENDENCIES
   amazon-ecs
   byebug
+  cloudflare-rails
   coderay
   coffee-rails (~> 4.1.0)
   dotenv-rails
