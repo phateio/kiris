@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  constraints subdomain: 'api', defaults: { format: 'json' } do
+    match '*foo' => 'errors#error404', via: :all
+  end
+
   namespace :api, defaults: { format: 'json' } do
     match '/ips' => '/application#remote_ips', via: :all
   end
