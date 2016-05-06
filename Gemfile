@@ -4,40 +4,32 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 group :production do
-  # Use Rails 12factor for The Twelve Factors
+  # Use Rails 12factor for Heroku
   gem 'rails_12factor'
-  # Use Puma as the app server
-  gem 'puma', platforms: :ruby
-  # Use Redis for in-memory key-value data store
-  gem 'redis'
-  # Use redis-rails for cache store
-  gem 'redis-rails'
   # Use Lograge for taming Rails' Default Request Logging
   gem 'lograge'
   # Use New Relic for monitoring
   gem 'newrelic_rpm'
 end
 
-# Use rails-i18n as I18n solution
-gem 'rails-i18n'
-# Use Kaminari as paginator
-gem 'kaminari'
-# Use Nokogiri as HTML parser
-gem 'nokogiri'
-# Use amazon-ecs for Amazon Product Advertising API
-gem 'amazon-ecs'
-# Use Ransack as search model
-gem 'ransack'
-# Use http_accept_language help detect the users preferred language
-gem 'http_accept_language'
+# Use dotenv for environment variables management
+gem 'dotenv-rails'
+# Use Puma as the app server
+gem 'puma'
+# Use pry-rails for pry initializer
+gem 'pry-rails'
+# Use Redis for in-memory key-value data store
+gem 'redis'
+# Use redis-rails for Rails cache store
+gem 'redis-rails'
+# Use Simple Form as form builder
+gem 'simple_form'
 # Use Slim for template
 gem 'slim-rails'
-# Use Redcarpet as Markdown parser
-gem 'redcarpet'
-# Use CodeRay for syntax highlighting
-gem 'coderay'
 # Use Rollbar as an error tracking service
 gem 'rollbar'
+# Use Ransack as search model
+gem 'ransack'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.5'
@@ -70,6 +62,27 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use rails-i18n as I18n solution
+gem 'rails-i18n'
+# Use Kaminari as paginator
+gem 'kaminari'
+# Use Nokogiri as HTML parser
+gem 'nokogiri'
+# Use Redcarpet as Markdown parser
+gem 'redcarpet'
+# Use CodeRay for syntax highlighting
+gem 'coderay'
+
+# Use amazon-ecs for Amazon Product Advertising API
+gem 'amazon-ecs'
+# Use http_accept_language help detect the users preferred language
+gem 'http_accept_language'
+
+# Use Foundation as UI framework
+gem 'foundation-rails'
+# Use Font Awesome for vector icons
+gem 'font-awesome-sass'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -78,8 +91,8 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  # Use pry-rails for pry initializer
-  gem 'pry-rails'
+  # Use Powder as the app server in development
+  gem 'powder'
   # Use pry-remote to binding remote pry in pow
   gem 'pry-remote'
 

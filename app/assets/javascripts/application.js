@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require jquery.jplayer
 //= require nprogress
 //= require asseturls
@@ -23,3 +24,5 @@
 //= require danmaku
 //= require chatroom
 //= require_tree .
+
+$(function(){ $(document).foundation(); });

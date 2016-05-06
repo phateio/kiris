@@ -34,25 +34,17 @@ $light-blue-edges: rgba(69, 143, 214, 0.5)
         display: inline-block
         vertical-align: text-bottom
         white-space: nowrap
+        line-height: 29px
     li > a
       display: block
       padding: 0px 5px
       border-top: 1px solid transparent
       color: #EEEEEE
+      line-height: 29px
     li[data-hover]:hover > a
       border-top: 1px solid $light-blue-edges
       box-shadow: 0px 4px 32px -4px $light-blue
       background-color: $light-blue-grand
-    li > a[href="/preferences"]
-      width: 16px
-      border-left: 1px solid rgb(50, 51, 52)
-      background-image: image-url("gear.png")
-      background-repeat: no-repeat
-      background-position: 50% 50%
-      overflow: hidden
-      text-indent: 100%
-      color: transparent
-      white-space: nowrap
     .sub-menu
       @extend .list-style-type-none
       position: fixed

@@ -2,4 +2,4 @@
   = content_tag :div do
     = select_tag 'preferences[locale]', locale_options_for_select
   = content_tag :div, time_zone_select('preferences', 'time_zone', nil, default: Time.zone.name)
-  = content_tag :div, submit_tag(t('form.submit'), class: 'submit-button', data: {disable: true})
+  = content_tag :div, submit_tag(t('form.submit'), class: 'submit-button button', data: {disable: true})

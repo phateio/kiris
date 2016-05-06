@@ -34,7 +34,7 @@ class Bridge::TracksController < ApplicationController
 
   def search_niconico_for_renew
     arel_old_tracks = Track.arel_table[:updated_at].lt(Time.parse('2015-11-01 00:00:00 UTC'))
-    tracks = Track.niconico_tracks.requestable.where(source_channels: 'mono').where(arel_old_tracks)
+    tracks = Track.niconico_tracks.requestable.where('status ILIKE ?', 'RENEW:OK').where(arel_old_tracks)
     tracks.each do |track|
       @items << track_item(track)
     end
@@ -59,28 +59,29 @@ class Bridge::TracksController < ApplicationController
   end
 
   private
-    def track_id
-      request.POST[:id]
-    end
 
-    def track_params
-      request.POST.slice(
-        :szhash,
-        :duration,
-        :status,
-        :source_format,
-        :source_bitrate,
-        :source_channels,
-        :source_frequency
-      )
-    end
+  def track_id
+    request.POST[:id]
+  end
 
-    def track_item(track)
-      {
-        id: track.id,
-        szhash: track.szhash,
-        status: track.status,
-        niconico: track.niconico
-      }
-    end
+  def track_params
+    request.POST.slice(
+      :szhash,
+      :duration,
+      :status,
+      :source_format,
+      :source_bitrate,
+      :source_channels,
+      :source_frequency
+    )
+  end
+
+  def track_item(track)
+    {
+      id: track.id,
+      szhash: track.szhash,
+      status: track.status,
+      niconico: track.niconico
+    }
+  end
 end

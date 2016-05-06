@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <meta charset="utf-8" />
+    <meta property="og:title" content="<%= @page_name %>" />
+    <meta property="og:site_name" content="<%= @site_name %>" />
+    <meta property="og:image" content="https://i.imgur.com/8BOmHBN.jpg" />
+    <meta name="description" property="og:description" content="<%= @page_description %>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tags %>
+    <title><%= content_for?(:title) ? yield(:title) : @page_title || "Untitled" %></title>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= google_fonts_link_tag "Source Code Pro", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= favicon_link_tag "/favicon.ico", rel: "icon", type: "image/x-icon" %>
+    <%= render partial: "partials/internal_style_sheet" %>
+  </head>
+  <body>
+    <div id="screenframe">
+      <div id="backimg_back"></div>
+      <div id="backimg_front"></div>
+      <div id="backimg_dark" class="hidden"></div>
+      <div id="backimg_filter"></div>
+      <%= render partial: "partials/player" %>
+      <div id="container">
+        <div id="scrolldiv">
+          <div id="homelinkdiv"><%= link_to "", root_path, remote: true %></div>
+          <div id="pjax-container" data-route="<%= "#{controller_name}-#{action_name}" %>">
+            <%= yield %>
+          </div>
+          <%= render partial: "partials/lyrics" %>
+        </div>
+        <%= render partial: "partials/danmaku_bar_field" %>
+        <%= render partial: "partials/chatroom" %>
+      </div>
+      <%= render partial: "partials/navbar" %>
+    </div>
+    <%# render partial: "partials/embedded_background" %>
+    <div id="tooltips" class="hidden"></div>
+    <%= render partial: "partials/template" %>
+    <%= render partial: "partials/tracking" %>
+  </body>
+</html>

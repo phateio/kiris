@@ -1,5 +1,11 @@
-<%= form_tag search_path, method: :get, id: 'searchform', enforce_utf8: false, remote: true do %>
-  <%= text_field_tag 'q', @keyword, autofocus: true, :'x-webkit-speech' => true %>
-  <%= submit_tag t('search.search'), name: nil, data: {disable: true} %>
-  <%= submit_tag t('search.random_search'), name: 'sort', value: 'random', data: {disable: true} %>
+<%= form_tag search_path, id: 'search-form', method: :get, enforce_utf8: false, remote: true do %>
+  <div class="input-group">
+    <%= text_field_tag 'q', @keyword, class: 'input-group-field', autofocus: true, :'x-webkit-speech' => true %>
+    <div class="input-group-button">
+      <%= submit_tag t('search.search'), class: 'button postfix', name: nil, data: {disable: true} %>
+    </div>
+    <div class="input-group-button">
+      <%= submit_tag t('search.random_search'), class: 'button postfix', name: 'sort', value: 'random', data: {disable: true} %>
+    </div>
+  </div>
 <% end %>

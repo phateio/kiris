@@ -107,8 +107,4 @@ module ApplicationHelper
       {url: logout_path,                 text: t('members.logout'),                                   privilege: 0}
     ]
   end
-
-  def navbar_preferences_item
-    content_tag :li, link_to(t('navbar.preferences'), preferences_path, remote: true), data: {hover: true}
-  end
 end

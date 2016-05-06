@@ -1,8 +1,6 @@
 <%= render_object_error_messages(track_comment) %>
-<%= form_for track_comment, url: track_comments_path(track_comment.track), remote: true do |f| %>
-  <table class="new-form">
-    <tr><td class="message"><%= f.text_area :message, placeholder: f.object.class.human_attribute_name('message') %></td></tr>
-    <tr><td class="nickname"><%= f.text_field :nickname, placeholder: f.object.class.human_attribute_name('nickname'), data: {option: 'nickname'} %></td></tr>
-    <tr><td class="buttons"><%= f.submit nil, class: 'submit-button', data: {disable: true} %></td></tr>
-  </table>
+<%= simple_form_for track_comment, url: track_comments_path(track_comment.track), remote: true do |f| %>
+  <%= f.input :message, placeholder: f.object.class.human_attribute_name('message') %>
+  <%= f.input :nickname, placeholder: f.object.class.human_attribute_name('nickname'), data: {option: 'nickname'} %>
+  <%= f.button :submit, class: 'submit-button', data: {disable: true} %>
 <% end %>
