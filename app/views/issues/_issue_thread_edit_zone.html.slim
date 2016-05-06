@@ -4,4 +4,4 @@
     = text_area_tag 'message', item[:message], class: 'js-innertext'
     .buttons
       = button_tag t('form.cancel'), class: 'js-button-cancel', type: 'button'
-      = submit_tag t('form.update'), data: {disable: true}
+      = submit_tag t('form.update'), class: 'button', data: {disable: true}

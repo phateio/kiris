@@ -15,6 +15,6 @@
     tfoot.buttons
       tr
         td
-          = submit_tag t('form.submit'), data: {disable: true}
+          = submit_tag t('form.submit'), class: 'button', data: {disable: true}
   .errormsg
     = flash[:error]

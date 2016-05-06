@@ -8,6 +8,7 @@ module DefaultHelper
   end
 
   private
+
   def locale_options_for_select
     options_for_select(locale_options, I18n.locale)
   end

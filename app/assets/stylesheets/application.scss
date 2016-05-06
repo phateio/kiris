@@ -14,7 +14,7 @@
  *= stub _mixins
  *= stub _template
  *= require foundation_and_overrides
- *= require overwrite
+ *= stub overwrite
  *= require nprogress
  *= require nprogress-custom
  *= require common
@@ -27,3 +27,6 @@
  *= require_tree .
  *= require_self
  */
+
+@import 'font-awesome-sprockets';
+@import 'font-awesome';

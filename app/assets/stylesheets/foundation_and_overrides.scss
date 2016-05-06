@@ -49,3 +49,25 @@
 //
 // @include motion-ui-transitions;
 // @include motion-ui-animations;
+
+@font-face {
+  font-family: CJK-sans-serif;
+  src: local(PingFang TC), /* OS X 10.11 */
+       local(PingFang HK), /* OS X 10.11 */
+       local(PingFang SC), /* OS X 10.11 */
+       local(Heiti TC), /* OS X 10.6 */
+       local(Heiti SC), /* OS X 10.6 */
+       local(Hiragino Kaku Gothic ProN), /* OS X */
+       local(Meiryo), /* Windows Vista */
+       local(Microsoft JhengHei), /* Windows Vista */
+       local(Microsoft YaHei), /* Windows Vista */
+       local(SimHei); /* Windows XP */
+}
+
+body {
+  cursor: default;
+
+  &.progress{
+    cursor: progress
+  }
+}

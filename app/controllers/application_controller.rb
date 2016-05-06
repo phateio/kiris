@@ -138,7 +138,7 @@ class ApplicationController < ActionController::Base
 
     def set_headers!
       expires_now if request.headers['X-XHR-Referer'] # Prevent Idiot Explorer pjax failed
-      response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+      response.headers['X-UA-Compatible'] = 'IE=Edge'
       response.headers['X-XHR-Route'] = "#{controller_name}-#{action_name}" if request.headers['X-XHR-Referer']
     end
 
