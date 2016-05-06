@@ -96,7 +96,11 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  # gem 'web-console', '~> 2.0'
+  # Use Better Errors for error pages
+  gem 'better_errors'
+  # Use binding_of_caller to enable the REPL and local/instance variable inspection
+  gem 'binding_of_caller'
   # Use Powder as the app server in development
   gem 'powder'
   # Use pry-remote to binding remote pry in pow
