@@ -1,32 +1,32 @@
-## Technical
-- Language: Ruby
-- Framework: Ruby on Rails
+[![Build Status](https://travis-ci.org/phateio/kiris.svg?branch=master)](https://travis-ci.org/phateio/kiris)
+[![security](https://hakiri.io/github/phateio/kiris/master.svg)](https://hakiri.io/github/phateio/kiris/master)
 
-## Requirement
-1. Ruby 2.2.3
-2. Rails 4.2.x
+## Getting Started
 
-## Installation
-```
-$ gem install bundle --no-document
-$ gem install rails --no-document
-```
+1. Install Bundler and Rails at the command prompt if you haven't yet:
 
-## Development
-```
-$ bundle install
-$ rake db:create
-$ rake db:migrate
-$ rake db:seed
-$ rails server -e development
-```
-Open http://localhost:3000/
+        $ gem install bundle --no-document
+        $ gem install rails --no-document
 
-## Testing
-```
-$ rake db:test:prepare
-$ rake test
-```
+2. Install the gem dependencies using bundler:
+
+        $ bundle install
+
+3. Initialize the database if you haven't yet:
+
+        $ bundle exec rake db:create
+        $ bundle exec rake db:migrate
+        $ bundle exec rake db:seed
+
+4. Start the web server:
+
+        $ rails server
+
+5. Using a browser, go to `http://localhost:3000` and you'll see the home page.
+
+## Test
+        $ bundle exec rake db:test:prepare
+        $ bundle exec rake test
 
 ## Translations
 We use [phateio-i18n@Locale](https://www.localeapp.com/projects/6196) to manage our translation files.
@@ -34,4 +34,4 @@ We use [phateio-i18n@Locale](https://www.localeapp.com/projects/6196) to manage 
 Everyone is welcome to help correct, improve, or complete the translations.
 
 ## License
-[MIT license](http://opensource.org/licenses/MIT)
+Phate Radio is released under the [MIT License](http://opensource.org/licenses/MIT).
