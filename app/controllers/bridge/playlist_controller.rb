@@ -60,7 +60,8 @@ class Bridge::PlaylistController < ApplicationController
       ypd.add(
         sn: 'Phate Radio',
         listenurl: listen_url(format: 'mp3'),
-        genre: 'JPop',
+        desc: 'Phate Radio is an experimental internet radio about anime, games and pop music.',
+        genre: 'Anime Jpop',
         b: 192,
         type: 'audio/mpeg',
         url: 'https://phate.io/'
