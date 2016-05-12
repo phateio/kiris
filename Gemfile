@@ -92,6 +92,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jplayer'
   # Use NProgress for slim progress bars
   gem 'rails-assets-nprogress'
+  # Use Intro.js for introduction guide
   gem 'rails-assets-intro.js'
 end
 
