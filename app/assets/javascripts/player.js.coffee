@@ -91,8 +91,8 @@ $(window).ready ->
 
     suspend: ->
       return unless playing
-      DEBUG('jPlayer: suspend')
-      $.jPlayer.restart.call(this)
+      DEBUG('jPlayer: suspend (Ignored)')
+      # $.jPlayer.restart.call(this)
 
     abort: ->
       return unless playing
