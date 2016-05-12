@@ -147,6 +147,9 @@ GEM
       railties (= 4.2.6)
       sprockets-rails
     rails-assets-intro.js (2.0.0)
+    rails-assets-jplayer (2.9.2)
+      rails-assets-jquery (>= 1.7.2)
+    rails-assets-jquery (2.2.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -272,6 +275,7 @@ DEPENDENCIES
   quiet_assets
   rails (~> 4.2.5)
   rails-assets-intro.js!
+  rails-assets-jplayer!
   rails-i18n
   rails_12factor
   ransack
