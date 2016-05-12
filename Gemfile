@@ -90,6 +90,8 @@ gem 'font-awesome-sass'
 source 'https://rails-assets.org' do
   # Use jPlayer for HTML5 Audio
   gem 'rails-assets-jplayer'
+  # Use NProgress for slim progress bars
+  gem 'rails-assets-nprogress'
   gem 'rails-assets-intro.js'
 end
 
