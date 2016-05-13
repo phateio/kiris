@@ -117,4 +117,6 @@ group :development do
   gem 'spring'
   # Use Quiet Assets to mute assets pipeline log messages
   gem 'quiet_assets'
+  # Use RealFaviconGenerator as favicon generator
+  gem 'rails_real_favicon'
 end
