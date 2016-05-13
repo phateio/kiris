@@ -1,0 +1,36 @@
+{
+    "master_picture": "app/assets/images/134838_1200x1200.jpg",
+    "favicon_design": {
+        "ios": {
+            "picture_aspect": "no_change"
+        },
+        "desktop_browser": [
+
+        ],
+        "windows": {
+            "picture_aspect": "no_change",
+            "background_color": "#2b5797",
+            "on_conflict": "override"
+        },
+        "android_chrome": {
+            "picture_aspect": "no_change",
+            "theme_color": "#6699ff",
+            "manifest": {
+                "name": "Phate Radio",
+                "display": "browser",
+                "orientation": "not_set",
+                "on_conflict": "override",
+                "declared": true
+            }
+        },
+        "safari_pinned_tab": {
+            "picture_aspect": "black_and_white",
+            "threshold": 40,
+            "theme_color": "#6699ff"
+        }
+    },
+    "settings": {
+        "scaling_algorithm": "Mitchell",
+        "error_on_image_too_small": false
+    }
+}

@@ -12,7 +12,8 @@
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= google_fonts_link_tag "Source Code Pro", media: "all" %>
     <%= javascript_include_tag "application" %>
-    <%= favicon_link_tag "/favicon.ico", rel: "icon", type: "image/x-icon" %>
+    <%# favicon_link_tag "/favicon.ico", rel: "icon", type: "image/x-icon" %>
+    <%= render 'favicon' %>
     <%= render partial: "partials/internal_style_sheet" %>
   </head>
   <body>
