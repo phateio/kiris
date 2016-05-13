@@ -5,7 +5,7 @@ services:
   - redis
 
 before_script:
-  - 'bundle exec rake db:test:prepare'
+  - bundle exec rake db:test:prepare
 
 cache: bundler
 
