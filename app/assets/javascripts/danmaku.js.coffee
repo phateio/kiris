@@ -182,8 +182,7 @@ $(document).on 'contextmenu', '.danmakuspan', (event) ->
   danmaku.report(target_id)
   $self.trigger('click')
 
-$(document).on 'ready', ->
-
+$(document).ready ->
   $(document).on 'keydown', '#danmakubar form > input', (event) ->
     $self = $(event.currentTarget)
     KEY_ESC = 27

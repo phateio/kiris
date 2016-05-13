@@ -1,5 +1,4 @@
-$(document).on 'ready', ->
-
+$(document).ready ->
   $(document).on 'submit', '#lang_area form', (event) ->
     event.preventDefault()
     $self = $(event.currentTarget)

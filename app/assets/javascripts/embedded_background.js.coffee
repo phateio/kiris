@@ -1,4 +1,4 @@
-# $(window).ready ->
+# $(document).ready ->
 #   $('#jquery_jplayer_2').jPlayer
 #     ready: ->
 #       $(this).jPlayer 'setMedia',

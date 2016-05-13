@@ -38,7 +38,7 @@ $(document).on 'click', '#playing li:first-child', ->
 $(document).on 'click', '#listeners', ->
   $(window).trigger('page:refresh', global: true)
 
-$(window).ready ->
+$(document).ready ->
   playing = false
   callback = false
 

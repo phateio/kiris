@@ -249,7 +249,7 @@ $(document).keydown (event) ->
     DEBUG('Global Keydown: ALT + L')
     $.pjax('/login', 'push') if window.history.pushState
 
-$(window).ready ->
+$(document).ready ->
   window.timer = new Timer()
   window.danmaku = new Danmaku()
   window.scrolltitle = new Scrolltitle()
@@ -269,7 +269,7 @@ $(window).ready ->
   , 60000
   $(window).trigger('page:refresh')
 
-$(window).on 'load', ->
+$(window).load ->
   if $('#backimg_front').length != 0
     setTimeout ->
       window.danmaku.connect()
