@@ -14,7 +14,7 @@
         },
         "android_chrome": {
             "picture_aspect": "no_change",
-            "theme_color": "#6699ff",
+            "theme_color": "#212121",
             "manifest": {
                 "name": "Phate Radio",
                 "display": "browser",
