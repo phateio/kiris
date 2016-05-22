@@ -39,80 +39,29 @@ $(document).on 'click', '#listeners', ->
   $(window).trigger('page:refresh', global: true)
 
 $(document).ready ->
-  playing = false
-  callback = false
+  $player = $('#jquery_jplayer_1')
 
-  $.jPlayer.reload = ->
-    DEBUG('jPlayer: reload')
-    $self = $(this)
-    playing = false
-    volume = memcache.get('volume')
-    muted = memcache.get('muted')
-    $self.jPlayer('destroy')
-    $self.jPlayer($.jPlayer.config)
-    $self.jPlayer('volume', volume) unless isNaN(volume)
-    $self.jPlayer('mute', muted) unless isNaN(muted)
-
-  $.jPlayer.restart = ->
-    DEBUG('jPlayer: restart')
-    $self = $(this)
-    callback = ->
-      setTimeout ->
-        $self.jPlayer('play')
-      , rand(1, 5) * 1000
-    $.jPlayer.reload.call(this)
-
-  $.jPlayer.config =
+  $player.jPlayer
     ready: ->
       DEBUG('jPlayer: ready')
-      $self = $(this)
-      stream = mp3: '/listen?_=' + $.now()
-      $self.jPlayer('setMedia', stream)
-      callback() if callback
+      $this = $(this)
+      $this.trigger('reload')
 
     play: ->
       DEBUG('jPlayer: play')
-      playing = true
+      $this = $(this)
+      $this.data('playing', true)
 
     pause: ->
       DEBUG('jPlayer: pause')
-      callback = false
-      $(this).jPlayer('clearMedia')
-      $.jPlayer.reload.call(this)
+      $this = $(this)
+      $this.data('playing', false)
+      $this.trigger('reload')
 
-    stalled: ->
-      return unless playing
-      DEBUG('jPlayer: stalled')
-
-    ended: ->
-      return unless playing
-      DEBUG('jPlayer: ended')
-      $.jPlayer.restart.call(this)
-
-    suspend: ->
-      return unless playing
-      DEBUG('jPlayer: suspend (Ignored)')
-      # $.jPlayer.restart.call(this)
-
-    abort: ->
-      return unless playing
-      DEBUG('jPlayer: abort')
-      $.jPlayer.restart.call(this)
-
-    emptied: ->
-      return unless playing
-      DEBUG('jPlayer: emptied')
-      $.jPlayer.restart.call(this)
-
-    stop: ->
-      return unless playing
-      DEBUG('jPlayer: stop')
-      $.jPlayer.restart.call(this)
-
-    error: (event) ->
-      return unless playing
-      DEBUG('jPlayer: error: ' + event.jPlayer.error.type)
-      $.jPlayer.restart.call(this)
+    progress: (event) ->
+      DEBUG('jPlayer: progress')
+      $this = $(this)
+      $this.trigger('ping')
 
     volumechange: (event) ->
       $self = $(this)
@@ -139,13 +88,33 @@ $(document).ready ->
       fullScreen: false
       loop: false
 
-  $jquery_jplayer_1 = $('#jquery_jplayer_1')
+  $player.on 'reload', ->
+    DEBUG('jPlayer: reload')
+    $this = $(this)
+    listen_path = mp3: "/listen?_=#{$.now()}"
+    is_playing = $this.data('playing')
+
+    $this.jPlayer('clearMedia')
+    $this.jPlayer('setMedia', listen_path)
+    if is_playing
+      $this.jPlayer('play')
+    else
+      old_timeout_id = $this.data('timeout-id')
+      clearTimeout(old_timeout_id)
+
+  $player.on 'ping', ->
+    $this = $(this)
+    old_timeout_id = $this.data('timeout-id')
+    clearTimeout(old_timeout_id)
+    new_timeout_id = setTimeout ->
+      $this.trigger('ping')
+      $this.trigger('reload')
+    , rand(10, 30) * 1000
+    $this.data('timeout-id', new_timeout_id)
 
   $('#jp_container_1 .jp-volume-bar-container').on 'mousewheel DOMMouseScroll', (event) ->
     event.preventDefault()
     delta = event.originalEvent.wheelDelta or event.originalEvent.detail * -40
     DEBUG('Mousewheel delta: ' + delta)
-    volume = $jquery_jplayer_1.jPlayer('option', 'volume') + if delta > 0 then 0.05 else -0.05
-    $jquery_jplayer_1.jPlayer('volume', volume)
-
-  $.jPlayer.reload.call($jquery_jplayer_1)
+    volume = $player.jPlayer('option', 'volume') + if delta > 0 then 0.05 else -0.05
+    $player.jPlayer('volume', volume)
