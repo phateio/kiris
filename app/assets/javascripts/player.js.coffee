@@ -45,6 +45,10 @@ $(document).ready ->
     ready: ->
       DEBUG('jPlayer: ready')
       $this = $(this)
+      user_volume = memcache.get('volume')
+      user_muted = memcache.get('muted')
+      $this.jPlayer('volume', user_volume) unless isNaN(user_volume)
+      $this.jPlayer('mute', user_muted) unless isNaN(user_muted)
       $this.trigger('reload')
 
     play: ->
