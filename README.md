@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/phateio/kiris.svg?branch=master)](https://travis-ci.org/phateio/kiris)
-[![security](https://hakiri.io/github/phateio/kiris/master.svg)](https://hakiri.io/github/phateio/kiris/master)
+[![Code Climate](https://codeclimate.com/github/phateio/kiris/badges/gpa.svg)](https://codeclimate.com/github/phateio/kiris)
+[![Test Coverage](https://codeclimate.com/github/phateio/kiris/badges/coverage.svg)](https://codeclimate.com/github/phateio/kiris/coverage)
 
 ## Getting Started
 
