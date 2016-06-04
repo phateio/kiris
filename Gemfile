@@ -119,4 +119,6 @@ group :development do
   gem 'quiet_assets'
   # Use RealFaviconGenerator as favicon generator
   gem 'rails_real_favicon'
+  # Use RuboCop for Ruby code analysis
+  gem 'rubocop', require: false
 end
