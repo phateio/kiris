@@ -63,25 +63,14 @@ class Bridge::TracksController < ApplicationController
     end
   end
 
-  def create_or_update
-    secret_key = request.POST[:secret_key]
-    if secret_key != $BRIDGE_SECRET_KEY
-      render nothing: true, status: :forbidden and return
-    end
-    track_niconico = track_params[:niconico]
-    @track = Track.find_or_initialize_by(track_niconico)
-    @track.update!(track_params)
-    render json: { status: 'OK' }
-  end
-
   def update
-    @track = Track.find(track_id)
     secret_key = request.POST[:secret_key]
     if secret_key != $BRIDGE_SECRET_KEY
-      render nothing: true, status: :forbidden and return
+      render json: { status: '403 Forbidden' }, status: :forbidden and return
     end
-    @track.update(track_params.merge(mtime: Time.now.utc))
-    render nothing: true
+    @track = Track.find(track_id)
+    @track.update!(track_params.merge(mtime: Time.now.utc))
+    render json: { status: 'OK' }
   end
 
   private
