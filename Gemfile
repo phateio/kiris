@@ -9,7 +9,7 @@ group :production do
   # Use Lograge for taming Rails' Default Request Logging
   gem 'lograge'
   # Use New Relic for monitoring
-  gem 'newrelic_rpm'
+  # gem 'newrelic_rpm'
   # Use cloudflare-rails for filtering CloudFlare IPs
   gem 'cloudflare-rails'
 end

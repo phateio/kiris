@@ -116,7 +116,6 @@ GEM
     multi_json (1.12.0)
     multi_xml (0.5.5)
     netrc (0.11.0)
-    newrelic_rpm (3.15.2.317)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     parser (2.3.1.2)
@@ -295,7 +294,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   lograge
-  newrelic_rpm
   nokogiri
   pg (~> 0.15)
   powder
@@ -327,4 +325,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.2
+   1.12.5
