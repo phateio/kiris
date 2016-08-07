@@ -1,7 +1,7 @@
 <div class="subpage">
   <%= render_flash_messages %>
   <%= content_tag :div, class: 'button-field' do %>
-    <%= link_to t('upload.niconico.new_track'), new_upload_niconico_path, class: 'button', remote: true %>
+    <%= button_tag t('upload.niconico.new_track'), class: 'button', disabled: 'disabled' %>
   <% end %>
   <% if @tracks.length > 0 %>
     <%= render_niconico_track_list(@tracks) %>
