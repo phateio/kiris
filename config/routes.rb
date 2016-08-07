@@ -120,6 +120,8 @@ Rails.application.routes.draw do
 
     get  'tracks' => 'tracks#index'
     post 'tracks' => 'tracks#update'
+    get  'tracks/utaitedb' => 'tracks#utaitedb'
+    post 'tracks/utaitedb' => 'tracks#create_or_update'
   end
 
   # Legacy client support
