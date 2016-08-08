@@ -215,8 +215,6 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rollbar (2.11.3)
-      multi_json
     rubocop (0.40.0)
       parser (>= 2.3.1.0, < 3.0)
       powerpack (~> 0.1)
@@ -312,7 +310,6 @@ DEPENDENCIES
   redcarpet
   redis
   redis-rails
-  rollbar
   rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

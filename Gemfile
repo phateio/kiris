@@ -28,8 +28,6 @@ gem 'redis-rails'
 gem 'simple_form'
 # Use Slim for template
 gem 'slim-rails'
-# Use Rollbar as an error tracking service
-gem 'rollbar'
 # Use Ransack as search model
 gem 'ransack'
 # Use HTTParty as an HTTP client
