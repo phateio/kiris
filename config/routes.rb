@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'listen'         => 'listen#redirect', as: 'listen'
   get 'robots.txt'     => 'static#robots', format: false, as: 'robots'
   get 'cache.appcache' => 'static#manifest', format: false, as: 'manifest'
+  get 'imgur/:id'      => 'static#imgur_proxy', constraints: { id: /\w+/ }
 
   match 'preferences' => 'default#preferences', via: [:get, :patch], format: false
 
