@@ -22,7 +22,7 @@ class Json::PlaylistController < ApplicationController
 
             if false && image
               image_info = {
-                url: image.url,
+                url: image.cdn_url,
                 source: image.source,
                 nickname: image.nickname,
                 illustrator: image.illustrator

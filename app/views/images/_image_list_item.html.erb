@@ -6,7 +6,7 @@
   </td></tr>
   <tr>
     <th rowspan="5">
-      <%= link_to image.url, target: '_blank' do %>
+      <%= link_to image.cdn_url, target: '_blank' do %>
         <%= image_tag image.thumbnail, size: '90x90', alt: image.hash %>
       <% end %>
     </th>

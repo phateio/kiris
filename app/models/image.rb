@@ -18,8 +18,12 @@ class Image < ActiveRecord::Base
   validates :url, format: {with: valid_url_regexp, message: :invalid_format}
   validates :source, format: {with: valid_source_regexp, message: :invalid_format}, allow_blank: true
 
+  def cdn_url
+    self[:url].sub('//i.imgur.com/', '/imgur/')
+  end
+
   def thumbnail
-    self.url.gsub(/(\.[A-Za-z]+)$/, 's\1')
+    cdn_url.gsub(/(\.[A-Za-z]+)$/, 's\1')
   end
 
   def source_abbreviation
