@@ -47,7 +47,7 @@ namespace :tracks do
           artist: artists.join('、'),
           tags: tags,
           uploader: 'utaitedb.net',
-          status: 'QUEUED'
+          status: track.new_record? ? 'QUEUED' : track.status
         )
       end
     end
