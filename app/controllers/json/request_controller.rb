@@ -22,7 +22,7 @@ class Json::RequestController < ApplicationController
     server_port = @client[:server_port]
     cookie_ips = session[:forwarded_for].to_s.split(/\s*,\s*/)
     user_ipaddr = IPAddr.new(userip)
-    masked_addr = user_ipaddr.mask(user_ipaddr.ipv4? ? '255.255.0.0' : 112).to_s
+    masked_addr = user_ipaddr.mask(user_ipaddr.ipv4? ? '255.255.0.0' : 16).to_s
 
     client_ips = forwarded_ips
     client_ips << userip
@@ -152,7 +152,8 @@ class Json::RequestController < ApplicationController
           end
         end
 
-        playlist_by_masked_addr = Playlist.queue.where('userip LIKE ?', masked_addr.gsub('.0', '.%'))
+        wildcard_masked_addr = masked_addr.gsub('.0', '.%').gsub('::', '%')
+        playlist_by_masked_addr = Playlist.queue.where('userip LIKE ?', wildcard_masked_addr)
         if playlist_by_masked_addr.size >= 3
           items[:message] = I18n.t('search.request_msg.ip_range_on_playlist', count: 3)
           raise PlaylistRequestError.new(items[:message])
