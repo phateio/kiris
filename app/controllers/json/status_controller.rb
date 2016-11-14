@@ -14,8 +14,8 @@ class Json::StatusController < ApplicationController
           res_body = http_get_response_body("http://#{server}/status-json.xsl") rescue nil
           next if res_body.nil?
           icecast_status = JSON.parse(res_body)
-          icecast_source = icecast_status['icestats']['source']
-          listeners = icecast_source ? icecast_source['listeners'].to_i : 0
+          icecast_sources = icecast_status['icestats']['source']
+          listeners = Array(icecast_sources).map { |source| source['listeners'] }.inject(0, :+)
           total_listeners += listeners
         end
         items[:date] = Time.now.utc
