@@ -123,6 +123,8 @@ Rails.application.routes.draw do
     post 'tracks' => 'tracks#update'
     get  'tracks/utaitedb' => 'tracks#utaitedb'
     post 'tracks/utaitedb' => 'tracks#update'
+
+    post 'caches' => 'caches#create'
   end
 
   # Legacy client support
