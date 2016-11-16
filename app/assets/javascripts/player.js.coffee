@@ -82,7 +82,7 @@ $(document).ready ->
         DEBUG('jPlayer: unmute')
         $self.jPlayer('mute', false)
 
-    supplied: 'oga, mp3, m4a'
+    supplied: 'oga, mp3'
     solution: 'html'
     swfPath: '/'
     preload: 'none'
@@ -98,7 +98,6 @@ $(document).ready ->
     listen_path =
       oga: "/listen.opus?_=#{$.now()}"
       mp3: "/listen.mp3?_=#{$.now()}"
-      m4a: "/listen.aac?_=#{$.now()}"
     is_playing = $this.data('playing')
 
     $this.jPlayer('clearMedia')
