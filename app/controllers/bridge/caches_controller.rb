@@ -10,8 +10,9 @@ class Bridge::CachesController < ApplicationController
 
     key = request.POST[:key]
     value = JSON.parse(request.POST[:value], quirks_mode: true)
+    namespace = request.POST[:namespace]
     expires = request.POST[:expires] || 1.hour
-    return_value = Rails.cache.write(key, value, expires_in: expires)
+    return_value = Rails.cache.write(key, value, namespace: namespace, expires_in: expires)
 
     respond_to do |format|
       # format.xml { render xml: return_value }
