@@ -5,14 +5,25 @@ class Json::StatusController < ApplicationController
 
   def index
     items = {}
+    total_listeners = 0
 
-    icecast_status = Rails.cache.read('icecast_status')
-    if icecast_status
-      icecast_sources = icecast_status['icestats']['source']
-      listeners = Array(icecast_sources).map { |source| source['listeners'] }.inject(0, :+)
-      items[:date] = Time.now.utc
-      items[:listeners] = listeners
+    rails_cache_keys = Rails.cache.instance_variable_get(:@data).try(:keys) || []
+    icecast_status_keys = rails_cache_keys.select do |key|
+      key =~ /(?:\Aicecast_status|:icecast_status)\z/
     end
+
+    icecast_status_keys.each do |icecast_status_key|
+      icecast_status = Rails.cache.read(icecast_status_key)
+      next unless icecast_status
+      icecast_sources = icecast_status['icestats']['source']
+      icecast_phateio_sources = Array(icecast_sources).select do |source|
+        source['listenurl'] =~ %r{/phateio(?:\.\w+)?\z}
+      end
+      listeners = icecast_phateio_sources.map { |source| source['listeners'] }.inject(0, :+)
+      total_listeners += listeners
+    end
+    items[:date] = Time.now.utc
+    items[:listeners] = total_listeners
 
     respond_to do |format|
       format.xml { render xml: items }
