@@ -96,7 +96,7 @@ $(document).ready ->
     DEBUG('jPlayer: reload')
     $this = $(this)
     listen_path =
-      oga: "/listen.opus?_=#{$.now()}"
+      oga: "/listen.ogg?_=#{$.now()}"
       mp3: "/listen.mp3?_=#{$.now()}"
     is_playing = $this.data('playing')
 
