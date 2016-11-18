@@ -24,6 +24,7 @@ class Json::StatusController < ApplicationController
     end
     items[:date] = Time.now.utc
     items[:listeners] = total_listeners
+    Rails.cache.write(:status, items, expires_in: 30.minutes)
 
     respond_to do |format|
       format.xml { render xml: items }

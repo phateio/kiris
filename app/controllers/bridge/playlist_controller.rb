@@ -59,11 +59,11 @@ class Bridge::PlaylistController < ApplicationController
       ypd = YPDirectory.new('http://dir.xiph.org/cgi-bin/yp-cgi')
       ypd.add(
         sn: 'Phate Radio',
-        listenurl: listen_url(format: 'mp3'),
+        listenurl: listen_url(protocol: 'http', format: 'ogg'),
         desc: 'Phate Radio is an experimental internet radio about anime, games and pop music.',
-        genre: 'Anime Jpop',
-        b: 192,
-        type: 'audio/mpeg',
+        genre: 'Jpop Anime',
+        b: 128,
+        type: 'application/ogg',
         url: 'https://phate.io/'
       ) unless ypd.connected?
       ypd.touch(st: track.long_title, listeners: listeners)
