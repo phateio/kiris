@@ -19,6 +19,7 @@ class Track < ActiveRecord::Base
 
   scope :requestable, -> { where(status: 'OK') }
   scope :not_requestable, -> { where.not(status: 'OK') }
+  scope :utaitedb, -> { where(uploader: 'utaitedb.net') }
   scope :niconico_tracks, -> { where.not(niconico: '') }
   scope :niconico_idle_tracks, -> { niconico_tracks.not_requestable }
   scope :niconico_queued_tracks, -> { niconico_tracks.where(status: 'QUEUED') }

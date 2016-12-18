@@ -74,9 +74,9 @@ class Bridge::PlaylistController < ApplicationController
 
   def randlist
     items = []
-    track_size = Track.requestable.size
+    track_size = Track.requestable.utaitedb.size
     offset = track_size >= 100 ? rand(100) : rand(track_size)
-    tracks = Track.requestable.order(updated_at: :asc).offset(offset).limit(1)
+    tracks = Track.requestable.utaitedb.order(updated_at: :asc).offset(offset).limit(1)
     tracks.each do |track|
       items << track_item(track)
       track.touch
