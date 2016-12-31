@@ -1,8 +1,6 @@
 <div class="subpage">
   <%= render_flash_messages %>
-  <%= content_tag :div, class: 'button-field' do %>
-    <%= button_tag t('upload.niconico.new_track'), class: 'button', disabled: 'disabled' %>
-  <% end %>
+  <p>電台目前已改為使用 <a href="http://utaitedb.net/" target="_blank">utaitedb.net</a> 做為歌曲資訊來源 <a href="/issues/201" data-remote="true">[1]</a></p>
   <% if @tracks.length > 0 %>
     <%= render_niconico_track_list(@tracks) %>
   <% else %>

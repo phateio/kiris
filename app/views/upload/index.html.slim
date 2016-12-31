@@ -1,6 +1,0 @@
-.subpage
-  = render_flash_messages
-  = content_tag :div, class: 'button-field' do
-    = link_to 'Upload from Niconico', upload_niconico_index_path, class: 'button', remote: true
-    = button_tag 'Direct Upload', class: 'button', remote: true, disabled: 'disabled'
-  = render_upload_statistic_list(@statistics)
