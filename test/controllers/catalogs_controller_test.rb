@@ -8,7 +8,8 @@ class CatalogsControllerTest < ActionController::TestCase
   test 'should get index' do
     get :index
     assert_response :success
-    assert_not_nil assigns(:catalog)
+    # assert_not_nil assigns(:catalog)
+    assert_not_nil assigns(:track_groups)
     # puts @response.body
     assert_select 'title', /^.+$/
     assert_select 'html', /^((?!translation missing:).)+$/i

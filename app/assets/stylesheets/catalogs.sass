@@ -8,3 +8,9 @@
     width: calc(100vw - 40px)
     height: calc(100vh - 180px)
     max-width: 80em
+  .tag-list [data-count]
+    &::after
+      content: "(" attr(data-count) ")"
+      padding-left: 0.5em
+      font-size: smaller
+      color: #888888

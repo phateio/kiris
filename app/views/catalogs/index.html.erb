@@ -1,0 +1,14 @@
+<div class="subpage">
+  <!-- <ul id="catalog_actions" class="fence">
+    <li><%# render_catalog_edit_link %></li>
+    <li><%# render_catalog_google_sheets_edit_link %></li>
+  </ul> -->
+  <%# render_catalog_html(@catalog) %>
+  <table class="tag-list">
+    <tr>
+      <td><%= Track.human_attribute_name('artist') %></td>
+    </tr>
+    <%= render partial: "catalog_table_row", collection: @track_groups, as: :track_group %>
+  </table>
+</div>
+<%= render_debug_information %>
