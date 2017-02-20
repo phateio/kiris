@@ -13,7 +13,7 @@ namespace :tracks do
       maxResults: max_results_count,
       getTotalCount: true,
       sort: 'PublishDate',
-      fields: 'Artists,PVs'
+      fields: 'Artists,PVs,Tags'
     }
     headers = {
       'User-Agent' => DEFAULT_USER_AGENT
@@ -38,10 +38,12 @@ namespace :tracks do
         producers = item['artists'].select { |artist| artist['categories'].split(',').map(&:strip).include?('Producer') }.map { |artist| artist['name'] }
         composers = item['artists'].select { |artist| artist['roles'].split(',').map(&:strip).include?('Composer') }.map { |artist| artist['name'] }
         instrumentalists = item['artists'].select { |artist| artist['roles'].split(',').map(&:strip).include?('Instrumentalist') }.map { |artist| artist['name'] }
+        tags = item['tags'].map { |tag| tag['tag']['name'] }
+        primary_tag = tags.include?('vocaloid original') ? 'VOCALOID' : '歌ってみた'
 
         artists.concat(instrumentalists) if artists.empty? && instrumentalists.any?
         artists.concat(producers) if artists.empty? && producers.any?
-        tags = 'niconico,歌ってみた'
+        tags = "niconico,#{primary_tag}"
         tags = "#{tags}," + (producers + composers).uniq.join(',') if producers.any? || composers.any?
 
         raise "Irregular id: #{utaitedb_song_id}" if title.empty? || artists.empty? || niconico.empty?
