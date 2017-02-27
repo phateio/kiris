@@ -26,4 +26,8 @@ class DefaultController < ApplicationController
   def preferences
     set_site_title(I18n.t('navbar.preferences'))
   end
+
+  def privacy
+    set_site_title('Privacy Policy')
+  end
 end

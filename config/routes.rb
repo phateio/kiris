@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'faq'      => 'default#faq', format: false
   get 'speed'    => 'default#speed', format: false
   get 'support'  => 'default#support', format: false
+  get 'privacy'  => 'default#privacy', format: false
 
   # TODO: RESTful
   get    'issues'      => 'issues#index', format: false
