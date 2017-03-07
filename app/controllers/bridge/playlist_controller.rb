@@ -45,6 +45,7 @@ class Bridge::PlaylistController < ApplicationController
     end
     History.create!(playedtime: Time.now.utc, track_id: track_id)
     track = playlist.track
+
     Thread.new do
       http_get_post_form_body('http://danmaku.phate.io/metadata',
                               'title' => track.title,
@@ -52,6 +53,7 @@ class Bridge::PlaylistController < ApplicationController
                               'tags' => track.tags,
                               'secret_key' => $DANMAKU_SECRET_KEY) rescue nil
     end
+
     Thread.new do
       cached_status = Rails.cache.read(:status)
       Thread.exit if cached_status.nil?
@@ -68,6 +70,9 @@ class Bridge::PlaylistController < ApplicationController
       ) unless ypd.connected?
       ypd.touch(st: track.long_title, listeners: listeners)
     end
+
+    track.update!(status: 'DELETED') if track.legacy
+
     render nothing: true
     Rails.cache.delete(:playlist)
   end
