@@ -29,7 +29,7 @@ namespace :tracks do
       items = response['items']
 
       items.reverse_each do |item|
-        niconico = item['pVs'].find { |pv| pv['service'].eql?('NicoNicoDouga') }['pvId']
+        niconico = item['pvs'].find { |pv| pv['service'].eql?('NicoNicoDouga') }['pvId']
         next unless acceptable?(niconico)
 
         utaitedb_song_id = item['id']
