@@ -80,12 +80,14 @@ class Bridge::PlaylistController < ApplicationController
   def randlist
     items = []
     track_size = Track.requestable.utaitedb.implicit.size
-    offset = track_size >= 100 ? rand(100) : rand(track_size)
-    tracks = Track.requestable.utaitedb.order(updated_at: :asc).offset(offset).limit(1)
+    offset = track_size >= 2000 ? rand(2000) : rand(track_size)
+    tracks = Track.requestable.utaitedb.implicit.order(count: :desc).offset(offset).limit(1)
+
     tracks.each do |track|
       items << track_item(track)
       track.touch
     end
+
     respond_to do |format|
       format.xml { render xml: items }
       format.json { render json: items }
