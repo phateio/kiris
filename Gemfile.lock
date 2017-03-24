@@ -74,9 +74,25 @@ GEM
       dotenv (= 2.1.1)
       railties (>= 4.0, < 5.1)
     erubis (2.7.0)
+    excon (0.55.0)
     execjs (2.6.0)
+    fog-core (1.43.0)
+      builder
+      excon (~> 0.49)
+      formatador (~> 0.2)
+    fog-google (0.1.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.0.2)
+      fog-core (~> 1.0)
+      multi_json (~> 1.10)
+    fog-xml (0.1.2)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-sass (4.6.2)
       sass (>= 3.2)
+    formatador (0.2.5)
     foundation-rails (6.2.1.0)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -284,6 +300,7 @@ DEPENDENCIES
   coderay
   coffee-rails (~> 4.1.0)
   dotenv-rails
+  fog-google
   font-awesome-sass
   foundation-rails
   http_accept_language

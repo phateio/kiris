@@ -32,6 +32,8 @@ gem 'slim-rails'
 gem 'ransack'
 # Use HTTParty as an HTTP client
 gem 'httparty'
+# Use fog-google for Google Cloud Platform
+gem 'fog-google'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.5'
