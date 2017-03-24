@@ -15,7 +15,7 @@ class Image < ActiveRecord::Base
   valid_source_regexp = /\A(?:#{valid_sources.join('|')})\z/
 
   validates :url, presence: true
-  validates :url, format: {with: valid_url_regexp, message: :invalid_format}
+  validates :url, format: {with: valid_url_regexp, message: :invalid_format}, unless: :verified?
   validates :source, format: {with: valid_source_regexp, message: :invalid_format}, allow_blank: true
 
   def cdn_url
@@ -23,7 +23,11 @@ class Image < ActiveRecord::Base
   end
 
   def thumbnail
-    cdn_url.gsub(/(\.[A-Za-z]+)$/, 's\1')
+    if %r{//i\.imgur\.com/} === url
+      cdn_url.gsub(/(\.[A-Za-z]+)$/, 's\1')
+    else
+      url.gsub(/(\.[A-Za-z]+)$/, '_square1200.jpg')
+    end
   end
 
   def source_abbreviation
