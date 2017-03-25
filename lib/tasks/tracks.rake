@@ -34,17 +34,30 @@ namespace :tracks do
 
         utaitedb_song_id = item['id']
         title = item['name']
-        artists = item['artists'].select { |artist| artist['categories'].split(',').map(&:strip).include?('Vocalist') }.map { |artist| artist['name'] }
-        producers = item['artists'].select { |artist| artist['categories'].split(',').map(&:strip).include?('Producer') }.map { |artist| artist['name'] }
-        composers = item['artists'].select { |artist| artist['roles'].split(',').map(&:strip).include?('Composer') }.map { |artist| artist['name'] }
-        instrumentalists = item['artists'].select { |artist| artist['roles'].split(',').map(&:strip).include?('Instrumentalist') }.map { |artist| artist['name'] }
+        artists = item['artists'].select do |artist|
+          artist['categories'].split(',').map(&:strip).include?('Vocalist') && !artist['isSupport']
+        end.map { |artist| artist['name'] }
+        support_artists = item['artists'].select do |artist|
+          artist['categories'].split(',').map(&:strip).include?('Vocalist') && artist['isSupport']
+        end.map { |artist| artist['name'] }
+        producers = item['artists'].select do |artist|
+          artist['categories'].split(',').map(&:strip).include?('Producer')
+        end.map { |artist| artist['name'] }
+        composers = item['artists'].select do |artist|
+          artist['roles'].split(',').map(&:strip).include?('Composer')
+        end.map { |artist| artist['name'] }
+        instrumentalists = item['artists'].select do |artist|
+          artist['roles'].split(',').map(&:strip).include?('Instrumentalist')
+        end.map { |artist| artist['name'] }
         tags = item['tags'].map { |tag| tag['tag']['name'] }
         primary_tag = tags.include?('vocaloid original') ? 'VOCALOID' : '歌ってみた'
 
         artists.concat(instrumentalists) if artists.empty? && instrumentalists.any?
         artists.concat(producers) if artists.empty? && producers.any?
         tags = "niconico,#{primary_tag}"
-        tags = "#{tags}," + (producers + composers).uniq.join(',') if producers.any? || composers.any?
+        if producers.any? || composers.any? || support_artists.any?
+          tags = "#{tags}," + (producers + composers + support_artists).uniq.join(',')
+        end
 
         raise "Irregular id: #{utaitedb_song_id}" if title.empty? || artists.empty? || niconico.empty?
 
