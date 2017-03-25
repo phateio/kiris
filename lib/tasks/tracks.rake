@@ -34,10 +34,13 @@ namespace :tracks do
 
         utaitedb_song_id = item['id']
         title = item['name']
-        artists = item['artists'].select do |artist|
+        bands = item['artists'].select do |artist|
+          artist['categories'].split(',').map(&:strip).include?('Band') && !artist['isSupport']
+        end.map { |artist| artist['name'] }
+        vocalists = item['artists'].select do |artist|
           artist['categories'].split(',').map(&:strip).include?('Vocalist') && !artist['isSupport']
         end.map { |artist| artist['name'] }
-        support_artists = item['artists'].select do |artist|
+        support_vocalists = item['artists'].select do |artist|
           artist['categories'].split(',').map(&:strip).include?('Vocalist') && artist['isSupport']
         end.map { |artist| artist['name'] }
         producers = item['artists'].select do |artist|
@@ -52,12 +55,8 @@ namespace :tracks do
         tags = item['tags'].map { |tag| tag['tag']['name'] }
         primary_tag = tags.include?('vocaloid original') ? 'VOCALOID' : '歌ってみた'
 
-        artists.concat(instrumentalists) if artists.empty? && instrumentalists.any?
-        artists.concat(producers) if artists.empty? && producers.any?
-        tags = "niconico,#{primary_tag}"
-        if producers.any? || composers.any? || support_artists.any?
-          tags = "#{tags}," + (producers + composers + support_artists).uniq.join(',')
-        end
+        artists = vocalists.presence || bands.presence || instrumentalists.presence || producers.presence
+        tags = (['niconico'] + [primary_tag] + producers + composers + support_vocalists).uniq.join(',')
 
         raise "Irregular id: #{utaitedb_song_id}" if title.empty? || artists.empty? || niconico.empty?
 
