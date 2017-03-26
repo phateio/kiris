@@ -71,7 +71,7 @@ class Bridge::PlaylistController < ApplicationController
       ypd.touch(st: track.long_title, listeners: listeners)
     end
 
-    track.update!(status: 'DELETED') if track.legacy
+    track.update!(status: 'DELETED') unless track.uploader.eql?('utaitedb.net')
 
     render nothing: true
     Rails.cache.delete(:playlist)
