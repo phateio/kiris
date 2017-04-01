@@ -18,7 +18,7 @@ class Json::PlaylistController < ApplicationController
 
           if index < 3
             images = track.images.order(id: :asc).select { |image| (/\ARANK_(?:2|3|4|5)\z/ =~ image.status) != nil }
-            image = images.present? ? images.at(playlist.id % images.size) : nil
+            image = images.present? ? images.at(playlist.id % images.size) : Image.find(15801)
 
             if image
               image_info = {
