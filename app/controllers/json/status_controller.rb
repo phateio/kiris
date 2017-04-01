@@ -23,7 +23,7 @@ class Json::StatusController < ApplicationController
       total_listeners += listeners
     end
     items[:date] = Time.now.utc
-    items[:listeners] = total_listeners * 10
+    items[:listeners] = total_listeners
     Rails.cache.write(:status, items, expires_in: 30.minutes)
 
     respond_to do |format|
