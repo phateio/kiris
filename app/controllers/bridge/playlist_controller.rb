@@ -80,7 +80,7 @@ class Bridge::PlaylistController < ApplicationController
   def randlist
     items = []
     played_tracks = Track.joins(:histories).where(History.arel_table[:playedtime].gt(7.days.ago))
-    available_tracks = Track.where.not(id: played_tracks).requestable.utaitedb.implicit
+    available_tracks = Track.where.not(id: played_tracks).requestable.utaitedb.implicit.utattemita
     track_size = available_tracks.size
     offset = track_size >= 2000 ? rand(2000) : rand(track_size)
     tracks = available_tracks.order(count: :desc).offset(offset).limit(1)
