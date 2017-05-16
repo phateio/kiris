@@ -14,7 +14,8 @@ track = Track.create!(
   duration: 207,
   status: 'OK',
   szhash: '5a9b41a9964b3f49a19b561b04fcb16e981cad3e',
-  niconico: 'sm22942867'
+  niconico: 'sm22942867',
+  uploader: 'utaitedb.net'
 )
 track.playlists.create!(
   playedtime: Time.now.utc

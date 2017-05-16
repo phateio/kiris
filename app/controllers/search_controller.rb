@@ -20,10 +20,10 @@ class SearchController < ApplicationController
     set_site_title("#{I18n.t('search.search')}『#{@keyword}』")
     @q = Track.search(search_params)
     if params[:sort] == 'random'
-      @tracks = @q.result.randomize.page(page)
+      @tracks = @q.result.utaitedb.randomize.page(page)
     else
       @q.sorts = ['asin asc', 'number asc', 'niconico asc', 'id asc']
-      @tracks = @q.result(distinct: true).page(page)
+      @tracks = @q.result(distinct: true).utaitedb.page(page)
     end
     render action: 'search'
   end
