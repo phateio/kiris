@@ -2,12 +2,17 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.6.3
+-- Dumped by pg_dump version 9.6.3
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -30,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: catalogs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: catalogs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE catalogs (
@@ -71,7 +76,7 @@ ALTER SEQUENCE catalogs_id_seq OWNED BY catalogs.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE categories (
@@ -106,7 +111,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: histories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: histories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE histories (
@@ -138,7 +143,7 @@ ALTER SEQUENCE histories_id_seq OWNED BY histories.id;
 
 
 --
--- Name: image_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: image_comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE image_comments (
@@ -176,7 +181,7 @@ ALTER SEQUENCE image_comments_id_seq OWNED BY image_comments.id;
 
 
 --
--- Name: images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: images; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE images (
@@ -217,7 +222,7 @@ ALTER SEQUENCE images_id_seq OWNED BY images.id;
 
 
 --
--- Name: issue_replies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: issue_replies; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE issue_replies (
@@ -256,7 +261,7 @@ ALTER SEQUENCE issue_replies_id_seq OWNED BY issue_replies.id;
 
 
 --
--- Name: issues; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: issues; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE issues (
@@ -297,7 +302,7 @@ ALTER SEQUENCE issues_id_seq OWNED BY issues.id;
 
 
 --
--- Name: lyrics; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: lyrics; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE lyrics (
@@ -334,7 +339,7 @@ ALTER SEQUENCE lyrics_id_seq OWNED BY lyrics.id;
 
 
 --
--- Name: members; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: members; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE members (
@@ -370,7 +375,7 @@ ALTER SEQUENCE members_id_seq OWNED BY members.id;
 
 
 --
--- Name: notices; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: notices; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE notices (
@@ -403,7 +408,7 @@ ALTER SEQUENCE notices_id_seq OWNED BY notices.id;
 
 
 --
--- Name: playlist; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: playlist; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE playlist (
@@ -439,7 +444,7 @@ ALTER SEQUENCE playlist_id_seq OWNED BY playlist.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -448,7 +453,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: track_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: track_comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE track_comments (
@@ -486,7 +491,7 @@ ALTER SEQUENCE track_comments_id_seq OWNED BY track_comments.id;
 
 
 --
--- Name: track_migration_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: track_migration_comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE track_migration_comments (
@@ -524,7 +529,7 @@ ALTER SEQUENCE track_migration_comments_id_seq OWNED BY track_migration_comments
 
 
 --
--- Name: track_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: track_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE track_migrations (
@@ -584,7 +589,7 @@ ALTER SEQUENCE track_migrations_id_seq OWNED BY track_migrations.id;
 
 
 --
--- Name: tracks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tracks; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE tracks (
@@ -643,112 +648,112 @@ ALTER SEQUENCE tracks_id_seq OWNED BY tracks.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: catalogs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY catalogs ALTER COLUMN id SET DEFAULT nextval('catalogs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: histories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY histories ALTER COLUMN id SET DEFAULT nextval('histories_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: image_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY image_comments ALTER COLUMN id SET DEFAULT nextval('image_comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: images id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY images ALTER COLUMN id SET DEFAULT nextval('images_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: issue_replies id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY issue_replies ALTER COLUMN id SET DEFAULT nextval('issue_replies_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: issues id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY issues ALTER COLUMN id SET DEFAULT nextval('issues_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: lyrics id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lyrics ALTER COLUMN id SET DEFAULT nextval('lyrics_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: members id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY members ALTER COLUMN id SET DEFAULT nextval('members_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: notices id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notices ALTER COLUMN id SET DEFAULT nextval('notices_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: playlist id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY playlist ALTER COLUMN id SET DEFAULT nextval('playlist_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: track_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY track_comments ALTER COLUMN id SET DEFAULT nextval('track_comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: track_migration_comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY track_migration_comments ALTER COLUMN id SET DEFAULT nextval('track_migration_comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: track_migrations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY track_migrations ALTER COLUMN id SET DEFAULT nextval('track_migrations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tracks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tracks ALTER COLUMN id SET DEFAULT nextval('tracks_id_seq'::regclass);
 
 
 --
--- Name: catalogs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: catalogs catalogs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY catalogs
@@ -756,7 +761,7 @@ ALTER TABLE ONLY catalogs
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories
@@ -764,7 +769,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: histories histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY histories
@@ -772,7 +777,7 @@ ALTER TABLE ONLY histories
 
 
 --
--- Name: image_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: image_comments image_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY image_comments
@@ -780,7 +785,7 @@ ALTER TABLE ONLY image_comments
 
 
 --
--- Name: images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: images images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY images
@@ -788,7 +793,7 @@ ALTER TABLE ONLY images
 
 
 --
--- Name: issue_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: issue_replies issue_replies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY issue_replies
@@ -796,7 +801,7 @@ ALTER TABLE ONLY issue_replies
 
 
 --
--- Name: issues_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: issues issues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY issues
@@ -804,7 +809,7 @@ ALTER TABLE ONLY issues
 
 
 --
--- Name: lyrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: lyrics lyrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lyrics
@@ -812,7 +817,7 @@ ALTER TABLE ONLY lyrics
 
 
 --
--- Name: members_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY members
@@ -820,7 +825,7 @@ ALTER TABLE ONLY members
 
 
 --
--- Name: notices_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: notices notices_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notices
@@ -828,7 +833,7 @@ ALTER TABLE ONLY notices
 
 
 --
--- Name: playlist_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: playlist playlist_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY playlist
@@ -836,7 +841,7 @@ ALTER TABLE ONLY playlist
 
 
 --
--- Name: track_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: track_comments track_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY track_comments
@@ -844,7 +849,7 @@ ALTER TABLE ONLY track_comments
 
 
 --
--- Name: track_migration_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: track_migration_comments track_migration_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY track_migration_comments
@@ -852,7 +857,7 @@ ALTER TABLE ONLY track_migration_comments
 
 
 --
--- Name: track_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: track_migrations track_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY track_migrations
@@ -860,7 +865,7 @@ ALTER TABLE ONLY track_migrations
 
 
 --
--- Name: tracks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tracks tracks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tracks
@@ -868,77 +873,77 @@ ALTER TABLE ONLY tracks
 
 
 --
--- Name: index_histories_on_track_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_histories_on_track_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_histories_on_track_id ON histories USING btree (track_id);
 
 
 --
--- Name: index_image_comments_on_image_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_image_comments_on_image_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_image_comments_on_image_id ON image_comments USING btree (image_id);
 
 
 --
--- Name: index_images_on_track_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_images_on_track_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_images_on_track_id ON images USING btree (track_id);
 
 
 --
--- Name: index_issue_replies_on_issue_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_issue_replies_on_issue_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_issue_replies_on_issue_id ON issue_replies USING btree (issue_id);
 
 
 --
--- Name: index_members_on_identity; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_members_on_identity; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_members_on_identity ON members USING btree (identity);
 
 
 --
--- Name: index_playlist_on_track_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_playlist_on_track_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_playlist_on_track_id ON playlist USING btree (track_id);
 
 
 --
--- Name: index_track_comments_on_track_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_track_comments_on_track_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_track_comments_on_track_id ON track_comments USING btree (track_id);
 
 
 --
--- Name: index_track_migration_comments_on_track_migration_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_track_migration_comments_on_track_migration_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_track_migration_comments_on_track_migration_id ON track_migration_comments USING btree (track_migration_id);
 
 
 --
--- Name: index_track_migrations_on_szhash; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_track_migrations_on_szhash; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_track_migrations_on_szhash ON track_migrations USING btree (szhash);
 
 
 --
--- Name: index_tracks_on_szhash; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_tracks_on_szhash; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_tracks_on_szhash ON tracks USING btree (szhash);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -948,7 +953,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES ('20131027125613');
 
