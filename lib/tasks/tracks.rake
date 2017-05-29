@@ -53,7 +53,14 @@ namespace :tracks do
           artist['roles'].split(',').map(&:strip).include?('Instrumentalist')
         end.map { |artist| artist['name'] }
         tags = item['tags'].map { |tag| tag['tag']['name'] }
-        primary_tag = tags.include?('vocaloid original') ? 'VOCALOID' : '歌ってみた'
+
+        primary_tag = if tags.include?('vocaloid original')
+                        'VOCALOID'
+                      elsif tags.include?('instrumental')
+                        'Instrumental'
+                      else
+                        '歌ってみた'
+                      end
 
         artists = vocalists.presence || bands.presence || instrumentalists.presence || producers.presence
         tags = (['niconico'] + [primary_tag] + producers + composers + support_vocalists).uniq.join(',')
