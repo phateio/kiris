@@ -83,7 +83,7 @@ class Bridge::PlaylistController < ApplicationController
     played_tracks = Track.joins(:histories).where(recent_histories).select(:title).distinct
     available_tracks = Track.where.not(title: played_tracks).requestable.utaitedb.implicit.utattemita
     track_size = available_tracks.size
-    offset = track_size >= 2000 ? rand(2000) : rand(track_size)
+    offset = track_size >= 350 ? rand(350) : rand(track_size)
     tracks = available_tracks.order(count: :desc).offset(offset).limit(1)
 
     tracks.each do |track|
