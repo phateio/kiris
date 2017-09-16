@@ -24,6 +24,8 @@ gem 'pry-rails'
 gem 'redis'
 # Use redis-rails for Rails cache store
 gem 'redis-rails'
+# Use Rack CORS Middleware for handling CORS
+gem 'rack-cors', require: 'rack/cors'
 # Use Simple Form as form builder
 gem 'simple_form'
 # Use Slim for template
