@@ -67,6 +67,11 @@ $(document).ready ->
       $this = $(this)
       $this.trigger('ping')
 
+    timeupdate: (event) ->
+      DEBUG('jPlayer: timeupdate')
+      $this = $(this)
+      $this.trigger('ping')
+
     volumechange: (event) ->
       $self = $(this)
       volume_new = event.jPlayer.options.volume
