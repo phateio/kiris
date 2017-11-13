@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.3
--- Dumped by pg_dump version 9.6.3
+-- Dumped from database version 9.6.5
+-- Dumped by pg_dump version 9.6.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -624,7 +624,8 @@ CREATE TABLE tracks (
     images_count integer DEFAULT 0 NOT NULL,
     track_comments_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    score integer DEFAULT 0 NOT NULL
 );
 
 
@@ -984,4 +985,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141017143741');
 INSERT INTO schema_migrations (version) VALUES ('20141021150831');
 
 INSERT INTO schema_migrations (version) VALUES ('20150810142823');
+
+INSERT INTO schema_migrations (version) VALUES ('20171113023019');
 
