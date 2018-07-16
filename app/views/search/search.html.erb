@@ -1,6 +1,5 @@
 <div class="subpage">
   <%= render partial: 'search_form' %>
-  <p><small>本電台即將轉型成以播放免費翻唱音樂為主的電台，動畫新番 OP ED 等商業音樂會改由新電台 <a href="https://denpa.io" target="_blank">denpa.io</a> 播放，新電台還在開發中歡迎至右下角意見提供給予回饋。</small></p>
   <% if @tracks.length > 0 %>
     <%= render_search_list(@tracks) %>
   <% else %>
