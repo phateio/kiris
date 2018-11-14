@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     match '/ips' => '/application#remote_ips', via: :all
   end
 
+  constraints subdomain: 'gitio' do
+    get '/', to: redirect('https://git.io/')
+    get ':id' => 'static#gitio_proxy', constraints: { id: /[\w\-\.]*/ }
+  end
+
   root 'default#index', defaults: { format: 'html' }
 
   get 'news'     => 'notices#index', format: false

@@ -25,4 +25,15 @@ class StaticController < ApplicationController
     response = HTTParty.get(imgur_url, headers: headers)
     send_data response.body, status: response.code, type: response.content_type, disposition: 'inline'
   end
+
+  def gitio_proxy
+    gitio_id = params[:id]
+    gitio_format = params[:format]
+    gitio_url = "https://git.io/#{gitio_id}"
+    gitio_url = "#{gitio_url}.#{gitio_format}" if gitio_format
+
+    expires_now
+    response = HTTParty.get(gitio_url, headers: headers)
+    send_data response.body, status: response.code, type: response.content_type, disposition: 'inline'
+  end
 end
