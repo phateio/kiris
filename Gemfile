@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Ruby version
-ruby '2.3.1'
+ruby '2.5.5'
 
 group :production do
   # Use Rails 12factor for Heroku
