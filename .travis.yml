@@ -1,9 +1,12 @@
 language: ruby
 sudo: false
 services:
-- redis
+  - postgresql
+  - redis
+addons:
+  postgresql: '9.6'
 before_script:
-- bundle exec rake db:test:prepare
+  - bundle exec rake db:test:prepare
 cache: bundler
 notifications:
   email: false
