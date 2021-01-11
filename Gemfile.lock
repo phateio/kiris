@@ -227,7 +227,7 @@ GEM
       polyamorous (~> 1.2)
     rdoc (4.2.2)
       json (~> 1.4)
-    redcarpet (3.3.4)
+    redcarpet (3.5.1)
     redis (4.0.1)
     redis-actionpack (5.0.2)
       actionpack (>= 4.0, < 6)
