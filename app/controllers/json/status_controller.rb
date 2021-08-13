@@ -15,8 +15,8 @@ class Json::StatusController < ApplicationController
     icecast_status_keys.each do |icecast_status_key|
       icecast_status = Rails.cache.read(icecast_status_key)
       next unless icecast_status
-      icecast_sources = icecast_status['icestats']['source']
-      icecast_phateio_sources = Array(icecast_sources).select do |source|
+      icecast_sources = Array.wrap(icecast_status['icestats']['source'])
+      icecast_phateio_sources = icecast_sources.select do |source|
         source['listenurl'] =~ %r{/phateio(?:\.\w+)?\z}
       end
       listeners = icecast_phateio_sources.map { |source| source['listeners'] }.inject(0, :+)
