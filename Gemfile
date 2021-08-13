@@ -1,7 +1,9 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-# Ruby version
-ruby '2.5.5'
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.5.8'
 
 group :production do
   # Use Rails 12factor for Heroku
