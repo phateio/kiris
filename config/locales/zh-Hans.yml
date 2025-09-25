@@ -147,10 +147,10 @@ zh-Hans:
       Q: 我能做些什么来帮助这个电台?
       > A: 您可以……
 
-      >- 上传您喜欢的歌曲 [http://phate.io/upload](/upload)
+      >- 上传您喜欢的歌曲 [https://phate.io/upload](/upload)
       >- 喜欢我们的 facebook 专页 https://www.facebook.com/phateio
       >- 加入一起参与开发 https://github.com/phateio/kiris
-      >- 分享这个电台给您的朋友 http://phate.io/
+      >- 分享这个电台给您的朋友 https://phate.io/
   form:
     cancel: "取消"
     close: "关闭"
@@ -198,10 +198,10 @@ zh-Hans:
       请勿上传动画截图。
       请避免任何包含放大缩小之类的修图行为。
       图片分辨率必须 960 × 720 以上，若有特殊情况则依个案处理。
-      图片网址只允许 <a href="http://imgur.com/" target="_blank">imgur.com</a> 的 Direct Link (<a href="http://i.imgur.com/gM09wTV.jpg" target="_blank">范例</a>)
+      图片网址只允许 <a href="https://imgur.com/" target="_blank">imgur.com</a> 的 Direct Link (<a href="https://i.imgur.com/gM09wTV.jpg" target="_blank">范例</a>)
       评分为 Rank 2 以上的图片才会列入该首歌曲随机背景来源。
     image_url: "图片网址"
-    image_url_placeholder: http://i.imgur.com/example.png
+    image_url_placeholder: https://i.imgur.com/example.png
     invalid_status: "无效状态"
     nickname_tip: "会显示在首页上请认真输入，若不知道要填什么留空即可"
     no_images_to_show: "目前尚无任何图片"

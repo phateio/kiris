@@ -18,7 +18,7 @@ class StaticController < ApplicationController
   def imgur_proxy
     imgur_id = params[:id]
     imgur_format = params[:format]
-    imgur_url = "http://i.imgur.com/#{imgur_id}"
+    imgur_url = "https://i.imgur.com/#{imgur_id}"
     imgur_url = "#{imgur_url}.#{imgur_format}" if imgur_format
 
     expires_in 1.month, public: true

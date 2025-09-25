@@ -22,7 +22,7 @@ track.playlists.create!(
 )
 track.images.create!(
   url: '//i.imgur.com/0eSuyIv.jpg',
-  source: 'http://www.pixiv.net/member_illust.php?mode=medium&illust_id=42917318',
+  source: 'https://www.pixiv.net/member_illust.php?mode=medium&illust_id=42917318',
   illustrator: '楠チェリー＠プロフ修正しました',
 )
 Member.create!(

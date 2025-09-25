@@ -147,10 +147,10 @@ en:
       Q: What can I do to help this this radio station?
       > A: You can...
 
-      >- Upload your favorite songs [http://phate.io/upload](/upload)
+      >- Upload your favorite songs [https://phate.io/upload](/upload)
       >- Like us on facebook https://www.facebook.com/phateio
       >- Join our development effort https://github.com/phateio/kiris
-      >- Share this website with your friends http://phate.io/
+      >- Share this website with your friends https://phate.io/
   form:
     cancel: Cancel
     close: Close
@@ -201,10 +201,10 @@ en:
       No screenshot.
       Please avoid any post-processing on images.
       Image resolution must greater than 960 × 720, otherwise case by case.
-      Image URL only allow Direct Link of <a href="http://imgur.com/" target="_blank">imgur.com</a> (<a href="http://i.imgur.com/gM09wTV.jpg" target="_blank">Example</a>)
+      Image URL only allow Direct Link of <a href="https://imgur.com/" target="_blank">imgur.com</a> (<a href="https://i.imgur.com/gM09wTV.jpg" target="_blank">Example</a>)
       Image will as one of random backgrounds of this audio when rated as Rank 2 or above.
     image_url: Image URL
-    image_url_placeholder: http://i.imgur.com/example.png
+    image_url_placeholder: https://i.imgur.com/example.png
     invalid_status: Invalid status
     nickname_tip: This will show on homepage, take it seriously please. (optional)
     no_images_to_show: No images to show.

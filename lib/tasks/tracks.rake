@@ -18,14 +18,14 @@ namespace :tracks do
     headers = {
       'User-Agent' => DEFAULT_USER_AGENT
     }
-    response = HTTParty.get('http://utaitedb.net/api/songs', query: query, headers: headers)
+    response = HTTParty.get('https://utaitedb.net/api/songs', query: query, headers: headers)
     total_count = response['totalCount']
     puts "Total count: #{total_count}"
 
     pages_count = total_count ? (total_count / max_results_count.to_f).ceil : 1
     (0...pages_count).reverse_each do |page_index|
       query[:start] = page_index * max_results_count
-      response = HTTParty.get('http://utaitedb.net/api/songs', query: query, headers: headers)
+      response = HTTParty.get('https://utaitedb.net/api/songs', query: query, headers: headers)
       items = response['items']
 
       items.reverse_each do |item|
@@ -89,7 +89,7 @@ def get_niconico_thumb_info(video_id)
   headers = {
     'User-Agent' => DEFAULT_USER_AGENT
   }
-  response = HTTParty.get("http://ext.nicovideo.jp/api/getthumbinfo/#{video_id}", headers: headers)
+  response = HTTParty.get("https://ext.nicovideo.jp/api/getthumbinfo/#{video_id}", headers: headers)
   raise unless response.code.eql?(200)
   thumb_info_doc = Nokogiri::XML(response.body)
   thumb_element = thumb_info_doc.xpath('/nicovideo_thumb_response/thumb')

@@ -157,13 +157,13 @@ class Upload::NiconicoController < ApplicationController
   end
 
   def get_niconico_location(video_id)
-    res = http_head_response("http://www.nicovideo.jp/watch/#{video_id}") rescue nil
+    res = http_head_response("https://www.nicovideo.jp/watch/#{video_id}") rescue nil
     return nil if res.nil?
     res['Location']
   end
 
   def get_niconico_thumb_info(video_id)
-    res_body = http_get_response_body("http://ext.nicovideo.jp/api/getthumbinfo/#{video_id}") rescue nil
+    res_body = http_get_response_body("https://ext.nicovideo.jp/api/getthumbinfo/#{video_id}") rescue nil
     return false if res_body.nil?
     thumb_info_doc = Nokogiri::XML(res_body)
     thumb_element = thumb_info_doc.xpath('/nicovideo_thumb_response/thumb')

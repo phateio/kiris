@@ -11,7 +11,7 @@ namespace :images do
 
       works_api_response['response'].each do |illust|
         illust_id = illust['id']
-        illust_url = "http://www.pixiv.net/member_illust.php?mode=medium&illust_id=#{illust_id}"
+        illust_url = "https://www.pixiv.net/member_illust.php?mode=medium&illust_id=#{illust_id}"
         illust_api_url = "https://public-api.secure.pixiv.net/v1/works/#{illust_id}.json?image_sizes=px_128x128,large"
 
         next if Image.exists?(source: illust_url)

@@ -35,4 +35,4 @@ We use [phateio-i18n@Locale](https://www.localeapp.com/projects/6196) to manage 
 Everyone is welcome to help correct, improve, or complete the translations.
 
 ## License
-Phate Radio is released under the [MIT License](http://opensource.org/licenses/MIT).
+Phate Radio is released under the [MIT License](https://opensource.org/license/MIT).

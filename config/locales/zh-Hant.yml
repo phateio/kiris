@@ -147,10 +147,10 @@ zh-Hant:
       Q: 我能做些什麼來幫助這個電台?
       > A: 您可以……
 
-      >- 上傳您喜歡的歌曲 [http://phate.io/upload](/upload)
+      >- 上傳您喜歡的歌曲 [https://phate.io/upload](/upload)
       >- 喜歡我們的 facebook 專頁 https://www.facebook.com/phateio
       >- 加入一起參與開發 https://github.com/phateio/kiris
-      >- 分享這個電台給您的朋友 http://phate.io/
+      >- 分享這個電台給您的朋友 https://phate.io/
   form:
     cancel: "取消"
     close: "關閉"
@@ -198,10 +198,10 @@ zh-Hant:
       請勿上傳動畫截圖。
       請避免任何包含放大縮小之類的修圖行為。
       圖片解析度必須 960 × 720 以上，若有特殊情況則依個案處理。
-      圖片網址只允許 <a href="http://imgur.com/" target="_blank">imgur.com</a> 的 Direct Link (<a href="http://i.imgur.com/gM09wTV.jpg" target="_blank">範例</a>)
+      圖片網址只允許 <a href="https://imgur.com/" target="_blank">imgur.com</a> 的 Direct Link (<a href="https://i.imgur.com/gM09wTV.jpg" target="_blank">範例</a>)
       評分為 Rank 2 以上的圖片才會列入該首歌曲隨機背景來源。
     image_url: "圖片網址"
-    image_url_placeholder: http://i.imgur.com/example.png
+    image_url_placeholder: https://i.imgur.com/example.png
     invalid_status: "無效狀態"
     nickname_tip: "會顯示在首頁上請認真輸入，若不知道要填什麼留空即可"
     no_images_to_show: "目前尚無任何圖片"

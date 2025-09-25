@@ -47,7 +47,7 @@ class Bridge::PlaylistController < ApplicationController
     track = playlist.track
 
     Thread.new do
-      http_get_post_form_body('http://danmaku.phate.io/metadata',
+      http_get_post_form_body('https://danmaku.phate.io/metadata',
                               'title' => track.title,
                               'artist' => track.artist,
                               'tags' => track.tags,

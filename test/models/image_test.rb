@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class ImageTest < ActiveSupport::TestCase
-  image_url = 'http://i.imgur.com/Tn4tTuZ.jpg'
+  image_url = 'https://i.imgur.com/Tn4tTuZ.jpg'
   image_html5_url = '//i.imgur.com/Tn4tTuZ.jpg'
-  image_thumb_url = 'http://i.imgur.com/Tn4tTuZs.jpg'
-  image_source_pixiv = 'http://www.pixiv.net/member_illust.php?mode=medium&illust_id=31955940'
-  image_source_piapro = 'http://piapro.jp/t/_Chy'
-  image_source_seiga = 'http://seiga.nicovideo.jp/seiga/im2676375'
+  image_thumb_url = 'https://i.imgur.com/Tn4tTuZs.jpg'
+  image_source_pixiv = 'https://www.pixiv.net/member_illust.php?mode=medium&illust_id=31955940'
+  image_source_piapro = 'https://piapro.jp/t/_Chy'
+  image_source_seiga = 'https://seiga.nicovideo.jp/seiga/im2676375'
 
   test 'validations' do
     assert Image.create(url: image_url, source: '').valid?

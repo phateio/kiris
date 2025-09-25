@@ -159,7 +159,7 @@ ja:
     image_rules_caption: 
     image_rules_content: 
     image_url: "画像のURL"
-    image_url_placeholder: http://i.imgur.com/example.png
+    image_url_placeholder: https://i.imgur.com/example.png
     invalid_status: "無効状態"
     nickname_tip: 
     no_images_to_show: 

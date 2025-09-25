@@ -80,7 +80,7 @@ class Json::PlaylistController < ApplicationController
       end
     end
 
-    # render json: JSON.parse(http_get_response_body('http://phate.io/playlist.json')) and return
+    # render json: JSON.parse(http_get_response_body('https://phate.io/playlist.json')) and return
 
     items.each do |item|
       playedtime = item[:playedtime]
