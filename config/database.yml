@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: kiris_production
-  username: kiris
-  password: <%= ENV['KIRIS_DATABASE_PASSWORD'] %>
+  # database: kiris_production
+  # username: kiris
+  # password: <%= ENV['KIRIS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
