@@ -70,7 +70,9 @@ Follow this complete upgrade path:
 
 ### 3. Ruby Version Synchronization
 
-- **Consult [Rails official documentation](https://guides.rubyonrails.org/)** to determine the minimum compatible Ruby version for each Rails version
+- **Check [rubygems.org Rails versions](https://rubygems.org/gems/rails/versions)** to determine the "Required Ruby Version" for each Rails version
+- **Select the highest patch version (x.y.z)** within the minimum required minor version (x.y)
+  - Example: If Rails requires Ruby >= 2.5.0, use the latest 2.5.z version (e.g., 2.5.9)
 - **Upgrade Ruby synchronously** with each major Rails version upgrade
 - Update both `.ruby-version` and `Gemfile` to reflect the new Ruby version
 - Verify Ruby version compatibility before proceeding with Rails upgrade
