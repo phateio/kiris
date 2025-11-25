@@ -29,7 +29,7 @@ gem 'redis-rails'
 # Use Rack CORS Middleware for handling CORS
 gem 'rack-cors', require: 'rack/cors'
 # Use Simple Form as form builder
-gem 'simple_form', '~> 3.5'
+gem 'simple_form', '~> 5.0'
 # Use Slim for template
 gem 'slim-rails', '>= 3.1.0'
 # Use Ransack as search model
@@ -40,9 +40,9 @@ gem 'httparty'
 gem 'fog-google', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0'
+gem 'rails', '~> 5.2.8'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 0.21'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -71,11 +71,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use rails-i18n as I18n solution
-gem 'rails-i18n', '~> 5.0'
+gem 'rails-i18n', '~> 5.1'
 # Use Kaminari as paginator
 gem 'kaminari'
 # Use Nokogiri as HTML parser
-gem 'nokogiri', '>= 1.5.11'
+gem 'nokogiri', '~> 1.10'
 # Use Redcarpet as Markdown parser
 gem 'redcarpet'
 # Use CodeRay for syntax highlighting
