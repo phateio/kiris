@@ -57,11 +57,24 @@ Follow this complete upgrade path:
 ### 2. Complete Diff Application Rules
 
 - **Use [railsdiff.org](https://railsdiff.org/)** to compare differences between versions
+  - **CRITICAL:** Visit the **exact URL** for the version range: `https://railsdiff.org/{from_version}/{to_version}`
+  - Example: For 4.2.10 → 6.1.7.10, visit `https://railsdiff.org/4.2.10/6.1.7.10`
 - **Apply ALL changes completely**, including:
-  - Configuration file updates
+  - **Modified files:** Update all existing configuration files
+  - **New files:** Create ALL new files shown in the diff (e.g., `config/cable.yml`, `config/storage.yml`, `bin/update`, initializers)
+  - **Deleted files:** Remove files that are no longer needed
+  - **Directory structure:** Create new directories with `.keep` files (e.g., `tmp/`, `storage/`)
   - Comment modifications (e.g., `http://` → `https://`)
   - Framework default changes
   - Deprecation warnings
+- **Verification checklist after applying diff:**
+  1. ✓ All files marked as "new file" in railsdiff.org are created
+  2. ✓ All files marked as "modified" in railsdiff.org are updated
+  3. ✓ All files marked as "deleted" in railsdiff.org are removed
+  4. ✓ `.gitattributes` and `.gitignore` are updated to Rails standard
+  5. ✓ All `bin/` scripts are updated to modern format
+  6. ✓ Configuration files in `config/environments/` include all new settings
+  7. ✓ New initializers are created (e.g., `content_security_policy.rb`, `permissions_policy.rb`)
 - **When encountering conflicts:**
   - **STOP the upgrade process**
   - Document the conflict
