@@ -293,7 +293,13 @@ When asked to upgrade Rails, follow this exact workflow:
 
    **C. Apply ALL railsdiff.org Changes**
 
-   **Must create these files if they don't exist:**
+   **CRITICAL: Copy files EXACTLY as shown in railsdiff.org, including:**
+   - All code lines
+   - **ALL comments** (even if they look like documentation or examples)
+   - All whitespace and formatting
+   - All empty lines
+
+   **Must create these files if they don't exist (with EXACT content from railsdiff.org):**
    - `config/cable.yml` (Rails 5.0+)
    - `config/storage.yml` (Rails 5.2+)
    - `config/initializers/content_security_policy.rb` (Rails 5.2+)
@@ -301,7 +307,7 @@ When asked to upgrade Rails, follow this exact workflow:
    - `config/initializers/new_framework_defaults_X_Y.rb` (each major version)
    - `bin/update` (Rails 5.0+)
    - `app/models/application_record.rb` (Rails 5.0+)
-   - `app/jobs/application_job.rb` (Rails 5.0+)
+   - `app/jobs/application_job.rb` (Rails 5.0+) - **including retry_on and discard_on comments**
    - `app/mailers/application_mailer.rb` (Rails 5.0+)
    - `app/views/layouts/mailer.html.erb` and `.text.erb` (Rails 5.0+)
 
@@ -321,14 +327,15 @@ When asked to upgrade Rails, follow this exact workflow:
    - `storage/.keep`
 
    **D. Verification Checklist**
-   - [ ] All files marked "new file" in railsdiff.org are created
-   - [ ] All files marked "modified" in railsdiff.org are updated
+   - [ ] All files marked "new file" in railsdiff.org are created **with EXACT content including ALL comments**
+   - [ ] All files marked "modified" in railsdiff.org are updated **line by line, including comment changes**
    - [ ] .gitattributes updated to Rails standard
    - [ ] .gitignore includes all new patterns
    - [ ] All bin/ scripts use modern format
    - [ ] config/application.rb has correct load_defaults version
    - [ ] All new initializers are created
    - [ ] Directory structure is complete
+   - [ ] **Content verification**: For new files (especially ApplicationJob, ApplicationRecord, ApplicationMailer), verify comments match railsdiff.org
 
    **E. Commit Changes**
    - Commit gem updates separately from config updates
@@ -349,10 +356,14 @@ When asked to upgrade Rails, follow this exact workflow:
 - Skip updating .gitattributes or .gitignore
 - Forget to create new initializers
 - Leave bin/ scripts in old format
+- **Create files from memory/common knowledge - ALWAYS copy from railsdiff.org**
+- **Skip comments thinking they are optional - ALL comments must be included**
+- Create minimal/skeleton versions of files - use EXACT content
 
 ✓ **DO:**
-- Create EVERY file marked as "new file" in railsdiff.org
-- Update EVERY file marked as "modified" in railsdiff.org
+- Create EVERY file marked as "new file" in railsdiff.org **with EXACT content**
+- Update EVERY file marked as "modified" in railsdiff.org **line by line**
+- **Include ALL comments, even if they look like documentation or examples**
 - Use the verification checklist for each version
 - Ask user if uncertain about any file
 - Follow the README.md guidelines strictly
