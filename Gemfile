@@ -40,13 +40,13 @@ gem 'httparty'
 gem 'fog-google', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8'
+gem 'rails', '~> 6.0.6'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.21'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '>= 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -73,11 +73,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use rails-i18n as I18n solution
-gem 'rails-i18n', '~> 5.1'
+gem 'rails-i18n', '~> 6.0'
 # Use Kaminari as paginator
 gem 'kaminari'
-# Use Nokogiri as HTML parser
-gem 'nokogiri', '~> 1.10'
+# Use Nokogiri as HTML parser (< 1.13 for Ruby 2.5 compatibility)
+gem 'nokogiri', '~> 1.12.0'
 # Use Redcarpet as Markdown parser
 gem 'redcarpet'
 # Use CodeRay for syntax highlighting
