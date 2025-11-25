@@ -40,7 +40,7 @@ gem 'httparty'
 gem 'fog-google', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.6'
+gem 'rails', '~> 6.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 # Use postgresql as the database for Active Record
@@ -73,7 +73,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use rails-i18n as I18n solution
-gem 'rails-i18n', '~> 6.0'
+gem 'rails-i18n', '~> 7.0'
 # Use Kaminari as paginator
 gem 'kaminari'
 # Use Nokogiri as HTML parser (< 1.13 for Ruby 2.5 compatibility)
