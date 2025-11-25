@@ -22,8 +22,12 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  config.static_cache_control = "public, max-age=#{365.days}"
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+
+  # Enable public file server with far-future expires headers
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{365.days.to_i}"
+  }
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -62,12 +66,18 @@ Rails.application.configure do
   # Use a different cache store in production.
   config.cache_store = :redis_store, ENV['REDIS_URL'], { expires_in: 1.year }
 
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = 'http://assets.example.com'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.perform_caching = false
+
   config.action_mailer.smtp_settings = {
     :port           => ENV['MAILGUN_SMTP_PORT'],
     :address        => ENV['MAILGUN_SMTP_SERVER'],

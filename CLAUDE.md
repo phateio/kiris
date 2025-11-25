@@ -256,6 +256,118 @@ end
 - `client_ip`, `client_identity` - Track users
 - `md_to_html` - Markdown rendering
 
+## Rails Upgrade Workflow
+
+**CRITICAL REFERENCE:** This project has comprehensive Rails Upgrade Guidelines in `README.md`. **ALWAYS read and follow README.md Rails Upgrade Guidelines before starting any Rails upgrade.**
+
+### Step-by-Step Rails Upgrade Process
+
+When asked to upgrade Rails, follow this exact workflow:
+
+1. **Read README.md Guidelines First**
+   - Open and read the "Rails Upgrade Guidelines" section in README.md
+   - Understand the upgrade path methodology
+   - Note the complete diff application rules
+
+2. **Plan the Upgrade Path**
+   - Determine current Rails version (check `Gemfile.lock`)
+   - Determine target Rails version
+   - Create step-by-step upgrade path following major version increments
+   - Example: 4.2.5 → 4.2.11 → 5.0.0 → 5.2.8 → 6.0.0 → 6.1.7
+
+3. **For EACH Major Version Step**
+
+   **A. Visit railsdiff.org**
+   - Open the exact URL: `https://railsdiff.org/{from_version}/{to_version}`
+   - Review ALL file changes in the diff
+   - Make a mental note of:
+     - Files to modify
+     - **Files to create (marked as "new file")**
+     - Files to delete
+     - Directory structure changes
+
+   **B. Update Gemfile**
+   - Update Rails version
+   - Update related gems if needed for compatibility
+   - Run `bundle update rails`
+
+   **C. Apply ALL railsdiff.org Changes**
+
+   **CRITICAL: Copy files EXACTLY as shown in railsdiff.org, including:**
+   - All code lines
+   - **ALL comments** (even if they look like documentation or examples)
+   - All whitespace and formatting
+   - All empty lines
+
+   **Must create these files if they don't exist (with EXACT content from railsdiff.org):**
+   - `config/cable.yml` (Rails 5.0+)
+   - `config/storage.yml` (Rails 5.2+)
+   - `config/initializers/content_security_policy.rb` (Rails 5.2+)
+   - `config/initializers/permissions_policy.rb` (Rails 6.1+)
+   - `config/initializers/new_framework_defaults_X_Y.rb` (each major version)
+   - `bin/update` (Rails 5.0+)
+   - `app/models/application_record.rb` (Rails 5.0+)
+   - `app/jobs/application_job.rb` (Rails 5.0+) - **including retry_on and discard_on comments**
+   - `app/mailers/application_mailer.rb` (Rails 5.0+)
+   - `app/views/layouts/mailer.html.erb` and `.text.erb` (Rails 5.0+)
+
+   **Must update these files:**
+   - `.gitattributes` - Update to Rails standard format
+   - `.gitignore` - Add new ignore patterns (storage/, tmp/storage/, config/master.key, etc.)
+   - `bin/rails`, `bin/rake`, `bin/setup` - Update to modern format (remove `.exe`, use `__dir__`)
+   - `config/application.rb` - Update `config.load_defaults`
+   - `config/boot.rb` - Update requires, add bootsnap
+   - `config/environment.rb` - Update requires to use `require_relative`
+   - `config/puma.rb` - Update to Rails 6.1 format
+   - `config/environments/*.rb` - Add all new configuration options
+   - `config/database.yml` - Update comments and format if needed
+
+   **Must create directory structure:**
+   - `tmp/.keep`, `tmp/pids/.keep`, `tmp/storage/.keep`
+   - `storage/.keep`
+
+   **D. Verification Checklist**
+   - [ ] All files marked "new file" in railsdiff.org are created **with EXACT content including ALL comments**
+   - [ ] All files marked "modified" in railsdiff.org are updated **line by line, including comment changes**
+   - [ ] .gitattributes updated to Rails standard
+   - [ ] .gitignore includes all new patterns
+   - [ ] All bin/ scripts use modern format
+   - [ ] config/application.rb has correct load_defaults version
+   - [ ] All new initializers are created
+   - [ ] Directory structure is complete
+   - [ ] **Content verification**: For new files (especially ApplicationJob, ApplicationRecord, ApplicationMailer), verify comments match railsdiff.org
+
+   **E. Commit Changes**
+   - Commit gem updates separately from config updates
+   - Use descriptive commit messages
+   - Follow the commit message format from previous upgrades
+
+4. **After All Upgrades Complete**
+   - Review all commits
+   - Ensure no files were missed
+   - Push to remote branch
+
+### Common Mistakes to Avoid
+
+❌ **DO NOT:**
+- Skip creating new files from railsdiff.org
+- Only update gems without applying config changes
+- Assume existing files are sufficient
+- Skip updating .gitattributes or .gitignore
+- Forget to create new initializers
+- Leave bin/ scripts in old format
+- **Create files from memory/common knowledge - ALWAYS copy from railsdiff.org**
+- **Skip comments thinking they are optional - ALL comments must be included**
+- Create minimal/skeleton versions of files - use EXACT content
+
+✓ **DO:**
+- Create EVERY file marked as "new file" in railsdiff.org **with EXACT content**
+- Update EVERY file marked as "modified" in railsdiff.org **line by line**
+- **Include ALL comments, even if they look like documentation or examples**
+- Use the verification checklist for each version
+- Ask user if uncertain about any file
+- Follow the README.md guidelines strictly
+
 ## Development Workflow
 
 ### Getting Started

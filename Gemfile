@@ -17,7 +17,7 @@ group :production do
 end
 
 # Use dotenv for environment variables management
-gem 'dotenv-rails'
+gem 'dotenv-rails', '~> 2.7'
 # Use Puma as the app server
 gem 'puma'
 # Use pry-rails for pry initializer
@@ -29,26 +29,28 @@ gem 'redis-rails'
 # Use Rack CORS Middleware for handling CORS
 gem 'rack-cors', require: 'rack/cors'
 # Use Simple Form as form builder
-gem 'simple_form'
+gem 'simple_form', '~> 5.0'
 # Use Slim for template
-gem 'slim-rails'
+gem 'slim-rails', '>= 3.1.0'
 # Use Ransack as search model
 gem 'ransack'
 # Use HTTParty as an HTTP client
 gem 'httparty'
 # Use fog-google for Google Cloud Platform
-gem 'fog-google'
+gem 'fog-google', '~> 1.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5'
+gem 'rails', '~> 6.1.7'
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 0.21'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '>= 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -57,7 +59,7 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -71,18 +73,18 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use rails-i18n as I18n solution
-gem 'rails-i18n'
+gem 'rails-i18n', '~> 7.0'
 # Use Kaminari as paginator
 gem 'kaminari'
-# Use Nokogiri as HTML parser
-gem 'nokogiri'
+# Use Nokogiri as HTML parser (< 1.13 for Ruby 2.5 compatibility)
+gem 'nokogiri', '~> 1.12.0'
 # Use Redcarpet as Markdown parser
 gem 'redcarpet'
 # Use CodeRay for syntax highlighting
 gem 'coderay'
 
 # Use amazon-ecs for Amazon Product Advertising API
-gem 'amazon-ecs'
+gem 'amazon-ecs', '~> 2.6'
 # Use http_accept_language help detect the users preferred language
 gem 'http_accept_language'
 
@@ -103,6 +105,8 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Required for assigns and assert_template in tests
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -119,10 +123,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  # Use Quiet Assets to mute assets pipeline log messages
-  gem 'quiet_assets'
-  # Use RealFaviconGenerator as favicon generator
-  gem 'rails_real_favicon'
   # Use RuboCop for Ruby code analysis
   gem 'rubocop', require: false
 end

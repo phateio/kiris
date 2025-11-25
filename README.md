@@ -57,11 +57,29 @@ Follow this complete upgrade path:
 ### 2. Complete Diff Application Rules
 
 - **Use [railsdiff.org](https://railsdiff.org/)** to compare differences between versions
+  - **CRITICAL:** Visit the **exact URL** for the version range: `https://railsdiff.org/{from_version}/{to_version}`
+  - Example: For 4.2.10 → 6.1.7.10, visit `https://railsdiff.org/4.2.10/6.1.7.10`
 - **Apply ALL changes completely**, including:
-  - Configuration file updates
-  - Comment modifications (e.g., `http://` → `https://`)
-  - Framework default changes
-  - Deprecation warnings
+  - **Modified files:** Update all existing configuration files **line by line**
+  - **New files:** Create ALL new files shown in the diff with **EXACT content** including:
+    - All code
+    - All comments (even if they seem optional or documentation-only)
+    - All whitespace and formatting
+    - Examples: `config/cable.yml`, `config/storage.yml`, `bin/update`, `app/jobs/application_job.rb`, initializers
+  - **Deleted files:** Remove files that are no longer needed
+  - **Directory structure:** Create new directories with `.keep` files (e.g., `tmp/`, `storage/`)
+  - **Comment modifications:** Update all comments (e.g., `http://` → `https://`, documentation improvements)
+  - **Framework default changes:** Apply all new framework defaults
+  - **Deprecation warnings:** Address all deprecations
+- **Verification checklist after applying diff:**
+  1. ✓ All files marked as "new file" in railsdiff.org are created **with exact content including all comments**
+  2. ✓ All files marked as "modified" in railsdiff.org are updated **line by line, including comment changes**
+  3. ✓ All files marked as "deleted" in railsdiff.org are removed
+  4. ✓ `.gitattributes` and `.gitignore` are updated to Rails standard
+  5. ✓ All `bin/` scripts are updated to modern format (no `.exe`, use `__dir__`, double quotes)
+  6. ✓ Configuration files in `config/environments/` include all new settings
+  7. ✓ New initializers are created (e.g., `content_security_policy.rb`, `permissions_policy.rb`)
+  8. ✓ **Content match verification**: For new files, verify that comments, formatting, and documentation match railsdiff.org exactly
 - **When encountering conflicts:**
   - **STOP the upgrade process**
   - Document the conflict
