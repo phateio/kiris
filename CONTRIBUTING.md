@@ -1,5 +1,15 @@
 # Contributing Guidelines
 
+> **⚠️ Source of Truth**: [CONTRIBUTING.md on Gist](https://gist.githubusercontent.com/shikendon/2f6c3d48bba357bd094ca87ca5817802/raw/CONTRIBUTING.md)  
+> 
+> **MANDATORY: Version Check Before Any Work**:
+> - **ALWAYS verify this file matches the Gist source before making any changes**
+> - If outdated, MUST update to latest version first via PR
+> - To check: `curl -s https://gist.githubusercontent.com/shikendon/2f6c3d48bba357bd094ca87ca5817802/raw/CONTRIBUTING.md | diff - CONTRIBUTING.md`
+> - To sync: `curl -o CONTRIBUTING.md https://gist.githubusercontent.com/shikendon/2f6c3d48bba357bd094ca87ca5817802/raw/CONTRIBUTING.md`
+> - DO NOT modify this file directly - all changes must be made in the Gist
+> - After Gist updates, submit a PR to update this repository's copy
+
 ## Code Standards
 
 ### Language & Documentation
@@ -44,4 +54,4 @@ gofmt -w .
 
 ---
 
-<!-- For Claude Code: Strictly follow all standards above. Verify linter compliance before marking tasks complete. -->
+<!-- For Claude Code: CRITICAL - Before any work, verify CONTRIBUTING.md is up-to-date with Gist source. If outdated, stop and request update via PR first. Strictly follow all standards above. Verify linter compliance before marking tasks complete. -->
