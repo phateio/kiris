@@ -60,6 +60,8 @@ GEM
       rouge (>= 1.0.0)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
+    bootsnap (1.13.0)
+      msgpack (~> 1.2)
     builder (3.3.0)
     byebug (11.1.3)
     cloudflare-rails (2.0.0)
@@ -234,6 +236,7 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     minitest (5.15.0)
+    msgpack (1.8.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.4.1)
@@ -454,6 +457,7 @@ DEPENDENCIES
   amazon-ecs (~> 2.6)
   better_errors
   binding_of_caller
+  bootsnap (>= 1.1.0)
   byebug
   cloudflare-rails
   coderay
