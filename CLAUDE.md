@@ -17,6 +17,16 @@ This document provides comprehensive guidance for AI assistants working on the K
 
 **License:** MIT
 
+## Contributing Guidelines
+
+**IMPORTANT:** Before making any code changes, please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Code standards and style guidelines (RuboCop, ESLint, etc.)
+- Commit message conventions (Conventional Commits)
+- Pre-commit workflow and linter requirements
+- Language and documentation standards
+
+The CONTRIBUTING.md file is the source of truth for all contribution standards and must be followed for all code changes.
+
 ## Technology Stack
 
 ### Core Framework
