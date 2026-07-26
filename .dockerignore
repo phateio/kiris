@@ -1,0 +1,26 @@
+# Version control and CI
+.git
+.gitattributes
+.gitignore
+.github
+.travis.yml
+
+# Secrets. production.env is supplied at runtime by the Compose env_file;
+# it must never be baked into the image.
+production.env
+.env
+
+# Local developer state
+.bundle
+.ruby-lsp
+.dockerignore
+
+# Build and runtime artifacts. Assets are precompiled inside the image,
+# and tmp/ is recreated by the precompile step.
+tmp
+log/*.log
+public/assets
+
+# Not needed in the runtime image
+test
+README.rdoc

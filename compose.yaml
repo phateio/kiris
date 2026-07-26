@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      platforms:
+        - linux/amd64
+    image: denpaio/phateio:latest
+    container_name: phateio
+    ports:
+      - "127.0.0.1:3030:3000"
+    env_file:
+      - production.env
+    cpus: 0.5
+    mem_limit: 256m
+    restart: always

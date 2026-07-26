@@ -22,3 +22,6 @@
 
 # GitHub App credentials
 gha-creds-*.json
+
+# Production secrets (loaded via Docker Compose env_file, not dotenv-rails)
+/production.env
