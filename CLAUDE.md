@@ -34,7 +34,7 @@ The CONTRIBUTING.md file is the source of truth for all contribution standards a
 - **Rails:** 4.2.5
 - **Database:** PostgreSQL (with structure.sql format, not schema.rb)
 - **Cache:** Redis (production only)
-- **Web Server:** Puma (2 workers, 5 threads default)
+- **Web Server:** Puma 5.6.9 (single mode / 0 workers, 5 threads by default; clustered mode is opt-in by uncommenting `workers`/`preload_app!` in `config/puma.rb` and setting `WEB_CONCURRENCY`)
 
 ### Key Dependencies
 - **Templates:** Slim (slim-rails)
@@ -115,7 +115,9 @@ kiris/
 ├── .github/
 │   └── workflows/         # Gemini CLI workflows
 ├── Gemfile
-├── Procfile              # Heroku deployment
+├── Dockerfile            # Container image (ruby:2.5.9-slim / Debian buster)
+├── compose.yaml          # Docker Compose service
+├── sources.list          # Debian buster apt repos (archive.debian.org)
 ├── .rubocop.yml          # Code style rules
 └── .travis.yml           # Travis CI config
 ```
@@ -288,7 +290,7 @@ end
    ```bash
    rails server
    # or for production-like:
-   bundle exec puma -C config/puma.rb
+   bundle exec puma
    ```
 
 4. **Access Application:**
@@ -459,58 +461,52 @@ params[:key] == ENV['BRIDGE_SECRET_KEY']
 - `STATIC_SERVER_URL` - CDN/static file server
 - `PIXIV_AUTHORIZATION` - Pixiv API token
 - `OFFLINE_TRACK_ID` - Track to show when offline
-- `WEB_CONCURRENCY` - Puma worker count (default: 2, set to 0 in dev)
-- `MAX_THREADS` - Puma thread count (default: 5, set to 3 in dev)
+- `WEB_CONCURRENCY` - Puma worker count. `workers` is commented out in `config/puma.rb`, so the app runs in single mode (0 workers) by default to fit the 256 MB container limit. To enable clustered mode, uncomment `workers`/`preload_app!` in `config/puma.rb` and set this.
+- `RAILS_MAX_THREADS` - Puma thread count (default: 5; keep ≤ the `config/database.yml` `pool: 5`).
 
-**Development (.env file):**
-```
-WEB_CONCURRENCY=0
-MAX_THREADS=3
-```
+**Note:** Puma reads `config/puma.rb` before Rails (and thus dotenv-rails) boots, so puma-level vars like `WEB_CONCURRENCY` and `RAILS_MAX_THREADS` must come from the real process environment (e.g. `production.env` via the Docker Compose `env_file`, or the shell). Putting them in a dotenv `.env` file does not affect puma config.
 
 ## Deployment
 
-### Heroku Deployment
+### Docker Compose Deployment
 
-**Platform:** Primary deployment target is Heroku
+**Platform:** Self-hosted via Docker Compose (`Dockerfile` + `compose.yaml` at the repo root).
 
-**Procfile:**
-```
-web: bundle exec puma -C config/puma.rb
-```
+**Image (`Dockerfile`):**
+- Base image `ruby:2.5.9-slim` (Debian buster).
+- `COPY sources.list /etc/apt/sources.list` — points apt at `archive.debian.org` because buster is EOL/archived.
+- Sets `ENV RAILS_ENV=production`, apt-installs `build-essential ruby-dev libpq-dev nodejs`.
+- Runs `bundle install` (with `bundle config --global frozen 1`), then `bundle exec rake assets:precompile` — **assets are precompiled at image build time**, so there is no separate precompile step at deploy.
+- `EXPOSE 3000` and `CMD ["bundle", "exec", "puma"]` (puma auto-loads `config/puma.rb`).
 
-**Production Gems:**
-- rails_12factor - Heroku integration (logging, static assets)
-- lograge - Structured logging
-- cloudflare-rails - CloudFlare IP filtering
+**Service (`compose.yaml`):**
+- One service `web`: builds for `linux/amd64`, image `denpaio/phateio:latest`, `container_name: phateio`.
+- Port mapping `127.0.0.1:3030:3000` — bound to loopback only (front with a reverse proxy for public access).
+- `env_file: [production.env]` supplies env/secrets (see below). No `command:` override, so it uses the Dockerfile `CMD`.
+- Resource caps: `cpus: 0.5`, `mem_limit: 256m`. `restart: always`.
+- Puma runs in **single mode** (workers commented out) binding `tcp://0.0.0.0:3000` inside the container, fitting the 256 MB limit.
 
-**Database:**
-- Uses DATABASE_URL environment variable
-- PostgreSQL with structure.sql
+**Environment / secrets:**
+- Provided via `production.env`, loaded by the Compose `env_file:` as real process ENV (not dotenv). It is git-ignored (`.gitignore` has `/production.env`).
+- Holds `RACK_ENV=production`, `DATABASE_URL`, `BRIDGE_SECRET_KEY`, and the other vars from the Environment Variables section.
 
-**Buildpacks:**
-- Ruby buildpack (detects Ruby version from Gemfile)
+**Production gems:** The Heroku-era gems `rails_12factor`, `lograge`, and `cloudflare-rails` are still in the Gemfile (removing them is a separate future task). They remain useful under Docker: `rails_12factor` gives stdout logging + static asset serving, `lograge` structures logs, and `cloudflare-rails` filters CloudFlare IPs.
 
-**Configuration:**
-- Set all required environment variables in Heroku config
-- Enable Redis add-on for caching
-- Configure DATABASE_URL (automatic with Postgres add-on)
+**Deploy steps:**
 
-### Manual Deployment
-
-1. **Precompile Assets:**
+1. **Build the image:**
    ```bash
-   RAILS_ENV=production bundle exec rake assets:precompile
+   docker compose build
    ```
 
-2. **Database Migration:**
+2. **Start the service:**
    ```bash
-   RAILS_ENV=production bundle exec rake db:migrate
+   docker compose up -d
    ```
 
-3. **Start Server:**
+3. **Run database migrations** (against the container's configured DB):
    ```bash
-   bundle exec puma -C config/puma.rb
+   docker compose run --rm web bundle exec rake db:migrate
    ```
 
 ## Important Notes for AI Assistants
@@ -596,7 +592,8 @@ web: bundle exec puma -C config/puma.rb
 - **RuboCop:** `.rubocop.yml`
 - **Travis CI:** `.travis.yml`
 - **Gemfile:** `Gemfile` (dependencies)
-- **Procfile:** `Procfile` (Heroku)
+- **Dockerfile:** `Dockerfile` (container image)
+- **Docker Compose:** `compose.yaml` (Docker Compose service)
 
 ## Additional Resources
 
@@ -609,6 +606,6 @@ web: bundle exec puma -C config/puma.rb
 
 ---
 
-**Last Updated:** 2025-11-15
+**Last Updated:** 2026-07-26
 
 This document should be updated whenever significant architectural changes are made to the codebase.
