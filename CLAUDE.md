@@ -1,612 +1,200 @@
-# CLAUDE.md - AI Assistant Guide for Kiris (Phate Radio)
+# CLAUDE.md
 
-This document provides comprehensive guidance for AI assistants working on the Kiris/Phate Radio codebase.
+> **Editing this file:** Consider the whole document before changing it — the right section, the right wording, the most essential form for every sentence. **Length limit: 200 lines** — trim or consolidate before adding.
 
-## Project Overview
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Phate Radio** (Kiris) is an internet radio streaming platform specializing in anime, games, and Japanese pop music. The application manages a music library primarily sourced from NicoNico Douga (Japanese video sharing platform) and integrates with utaitedb.net for track metadata.
+## Overview
 
-**Core Features:**
-- Live streaming radio with Icecast integration
-- Track database with rich metadata (artist, album, tags, lyrics)
-- User-submitted artwork/images from Pixiv
-- Community features (comments, issues/feedback)
-- Multi-language support (English, Japanese, Simplified/Traditional Chinese)
-- Content moderation workflow (QUEUED → reviewed → OK/DELETED)
-- Bridge API for streaming server integration
+Phate Radio (Rails application module `Kiris`) is an internet radio site for anime, game and J-pop
+music. Rails does **not** stream audio — an external Icecast server does. Rails owns the track
+database, the web UI and a JSON API; the streaming side drives it through the Bridge API
+(`/bridge/*`), which is the busiest surface in production.
 
-**License:** MIT
+## The UGC removal: six tables have no models, on purpose
 
-## Contributing Guidelines
+Issues, track/image comments and track migrations were deleted wholesale — models, controllers,
+helpers, views, routes, tests and fixtures, 82 files. **Their six PostgreSQL tables were deliberately
+kept, every row intact: `issues`, `issue_replies`, `track_comments`, `image_comments`,
+`track_migrations`, `track_migration_comments`.** They are the backup that makes the removal
+reversible; `db/structure.sql` still declares them and `db/migrate/` still creates them on a fresh
+setup. **Do not drop them as orphan cleanup, and do not regenerate models to match them.** Both are wrong.
 
-**IMPORTANT:** Before making any code changes, please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for:
-- Code standards and style guidelines (RuboCop, ESLint, etc.)
-- Commit message conventions (Conventional Commits)
-- Pre-commit workflow and linter requirements
-- Language and documentation standards
+Fallout already in the tree: `app/mailers/` holds only `.keep` (`SystemMailer` went with the issue
+notifications), so the `action_mailer` SMTP block in `config/environments/production.rb` is vestigial;
+`Admin::TracksController#confirm` no longer records its field-diff changelog as a `Changelog`-nicknamed
+`TrackComment`; and `Track#editable?`, `Lyric#editable?` and `Image#image_editable?` have no callers left.
 
-The CONTRIBUTING.md file is the source of truth for all contribution standards and must be followed for all code changes.
+## Versions
 
-## Technology Stack
+| Thing | Reality |
+| --- | --- |
+| Ruby | 2.5.9, consistent across `.ruby-version`, `Gemfile` and `Dockerfile`. |
+| Rails | `Gemfile` asks `~> 4.2.5`; `Gemfile.lock` pins **4.2.10**. Bundler 1.17.3. |
+| Database | PostgreSQL only. Schema lives in `db/structure.sql` (`config.active_record.schema_format = :sql`) — never regenerate a `schema.rb`. |
+| Cache | `:redis_store` in production, `:memory_store` in development. `$redis` is **nil outside production** (`config/initializers/redis.rb`). |
 
-### Core Framework
-- **Ruby:** 2.5.9 (defined in Gemfile and .ruby-version)
-- **Rails:** 4.2.10 (locked in Gemfile.lock, constrained to ~> 4.2.5 in Gemfile)
-- **Database:** PostgreSQL (with structure.sql format, not schema.rb)
-- **Cache:** Redis (production only)
-- **Web Server:** Puma 5.6.9 (single mode / 0 workers, 5 threads by default; clustered mode is opt-in by uncommenting `workers`/`preload_app!` in `config/puma.rb` and setting `WEB_CONCURRENCY`)
+Rails/Ruby upgrades have a mandatory procedure in `README.md` ("Rails Upgrade Guidelines"): one
+major version at a time, apply the full railsdiff, stop and ask on any conflict.
 
-### Key Dependencies
-- **Templates:** Slim (slim-rails)
-- **Forms:** SimpleForm with Foundation integration
-- **Authentication:** Custom session-based (no Devise)
-- **Search:** Ransack
-- **Markdown:** Redcarpet with CodeRay syntax highlighting
-- **HTTP Client:** HTTParty
-- **Pagination:** Kaminari
-- **Frontend:** Foundation framework, Font Awesome, jQuery
-- **Asset Gems:** jPlayer (HTML5 audio), NProgress, Intro.js
-- **Cloud Storage:** fog-google (Google Cloud Platform)
-- **CORS:** rack-cors
+## Commands
 
-### External Services Integration
-- **NicoNico Douga:** Video/music source
-- **utaitedb.net:** Track metadata API
-- **Pixiv:** Artwork sourcing
-- **Amazon Product API:** ASIN-based track import
-- **Imgur:** Image CDN
-- **Icecast:** Streaming server
-- **Xiph YP Directory:** Stream listing
+```bash
+bundle install
+bundle exec rake db:create db:migrate db:seed   # first-time setup
+rails server                                    # dev server on :3000
+bundle exec rubocop                             # lint (development-group gem)
 
-## Codebase Structure
-
-```
-kiris/
-├── app/
-│   ├── assets/
-│   │   ├── javascripts/    # CoffeeScript files (player, timer, danmaku, pjax, chatroom)
-│   │   ├── stylesheets/    # Sass/SCSS with Foundation framework
-│   │   └── images/
-│   ├── controllers/
-│   │   ├── concerns/       # CacheLock, CodeRayify, Streammeta, YPDirectory
-│   │   ├── admin/          # Admin namespace (tracks, images, playlist, migrations, notices)
-│   │   ├── upload/         # Upload namespace (asin, niconico)
-│   │   ├── bridge/         # Bridge API (playlist, tracks, caches)
-│   │   ├── json/           # JSON API (playlist, status, request)
-│   │   ├── tracks/         # Nested (comments, images, lyrics)
-│   │   └── images/         # Nested (comments)
-│   ├── models/
-│   │   ├── concerns/       # SharedMethods (value normalization)
-│   │   ├── track.rb        # Central model
-│   │   ├── image.rb        # Artwork/covers
-│   │   ├── playlist.rb     # Current/queued tracks
-│   │   ├── history.rb      # Play history
-│   │   ├── track_migration.rb  # Staging for track changes
-│   │   ├── issue.rb        # Feedback system
-│   │   ├── catalog.rb      # Wiki with versioning
-│   │   ├── member.rb       # User authentication
-│   │   └── [comments, lyric, category, notice].rb
-│   ├── views/              # Slim templates organized by controller
-│   ├── helpers/
-│   └── mailers/
-├── config/
-│   ├── routes.rb           # Routing with subdomain constraints
-│   ├── application.rb      # Main app config
-│   ├── database.yml        # PostgreSQL config
-│   ├── puma.rb            # Web server config
-│   ├── initializers/      # Redis, session, environment variables, etc.
-│   ├── locales/           # i18n files (en, ja, zh-Hans, zh-Hant)
-│   └── environments/
-├── db/
-│   ├── migrate/           # Database migrations
-│   ├── structure.sql      # PostgreSQL schema (NOT schema.rb)
-│   └── seeds.rb
-├── lib/
-│   └── tasks/             # Rake tasks (tracks.rake, images.rake)
-├── test/                  # Minitest suite
-│   ├── controllers/
-│   ├── models/
-│   ├── fixtures/
-│   ├── helpers/
-│   ├── integration/
-│   └── mailers/
-├── public/
-├── vendor/
-├── .github/
-│   └── workflows/         # CI (GitHub Actions)
-├── Gemfile
-├── Dockerfile            # Container image (ruby:2.5.9-slim / Debian buster)
-├── compose.yaml          # Docker Compose service
-├── sources.list          # Debian buster apt repos (archive.debian.org)
-└── .rubocop.yml          # Code style rules
+bundle exec rake db:test:prepare
+bundle exec rake test                                                 # full suite
+bundle exec rake test TEST=test/models/track_test.rb TESTOPTS="-n /validations/"   # one file / one test
 ```
 
-## Database Schema and Models
+There is no `rails test` runner — that arrived in Rails 5; the rake task reads `TEST` / `TESTOPTS`.
+Tests are Minitest with `fixtures :all` and one helper, `authenticate_member` (`test/test_helper.rb`),
+which just sets `session[:access] = 5`. **27 of the 53 test files are empty generator stubs** —
+`.github/workflows/ci.yml` does run `rubocop` and `rake db:test:prepare test` on Ruby 2.5.9 against a
+PostgreSQL service, on every PR and every push to `master`, but a green run proves less than it looks.
 
-### Core Models and Relationships
+## Routing conventions
 
-#### Track (Central Model)
-- **Location:** `app/models/track.rb`
-- **Key Fields:** title, artist, album, tags, duration, szhash (file hash), niconico (video ID), asin (Amazon ID), status, uploader
-- **Relationships:**
-  - `has_many :playlists` (play history)
-  - `has_many :histories` (broadcast history)
-  - `has_many :images` (cover art)
-  - `has_many :track_comments`
-  - `has_one :lyric`
-- **Important Scopes:** requestable, utaitedb, niconico_tracks, utattemita (cover songs)
-- **Status Values:** QUEUED, OK, DELETED
+`config/routes.rb` deliberately breaks REST in the `admin` and `upload` namespaces: **`POST` goes to
+a `new` path and `PATCH` to an `edit` path**, mapped onto `create` / `update` actions.
 
-#### Image
-- **Location:** `app/models/image.rb`
-- **Key Fields:** url, source, illustrator, status, verified, rate
-- **Validates:** URLs from Imgur, sources from Pixiv/Piapro/NicoSeiga
-- **Relationships:** `belongs_to :track`, `has_many :image_comments`
-- **Rating System:** RANK_1 through RANK_5, RANK_BAKA
-
-#### Playlist
-- **Location:** `app/models/playlist.rb`
-- **Purpose:** Manages current and queued tracks
-- **Key Fields:** playedtime, track_id, nickname, userip
-- **Note:** Uses pessimistic locking for updates
-
-#### History
-- **Location:** `app/models/history.rb`
-- **Purpose:** Play history (cleaned up after 30 days)
-- **Relationships:** `belongs_to :track`
-
-#### TrackMigration
-- **Location:** `app/models/track_migration.rb`
-- **Purpose:** Staging area for reviewing track changes before committing
-- **Workflow:** Create → Review → Transfer to Track model
-
-#### Member
-- **Location:** `app/models/member.rb`
-- **Authentication:** Username, password hash, identity, access level
-- **Note:** Custom authentication (no Devise)
-
-#### Other Models
-- **Catalog:** Wiki-style content with parent/child revision tracking
-- **Issue/IssueReply:** Community feedback system
-- **Lyric:** Song lyrics (`belongs_to :track`)
-- **Comments:** TrackComment, ImageComment, TrackMigrationComment (all support editability by IP/identity)
-- **Category, Notice:** Simple categorization and announcements
-
-### Database Conventions
-- Uses **structure.sql** instead of schema.rb for PostgreSQL-specific features
-- Counter caches for performance (images_count, track_comments_count, etc.)
-- Status-based workflows throughout
-- Comprehensive indexes and foreign keys
-
-## Controllers and Routes
-
-### Routing Architecture
-
-**Subdomain Constraints:**
-- `api.phate.io` → JSON format endpoints
-- `gitio.phate.io` → Git.io proxy service
-
-**Custom Routing Pattern:**
-Admin resources use non-standard REST:
-- POST to 'new' action instead of create
-- PATCH to 'edit' action instead of update
-
-Example:
 ```ruby
 resources :tracks, except: [:create, :update] do
-  post  'new'  => 'tracks#create', on: :collection
-  patch 'edit' => 'tracks#update', on: :member
+  post  'new'  => 'tracks#create', on: :collection, as: 'create'
+  patch 'edit' => 'tracks#update', on: :member,     as: 'update'
 end
 ```
 
-### Controller Organization
+Follow this shape for new admin/upload resources. Also:
 
-#### Public Controllers
-- **DefaultController:** Home, FAQ, chat, preferences, support pages
-- **ListenController:** Redirects to streaming servers
-- **SearchController:** Uses Ransack for searching (random, history, latest)
-- **TracksController:** Individual track details
-- **ImagesController:** Image galleries
-- **IssuesController:** Community feedback
-- **CatalogsController:** Wiki with diff viewing
-- **NoticesController:** News/announcements
-- **MembersController:** Login/logout
-- **StaticController:** robots.txt, manifest, proxy services (imgur, gitio)
-- **ErrorsController:** Custom error pages
+- Subdomain constraints: `api.` forces `format: :json`; `gitio.` proxies git.io via `static#gitio_proxy`.
+- Most public routes carry `format: false`, so `/search.json` is deliberately not a route.
+- `/kernel/playlist` and friends are legacy aliases for old streaming clients — keep them working.
+- **Routed but broken, both pre-existing:** `catalogs#show`, `#show_history` and `#diff` have routes
+  but no actions (`CatalogsController` defines only `index`), and `Upload::AsinController#index` /
+  `#show` exist while `app/views/upload/asin/` does not, so both raise `MissingTemplate`.
 
-#### Admin Namespace (`/admin/`)
-- **Requires:** Authentication (access level >= 5)
-- **Admin::TracksController:** CRUD, review/confirm workflow
-- **Admin::ImagesController:** Management, import/export
-- **Admin::PlaylistController:** Playlist management
-- **Admin::TrackMigrationsController:** Migration workflow
-- **Admin::NoticesController:** Notice management
+**The entire write surface fits in one paragraph.** Anonymous writes reach exactly three endpoints:
+`POST /request` (song requests — the only live listener-facing write), `POST /login` and
+`PATCH /preferences`. Every other write sits under `/admin/*` behind `authenticate` (access ≥ 5) or
+`/bridge/*` behind the `secret_key` check. `upload/`, `tracks/:id/images`, `tracks/:id/lyrics` and
+`/catalog` are read-only views of data that can no longer be created through the web UI.
 
-#### Upload Namespace (`/upload/`)
-- **Upload::AsinController:** Add tracks via Amazon ASIN
-- **Upload::NiconicoController:** Add tracks from NicoNico Douga
+## Authentication
 
-#### Bridge API (`/bridge/`)
-- **Purpose:** Streaming server integration
-- **Authentication:** Protected by BRIDGE_SECRET_KEY
-- **Bridge::PlaylistController:** Updates now playing, generates playlists, YP Directory integration
-- **Bridge::TracksController:** Track data API
-- **Bridge::CachesController:** Cache management
+Session-based and hand-rolled. **There is no Devise, and `Member` is a completely empty model** —
+`MembersController#login` queries it directly and hashes with `Digest::SHA1(Digest::MD5(password))`.
+Login sets `session[:identity] / [:nickname] / [:access]`; `ApplicationController#load_config!` reads
+them back into `@identity`, `@nickname`, `@access` (defaulting to `0`). The admin gate is
+`before_action :authenticate`, used by the four `app/controllers/admin/*` controllers and nowhere else.
 
-#### JSON API (`/json/`)
-- **Json::PlaylistController:** Public playlist JSON/XML with caching
-- **Json::StatusController:** Server status
-- **Json::RequestController:** Song requests
+`ApplicationController#authenticate` (`application_controller.rb:67`) is one line:
+`render file: 'public/403.html', status: :forbidden, layout: false && return unless @access >= 5`.
+`&&` binds tighter than the argument list, so `layout:` receives `false && return` → `false` and the
+`return` is dead code. It works only because Rails halts the filter chain when a `before_action`
+renders. Leave it alone or rewrite it properly — don't half-fix it.
 
-### Controller Concerns
+## Custom pjax layer
 
-**Location:** `app/controllers/concerns/`
+Not turbolinks and not jquery-pjax: `app/assets/javascripts/pjax.js.coffee` plus header plumbing in
+`ApplicationController`. Requests carrying `X-XHR-Referer` get `X-XHR-Route` and cache-busting
+headers, and redirects travel as `X-XHR-Redirected-To` / `X-TOP-Redirected-To` via `x_redirect_to`
+rather than a 302. Some actions *require* the header — `MembersController#index` renders 403 without
+it — so a plain `curl` of the login page returning 403 is by design.
 
-- **CacheLock:** Redis-based locking mechanism to prevent race conditions
-- **CodeRayify:** Syntax highlighting for markdown code blocks
-- **Streammeta:** Integer#abbrtime extension for duration formatting
-- **YPDirectory:** Xiph directory listing integration
+## `app/controllers/concerns/` is not Rails concerns
 
-### ApplicationController
+Those files define plain top-level classes and monkey patches, pulled in with `require 'cache_lock'` /
+`require 'streammeta'` / `require 'yp_directory'`, never `include`. `cache_lock.rb` picks its
+implementation at load time (`RedisLock` in production, `RailsLock` otherwise) and publishes it via
+`Object.const_set('CacheLock', …)`, so call it as `CacheLock.synchronize(:playlist) { ... }`.
+`streammeta.rb` adds `Integer#abbrtime`; `metacharacters.rb` adds `String#escape_sql_wildcard_characters`.
 
-**Location:** `app/controllers/application_controller.rb`
+## Now-playing pipeline
 
-**Key Functionality:**
-- Locale detection (session or Accept-Language header)
-- Timezone detection
-- Client tracking (IP, user agent, forwarded IPs)
-- Session-based authentication (`authenticate!` method)
-- Access level checking (5 = admin)
-- Markdown rendering with CodeRay
-- HTTP request helpers
-- CSRF protection
+1. The streaming server POSTs `/bridge/playlist` with a `secret_key` param checked against
+   `$BRIDGE_SECRET_KEY` — not the session. Bridge controllers `skip_before_filter :verify_authenticity_token`.
+2. `Bridge::PlaylistController#update` takes a **pessimistic row lock** (`playlist.with_lock`),
+   rewrites `Playlist`, appends a `History` row, purges histories older than 30 days, then busts
+   `Rails.cache.delete(:playlist)`. It also fires `Thread.new` calls to the danmaku service and the
+   Xiph YP directory, and marks any non-`utaitedb.net` track `DELETED` once played.
+3. `Json::PlaylistController#index` rebuilds the public payload inside
+   `CacheLock.synchronize(:playlist)` and caches it until the current track ends.
+4. `Json::RequestController#create` handles listener requests under `CacheLock.synchronize(:request)`
+   with cooldown, duplicate-title and per-IP checks.
 
-**Important Methods:**
-- `set_locale` - Automatic locale detection
-- `authenticate!` - Check if logged in
-- `client_ip`, `client_identity` - Track users
-- `md_to_html` - Markdown rendering
+**Step 2's `DELETED` side effect is deliberate policy, not a bug — do not "fix" it.** Listener video
+submissions were retired in favour of utaitedb.net as the sole source, and rather than purging them
+outright each gets one farewell airing. `randlist` is `.utaitedb`-only, so only a request triggers it.
+Two locks guard this path — Redis/cache lock for read rebuilds, DB row lock for writes; don't collapse them.
 
-## Development Workflow
+## Models
 
-### Getting Started
+`Track` is the hub (`playlists`, `histories`, `images`, `lyric`). Rules that bite:
 
-1. **Install Dependencies:**
-   ```bash
-   gem install bundler --no-document
-   gem install rails --no-document
-   bundle install
-   ```
+- **Status is a string column, not an enum.** `Track.status` is `'QUEUED'` / `'OK'` / `'DELETED'`;
+  the `requestable` scope means `status == 'OK'` and is what gates playback. `Image.status` is
+  `RANK_1`…`RANK_5` / `RANK_BAKA` and doubles as a quality rating.
+- **Exactly one counter cache is still live:** `tracks.images_count`, driven by `Image belongs_to
+  :track, counter_cache: true`. `tracks.track_comments_count`, `images.image_comments_count`,
+  `issues.issue_replies_count` and `track_migrations.track_migration_comments_count` remain as
+  columns with no association behind them — frozen at their last values; don't read or "repair" them.
+- `SharedMethods#normalize_values` strips every String attribute in `before_validation`; `Track` also
+  normalises its comma-joined `tags`.
+- `Image` accepts only `//i.imgur.com/…` URLs (protocol stripped) with sources from
+  Pixiv/piapro/NicoSeiga, and `cdn_url` rewrites them onto the app's own `/imgur/:id` proxy.
 
-2. **Database Setup:**
-   ```bash
-   bundle exec rake db:create
-   bundle exec rake db:migrate
-   bundle exec rake db:seed
-   ```
+## Views: ERB *and* Slim
 
-3. **Start Server:**
-   ```bash
-   rails server
-   # or for production-like:
-   bundle exec puma
-   ```
+67 `.erb` against 26 `.slim` under `app/views` — ERB is the majority and the layout is ERB. The split
+is per-subtree historical drift rather than a principled rule: Slim survives only in `default/` (all
+8 files), most of `partials/` (16 of 19) and two stray partials in `admin/tracks/`; `search/`,
+`admin/`, `upload/`, `images/`, `tracks/`, `notices/`, `members/`, `catalogs/` and `category/` are
+ERB. **Match the neighbouring files in whichever directory you are editing** instead of converting.
 
-4. **Access Application:**
-   - Development: http://localhost:3000
+## Environment variables
 
-### Testing
+`config/initializers/environment_variables.rb` copies ENV into globals, and application code reads
+the globals (`$BRIDGE_SECRET_KEY`), not `ENV[...]`: `ICECAST_SERVER`, `ICECAST_RELAYS`,
+`OFFLINE_TRACK_ID`, `STATIC_SERVER_URL`, `BRIDGE_SECRET_KEY` (falling back to `KERNEL_SECRET_KEY`),
+`DANMAKU_SECRET_KEY`, `PIXIV_AUTHORIZATION`. Production additionally needs `DATABASE_URL` and `REDIS_URL`.
 
-**Framework:** Minitest (Rails default)
-
-**Run Tests:**
-```bash
-bundle exec rake db:test:prepare
-bundle exec rake test
-```
-
-**Test Helper:**
-- Located at `test/test_helper.rb`
-- Helper: `authenticate_member` (sets session[:access] = 5 for admin access)
-
-**CI/CD:**
-- GitHub Actions (.github/workflows/ci.yml), on pull requests and pushes to master
-- `lint` job: `bundle exec rubocop`
-- `test` job: `bundle exec rake db:test:prepare test` against a PostgreSQL service container
-- Ruby 2.5.9 (read from .ruby-version) installed by ruby/setup-ruby
-
-### Code Quality
-
-**RuboCop Configuration (.rubocop.yml):**
-- Rails cops enabled
-- Documentation disabled
-- Max line length: 120 characters
-- Class/module nesting style disabled
-- Excludes: db/, config/, script/
-- Target Ruby version pinned to 2.4 (RuboCop 0.51 cannot parse 2.5.9)
-- Inherits .rubocop_todo.yml, which baselines 1,064 pre-existing offenses so CI only fails on new code
-
-**Run Linter:**
-```bash
-bundle exec rubocop
-```
-
-### Common Development Tasks
-
-#### Import Tracks from utaitedb.net
-```bash
-bundle exec rake tracks:create_or_update_by_utaitedb
-```
-- Fetches songs with >10,000 views
-- Creates tracks with status QUEUED
-- Updates existing tracks
-
-#### Import Artwork from Pixiv
-```bash
-bundle exec rake images:create_or_update_from_pixiv
-```
-- Searches Pixiv for track artwork
-- Tag matching algorithm
-- Uploads to Google Cloud Storage
-- Filters age-restricted content
-
-#### Database Operations
-```bash
-# Reset database
-bundle exec rake db:reset
-
-# Load structure
-bundle exec rake db:structure:load
-
-# Dump structure (after migrations)
-bundle exec rake db:structure:dump
-```
-
-### Content Management Workflow
-
-#### Track Management Workflow
-1. **Import/Create:** Track created with status QUEUED
-2. **Review:** Admin reviews at `/admin/tracks/:id/review`
-3. **Confirm:** Admin confirms, status changes to OK
-4. **Delete:** Admin can mark as DELETED
-
-#### Track Migration Workflow
-1. **Create Migration:** User proposes changes via TrackMigration
-2. **Review:** Community/admin reviews
-3. **Migrate:** Admin transfers changes to actual Track
-4. **Cleanup:** Migration record removed
-
-#### Image Upload Workflow
-1. **Upload:** User submits image URL (Imgur) with source (Pixiv/etc)
-2. **Verification:** Admin verifies and rates
-3. **Publish:** Image marked as verified
-
-## Key Conventions
-
-### Ruby/Rails Conventions
-- **Frozen String Literals:** Use `# frozen_string_literal: true` at top of files
-- **Strong Parameters:** Always use `.permit!` or explicit whitelisting
-- **Before Actions:** Use for common operations (set_locale, authenticate!)
-- **Concerns:** Extract shared functionality into concerns
-- **Scopes:** Prefer scopes over class methods in models
-- **Counter Caches:** Use for performance on associations with counts
-
-### Naming Conventions
-- **Models:** Singular, CamelCase (Track, Image, Playlist)
-- **Controllers:** Plural, CamelCase with Controller suffix
-- **Views:** Organized by controller name, use Slim templates
-- **Helpers:** Match controller names
-- **Database Tables:** Plural, snake_case
-
-### Authentication Pattern
-```ruby
-# In controller
-before_action :authenticate!
-
-# Sets these variables:
-@identity  # Client identity (session or anonymous)
-@access    # Access level (5 = admin, nil = guest)
-```
-
-### Client Tracking Pattern
-```ruby
-# Available in ApplicationController
-client_ip         # User's IP address (handles proxies)
-client_agent      # User agent string
-client_identity   # Identity for tracking (uses session)
-```
-
-### Status Workflows
-
-**Track Status:**
-- `nil` or `QUEUED` → Under review
-- `OK` → Published
-- `DELETED` → Removed
-
-**Image Status:**
-- `nil` → Pending verification
-- `verified: true` → Published
-
-### Markdown Rendering
-```ruby
-# In views/controllers
-md_to_html(text)  # Converts markdown to HTML with syntax highlighting
-```
-
-### Caching Patterns
-```ruby
-# Use CacheLock concern for preventing race conditions
-include CacheLock
-
-cache_lock('unique_key') do
-  # Critical section
-end
-```
-
-### API Authentication (Bridge)
-```ruby
-# Bridge controllers check BRIDGE_SECRET_KEY
-params[:key] == ENV['BRIDGE_SECRET_KEY']
-```
-
-## Environment Variables
-
-**Required in Production:**
-- `DATABASE_URL` - PostgreSQL connection string
-- `BRIDGE_SECRET_KEY` - Bridge API authentication
-- `DANMAKU_SECRET_KEY` - Danmaku service authentication
-- `REDIS_URL` - Redis connection (for caching)
-
-**Optional:**
-- `ICECAST_SERVER` - Primary Icecast server URL
-- `ICECAST_RELAYS` - Comma-separated relay servers
-- `STATIC_SERVER_URL` - CDN/static file server
-- `PIXIV_AUTHORIZATION` - Pixiv API token
-- `OFFLINE_TRACK_ID` - Track to show when offline
-- `WEB_CONCURRENCY` - Puma worker count. `workers` is commented out in `config/puma.rb`, so the app runs in single mode (0 workers) by default to fit the 256 MB container limit. To enable clustered mode, uncomment `workers`/`preload_app!` in `config/puma.rb` and set this.
-- `RAILS_MAX_THREADS` - Puma thread count (default: 5; keep ≤ the `config/database.yml` `pool: 5`).
-
-**Note:** Puma reads `config/puma.rb` before Rails (and thus dotenv-rails) boots, so puma-level vars like `WEB_CONCURRENCY` and `RAILS_MAX_THREADS` must come from the real process environment (e.g. `production.env` via the Docker Compose `env_file`, or the shell). Putting them in a dotenv `.env` file does not affect puma config.
+`dotenv-rails` loads `.env` for the Rails process, but **`config/puma.rb` is read before Rails boots**,
+so `RAILS_MAX_THREADS` and `PORT` must come from the real process environment.
 
 ## Deployment
 
-### Docker Compose Deployment
+Self-hosted Docker Compose. The image is `ruby:2.5.9-slim` (Debian buster, EOL — `sources.list`
+repoints apt at `archive.debian.org`); `bundle install` runs frozen and **`rake assets:precompile`
+runs at image build time**, so there is no deploy-time precompile step. Service `web` in
+`compose.yaml` publishes `127.0.0.1:3030 -> 3000` (loopback only — front it with a reverse proxy),
+reads secrets from the git-ignored `production.env` via `env_file`, and is capped at `cpus: 0.5` and
+`mem_limit: 256m`. `config/puma.rb` keeps `workers` and `preload_app!` commented out, so Puma runs
+**single mode with 5 threads** to fit that cap; `config/database.yml` uses `pool: 5` to match.
+Enabling clustered mode means uncommenting both lines *and* raising the memory limit.
 
-**Platform:** Self-hosted via Docker Compose (`Dockerfile` + `compose.yaml` at the repo root).
+```bash
+docker compose build
+docker compose up -d
+docker compose run --rm web bundle exec rake db:migrate
+```
 
-**Image (`Dockerfile`):**
-- Base image `ruby:2.5.9-slim` (Debian buster).
-- `COPY sources.list /etc/apt/sources.list` — points apt at `archive.debian.org` because buster is EOL/archived.
-- Sets `ENV RAILS_ENV=production`, apt-installs `build-essential ruby-dev libpq-dev nodejs`.
-- Runs `bundle install` (with `bundle config --global frozen 1`), then `bundle exec rake assets:precompile` — **assets are precompiled at image build time**, so there is no separate precompile step at deploy.
-- `EXPOSE 3000` and `CMD ["bundle", "exec", "puma"]` (puma auto-loads `config/puma.rb`).
+## Conventions and traps
 
-**Service (`compose.yaml`):**
-- One service `web`: builds for `linux/amd64`, image `denpaio/phateio:latest`, `container_name: phateio`.
-- Port mapping `127.0.0.1:3030:3000` — bound to loopback only (front with a reverse proxy for public access).
-- `env_file: [production.env]` supplies env/secrets (see below). No `command:` override, so it uses the Dockerfile `CMD`.
-- Resource caps: `cpus: 0.5`, `mem_limit: 256m`. `restart: always`.
-- Puma runs in **single mode** (workers commented out) binding `tcp://0.0.0.0:3000` inside the container, fitting the 256 MB limit.
-
-**Environment / secrets:**
-- Provided via `production.env`, loaded by the Compose `env_file:` as real process ENV (not dotenv). It is git-ignored (`.gitignore` has `/production.env`).
-- Holds `RACK_ENV=production`, `DATABASE_URL`, `BRIDGE_SECRET_KEY`, and the other vars from the Environment Variables section.
-
-**Production gems:** The Heroku-era gems `rails_12factor`, `lograge`, and `cloudflare-rails` are still in the Gemfile (removing them is a separate future task). They remain useful under Docker: `rails_12factor` gives stdout logging + static asset serving, `lograge` structures logs, and `cloudflare-rails` filters CloudFlare IPs.
-
-**Deploy steps:**
-
-1. **Build the image:**
-   ```bash
-   docker compose build
-   ```
-
-2. **Start the service:**
-   ```bash
-   docker compose up -d
-   ```
-
-3. **Run database migrations** (against the container's configured DB):
-   ```bash
-   docker compose run --rm web bundle exec rake db:migrate
-   ```
-
-## Important Notes for AI Assistants
-
-### Do's ✓
-- **Always use structure.sql:** This project uses PostgreSQL-specific features; never convert to schema.rb
-- **Follow custom REST patterns:** Admin routes use POST to 'new' and PATCH to 'edit'
-- **Use Slim templates:** Views are in Slim, not ERB
-- **Respect status workflows:** Tracks go through QUEUED → OK/DELETED states
-- **Use counter caches:** Don't manually count associations; use counter_cache columns
-- **Include frozen_string_literal:** Add `# frozen_string_literal: true` to new Ruby files
-- **Follow RuboCop rules:** Max 120 char lines, no documentation requirement
-- **Test authentication:** Use `authenticate_member` helper in tests
-- **Use concerns:** Extract shared logic into concerns, not modules
-
-### Don'ts ✗
-- **Don't use Devise:** This project has custom authentication
-- **Don't use schema.rb:** Use structure.sql for database schema
-- **Don't bypass status checks:** Always respect Track/Image status fields
-- **Don't skip authentication:** Admin actions require access level >= 5
-- **Don't use ERB:** Templates are Slim format
-- **Don't ignore IP tracking:** Many features depend on client_ip/client_identity
-- **Don't remove frozen_string_literal:** It's a project standard
-- **Don't create standard REST routes for admin:** Follow the custom pattern
-- **Don't bypass CacheLock:** Use it for playlist updates and critical sections
-
-### Common Pitfalls
-1. **Database Schema:** Modifying structure.sql manually is tricky; prefer migrations
-2. **Custom Routes:** Don't expect standard REST routes in admin namespace
-3. **Authentication:** Session-based, not token-based; stored in session[:access]
-4. **Slim Syntax:** Different from ERB; `=` outputs, `-` doesn't, `==` outputs without escaping
-5. **PostgreSQL Features:** Don't use MySQL-specific features; this is PostgreSQL only
-6. **Counter Caches:** Must be manually updated if bypassing ActiveRecord
-
-### External Service Dependencies
-- **NicoNico Douga:** May require authentication; video IDs stored in `niconico` field
-- **utaitedb.net:** API may have rate limits; rake task handles this
-- **Pixiv:** Requires PIXIV_AUTHORIZATION token; may change API
-- **Imgur:** Used for image hosting; URLs validated in Image model
-- **Icecast:** Streaming server; Bridge API integrates with it
-
-### Localization Notes
-- **Supported Locales:** en, ja, zh-Hans, zh-Hant
-- **Locale Detection:** Automatic from Accept-Language header
-- **Session Override:** User can set preferred locale
-- **Translation Service:** Uses Locale app (localeapp.com)
-- **Chinese Variants:** Distinguish between Simplified (Hans) and Traditional (Hant)
-
-### Performance Considerations
-- **Redis Caching:** Only in production; development uses memory
-- **Counter Caches:** Used extensively; don't count manually
-- **N+1 Queries:** Use includes/joins for associations
-- **Playlist Locking:** Uses pessimistic locking to prevent race conditions
-- **History Cleanup:** Histories older than 30 days are purged
-- **Asset Pipeline:** Precompile assets for production
-
-## File Locations Quick Reference
-
-### Key Files
-- **Routes:** `config/routes.rb`
-- **Application Config:** `config/application.rb`
-- **Database Config:** `config/database.yml`
-- **Environment Variables:** `config/initializers/environment_variables.rb`
-- **Puma Config:** `config/puma.rb`
-- **Redis Config:** `config/initializers/redis.rb`
-
-### Key Models
-- **Track:** `app/models/track.rb`
-- **Image:** `app/models/image.rb`
-- **Playlist:** `app/models/playlist.rb`
-- **Member:** `app/models/member.rb`
-
-### Key Controllers
-- **Application:** `app/controllers/application_controller.rb`
-- **Bridge Playlist:** `app/controllers/bridge/playlist_controller.rb`
-- **Admin Tracks:** `app/controllers/admin/tracks_controller.rb`
-
-### Key Tasks
-- **Track Import:** `lib/tasks/tracks.rake`
-- **Image Import:** `lib/tasks/images.rake`
-
-### Configuration
-- **RuboCop:** `.rubocop.yml`
-- **GitHub Actions:** `.github/workflows/ci.yml`
-- **Gemfile:** `Gemfile` (dependencies)
-- **Dockerfile:** `Dockerfile` (container image)
-- **Docker Compose:** `compose.yaml` (Docker Compose service)
-
-## Additional Resources
-
-- **Repository:** https://github.com/phateio/kiris
-- **License:** MIT (see LICENSE file)
-- **Issue Tracker:** GitHub Issues
-- **Translation:** https://www.localeapp.com/projects/6196
-- **CI Status:** https://github.com/phateio/kiris/actions
-
----
-
-**Last Updated:** 2026-07-26
-
-This document should be updated whenever significant architectural changes are made to the codebase.
+- **No `# frozen_string_literal: true` anywhere in `app/` or `lib/`** — only `Gemfile` carries it.
+  Don't add it as a "project standard"; it isn't one.
+- `app/controllers/upload/asin_controller.rb` hardcodes live Amazon Product API credentials in plain
+  source. Treat them as compromised pending rotation; never copy or echo the values.
+- RuboCop 0.51 pins `TargetRubyVersion: 2.4` (it cannot parse 2.5.9) and excludes `db/`, `config/`, `script/`
+  plus `vendor/`, `node_modules/` — `Exclude` *replaces* the defaults. Line length 120; `Documentation` off;
+  `Style/ClassAndModuleChildren` off, which is why controllers are written `class Bridge::PlaylistController`.
+  **`.rubocop_todo.yml` baselines 1,064 offenses**: a green `rubocop` means "no new offenses", not clean code.
+- Locales are `en`, `ja`, `zh-Hans`, `zh-Hant`. `ApplicationController` maps `zh-TW/HK/MO` → `zh-Hant`
+  and `zh-CN/SG/MY` → `zh-Hans`. `README.md` still links a localeapp project, but the gem and its
+  config are long gone — hand-edit `config/locales/*.yml` freely; nothing will sync over it.
+- `README.rdoc` is a 2015 stock Rails stub; `CONTRIBUTING.md` is deprecated; `README.md` is the live doc.
+- The only project rake tasks: `tracks:create_or_update_by_utaitedb` and `images:create_or_update_from_pixiv`
+  (`lib/tasks/`). Both call third-party APIs live and write to the database — don't run them casually.
