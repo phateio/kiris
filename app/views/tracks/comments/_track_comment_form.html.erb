@@ -1,6 +1,0 @@
-<%= render_object_error_messages(track_comment) %>
-<%= simple_form_for track_comment, url: track_comments_path(track_comment.track), remote: true do |f| %>
-  <%= f.input :message, placeholder: f.object.class.human_attribute_name('message') %>
-  <%= f.input :nickname, placeholder: f.object.class.human_attribute_name('nickname'), data: {option: 'nickname'} %>
-  <%= f.button :submit, class: 'submit-button', data: {disable: true} %>
-<% end %>

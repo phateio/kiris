@@ -43,10 +43,6 @@ module Upload::NiconicoHelper
     render partial: 'niconico_track_list_column_track_lyrics_link', :locals => {track: track}
   end
 
-  def render_niconico_track_comments_link(track)
-    render partial: 'niconico_track_list_column_track_comments_link', :locals => {track: track}
-  end
-
   def render_niconico_track_edit_link(track)
     return '-' unless track.editable?(@client[:ip], @identity)
     link_to t('form.edit'), edit_upload_niconico_path(track), remote: true
