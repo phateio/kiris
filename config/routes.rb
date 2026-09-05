@@ -44,8 +44,6 @@ Rails.application.routes.draw do
 
   resource :catalog, except: [:show, :new, :create, :edit, :update, :destroy], format: false do
     root               'catalogs#index',            on: :collection
-    get   'edit'    => 'catalogs#edit_or_new',      on: :collection
-    match 'edit'    => 'catalogs#update_or_create', on: :collection, via: [:post, :patch]
     get   'history' => 'catalogs#show_history',     on: :collection
   end
   resources :catalogs, except: [:index, :new, :create, :edit, :update, :destroy], format: false do
@@ -53,8 +51,8 @@ Rails.application.routes.draw do
   end
 
   resources :tracks, except: [:new, :create, :edit, :update, :destroy], format: false do
-    resources :images, controller: 'tracks/images'
-    resource  :lyrics, controller: 'tracks/lyrics'
+    resources :images, controller: 'tracks/images', only: [:index]
+    resource  :lyrics, controller: 'tracks/lyrics', only: [:show]
   end
 
   resources :images, except: [:new, :create, :edit, :update, :destroy], format: false
@@ -62,16 +60,9 @@ Rails.application.routes.draw do
   namespace :upload do
     get '' => '/upload#index', format: false
 
-    resources :asin, except: [:create, :update], format: false do
-      post  'new'  => 'asin#create', on: :collection, as: 'create'
-      patch 'edit' => 'asin#update', on: :member,     as: 'update'
-    end
+    resources :asin, only: [:index, :show], format: false
 
-    resources :niconico, param: :track_id, except: [:create, :update], format: false do
-      patch 'new'  => 'niconico#fetch' , on: :collection, as: 'fetch'
-      post  'new'  => 'niconico#create', on: :collection, as: 'create'
-      patch 'edit' => 'niconico#update', on: :member,     as: 'update'
-    end
+    resources :niconico, only: [:index], format: false
   end
 
   namespace :admin do
