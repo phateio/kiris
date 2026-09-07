@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+# Keyed on the PR number so a new push supersedes the run it obsoleted. Pushes to
+# master fall back to the commit SHA, giving each trunk commit its own group:
+# sharing one would let a third push cancel the second while it was still pending,
+# and that commit would never be verified.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # pg 0.18.4 has no precompiled gem and needs libpq headers to build.
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev
+
+      # ruby-builder publishes a prebuilt 2.5.9 for the current runner images, so
+      # the EOL OpenSSL that Ruby 2.5 needs never has to be satisfied locally.
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      # RuboCop 0.51 predates the github formatter, so this uses the default one.
+      - name: Lint code for consistent style
+        run: bundle exec rubocop
+
+  test:
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 20
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd "pg_isready" --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      # psql is needed because the schema format is :sql (db/structure.sql).
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev postgresql-client
+
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/kiris_test
+        run: bundle exec rake db:test:prepare test
