@@ -1,11 +1,25 @@
+# Existing offenses are grandfathered in .rubocop_todo.yml so that CI only
+# fails on newly written code. Regenerate with `rubocop --auto-gen-config`
+# after clearing a batch of them.
+inherit_from: .rubocop_todo.yml
+
 Rails:
   Enabled: true
 
 AllCops:
+  # RuboCop 0.51 only knows up to 2.4 and aborts on the 2.5.9 in .ruby-version.
+  # Pinning it here keeps the linter runnable; it is the newest RuboCop that
+  # resolves on Ruby 2.5, so this cannot simply be raised.
+  TargetRubyVersion: 2.4
   Include:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
+    # Listing Exclude replaces RuboCop's defaults rather than extending them
+    # (0.51 has no inherit_mode), so the two default entries are repeated here.
+    # Without them CI lints the gems that bundler installs into vendor/bundle.
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
