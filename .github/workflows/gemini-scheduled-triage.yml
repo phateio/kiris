@@ -15,6 +15,12 @@ on:
       - '.github/workflows/gemini-scheduled-triage.yml'
   workflow_dispatch:
 
+env:
+  # Recent Gemini CLI releases refuse to run in an untrusted directory, which a
+  # CI checkout always is, and abort before doing any work. See
+  # https://geminicli.com/docs/cli/trusted-folders/#headless-and-automated-environments
+  GEMINI_CLI_TRUST_WORKSPACE: 'true'
+
 concurrency:
   group: '${{ github.workflow }}'
   cancel-in-progress: true
