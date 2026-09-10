@@ -113,13 +113,12 @@ kiris/
 ├── public/
 ├── vendor/
 ├── .github/
-│   └── workflows/         # Gemini CLI workflows
+│   └── workflows/         # CI (GitHub Actions)
 ├── Gemfile
 ├── Dockerfile            # Container image (ruby:2.5.9-slim / Debian buster)
 ├── compose.yaml          # Docker Compose service
 ├── sources.list          # Debian buster apt repos (archive.debian.org)
-├── .rubocop.yml          # Code style rules
-└── .travis.yml           # Travis CI config
+└── .rubocop.yml          # Code style rules
 ```
 
 ## Database Schema and Models
@@ -311,8 +310,10 @@ bundle exec rake test
 - Helper: `authenticate_member` (sets session[:access] = 5 for admin access)
 
 **CI/CD:**
-- Travis CI configured (.travis.yml)
-- GitHub Actions with Gemini CLI workflows
+- GitHub Actions (.github/workflows/ci.yml), on pull requests and pushes to master
+- `lint` job: `bundle exec rubocop`
+- `test` job: `bundle exec rake db:test:prepare test` against a PostgreSQL service container
+- Ruby 2.5.9 (read from .ruby-version) installed by ruby/setup-ruby
 - Code Climate for quality and coverage
 
 ### Code Quality
@@ -323,6 +324,8 @@ bundle exec rake test
 - Max line length: 120 characters
 - Class/module nesting style disabled
 - Excludes: db/, config/, script/
+- Target Ruby version pinned to 2.4 (RuboCop 0.51 cannot parse 2.5.9)
+- Inherits .rubocop_todo.yml, which baselines 1,064 pre-existing offenses so CI only fails on new code
 
 **Run Linter:**
 ```bash
@@ -590,7 +593,7 @@ params[:key] == ENV['BRIDGE_SECRET_KEY']
 
 ### Configuration
 - **RuboCop:** `.rubocop.yml`
-- **Travis CI:** `.travis.yml`
+- **GitHub Actions:** `.github/workflows/ci.yml`
 - **Gemfile:** `Gemfile` (dependencies)
 - **Dockerfile:** `Dockerfile` (container image)
 - **Docker Compose:** `compose.yaml` (Docker Compose service)
@@ -601,7 +604,7 @@ params[:key] == ENV['BRIDGE_SECRET_KEY']
 - **License:** MIT (see LICENSE file)
 - **Issue Tracker:** GitHub Issues
 - **Translation:** https://www.localeapp.com/projects/6196
-- **CI Status:** https://travis-ci.org/phateio/kiris
+- **CI Status:** https://github.com/phateio/kiris/actions
 - **Code Climate:** https://codeclimate.com/github/phateio/kiris
 
 ---
