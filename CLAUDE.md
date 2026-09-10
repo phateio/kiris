@@ -31,7 +31,7 @@ The CONTRIBUTING.md file is the source of truth for all contribution standards a
 
 ### Core Framework
 - **Ruby:** 2.5.9 (defined in Gemfile and .ruby-version)
-- **Rails:** 4.2.5
+- **Rails:** 4.2.10 (locked in Gemfile.lock, constrained to ~> 4.2.5 in Gemfile)
 - **Database:** PostgreSQL (with structure.sql format, not schema.rb)
 - **Cache:** Redis (production only)
 - **Web Server:** Puma 5.6.9 (single mode / 0 workers, 5 threads by default; clustered mode is opt-in by uncommenting `workers`/`preload_app!` in `config/puma.rb` and setting `WEB_CONCURRENCY`)
