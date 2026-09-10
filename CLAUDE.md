@@ -30,8 +30,8 @@ The CONTRIBUTING.md file is the source of truth for all contribution standards a
 ## Technology Stack
 
 ### Core Framework
-- **Ruby:** 2.5.9 (defined in Gemfile, note: .ruby-version shows 2.5.8 but Gemfile uses 2.5.9)
-- **Rails:** 4.2.5
+- **Ruby:** 2.5.9 (defined in Gemfile and .ruby-version)
+- **Rails:** 4.2.10 (locked in Gemfile.lock, constrained to ~> 4.2.5 in Gemfile)
 - **Database:** PostgreSQL (with structure.sql format, not schema.rb)
 - **Cache:** Redis (production only)
 - **Web Server:** Puma 5.6.9 (single mode / 0 workers, 5 threads by default; clustered mode is opt-in by uncommenting `workers`/`preload_app!` in `config/puma.rb` and setting `WEB_CONCURRENCY`)
@@ -314,7 +314,6 @@ bundle exec rake test
 - `lint` job: `bundle exec rubocop`
 - `test` job: `bundle exec rake db:test:prepare test` against a PostgreSQL service container
 - Ruby 2.5.9 (read from .ruby-version) installed by ruby/setup-ruby
-- Code Climate for quality and coverage
 
 ### Code Quality
 
@@ -605,7 +604,6 @@ params[:key] == ENV['BRIDGE_SECRET_KEY']
 - **Issue Tracker:** GitHub Issues
 - **Translation:** https://www.localeapp.com/projects/6196
 - **CI Status:** https://github.com/phateio/kiris/actions
-- **Code Climate:** https://codeclimate.com/github/phateio/kiris
 
 ---
 
