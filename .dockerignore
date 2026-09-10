@@ -3,7 +3,6 @@
 .gitattributes
 .gitignore
 .github
-.travis.yml
 
 # Secrets. production.env is supplied at runtime by the Compose env_file;
 # it must never be baked into the image.
