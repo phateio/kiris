@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/phateio/kiris.svg?branch=master)](https://travis-ci.org/phateio/kiris)
+[![CI](https://github.com/phateio/kiris/actions/workflows/ci.yml/badge.svg)](https://github.com/phateio/kiris/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/phateio/kiris/badges/gpa.svg)](https://codeclimate.com/github/phateio/kiris)
 [![Test Coverage](https://codeclimate.com/github/phateio/kiris/badges/coverage.svg)](https://codeclimate.com/github/phateio/kiris/coverage)
 
