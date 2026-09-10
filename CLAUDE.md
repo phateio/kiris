@@ -314,7 +314,6 @@ bundle exec rake test
 - `lint` job: `bundle exec rubocop`
 - `test` job: `bundle exec rake db:test:prepare test` against a PostgreSQL service container
 - Ruby 2.5.9 (read from .ruby-version) installed by ruby/setup-ruby
-- Code Climate for quality and coverage
 
 ### Code Quality
 
@@ -605,7 +604,6 @@ params[:key] == ENV['BRIDGE_SECRET_KEY']
 - **Issue Tracker:** GitHub Issues
 - **Translation:** https://www.localeapp.com/projects/6196
 - **CI Status:** https://github.com/phateio/kiris/actions
-- **Code Climate:** https://codeclimate.com/github/phateio/kiris
 
 ---
 
