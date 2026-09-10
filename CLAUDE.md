@@ -30,7 +30,7 @@ The CONTRIBUTING.md file is the source of truth for all contribution standards a
 ## Technology Stack
 
 ### Core Framework
-- **Ruby:** 2.5.9 (defined in Gemfile, note: .ruby-version shows 2.5.8 but Gemfile uses 2.5.9)
+- **Ruby:** 2.5.9 (defined in Gemfile and .ruby-version)
 - **Rails:** 4.2.5
 - **Database:** PostgreSQL (with structure.sql format, not schema.rb)
 - **Cache:** Redis (production only)
