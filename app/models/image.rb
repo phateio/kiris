@@ -6,10 +6,11 @@ class Image < ActiveRecord::Base
   belongs_to :track, counter_cache: true
   has_many :image_comments, dependent: :destroy
 
+  # All three sites have been HTTPS-only for years, so the scheme is optional.
   valid_sources = [
-    'http:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium&illust_id=[0-9]+',
-    'http:\/\/piapro\.jp\/t\/[A-Za-z0-9_\-]+',
-    'http:\/\/seiga\.nicovideo\.jp\/seiga\/[A-Za-z0-9]+'
+    'https?:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium&illust_id=[0-9]+',
+    'https?:\/\/piapro\.jp\/t\/[A-Za-z0-9_\-]+',
+    'https?:\/\/seiga\.nicovideo\.jp\/seiga\/[A-Za-z0-9]+'
   ]
   valid_url_regexp = /\A\/\/i\.imgur\.com\/[A-Za-z0-9]+\.(?:jpg|png)\z/
   valid_source_regexp = /\A(?:#{valid_sources.join('|')})\z/
@@ -33,11 +34,11 @@ class Image < ActiveRecord::Base
   def source_abbreviation
       hash_code = self.source.scan(/[A-Za-z0-9_\-]+$/).first
       case self.source
-      when /\Ahttp:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium&illust_id=[0-9]+\z/i
+      when /\Ahttps?:\/\/www\.pixiv\.net\/member_illust\.php\?mode=medium&illust_id=[0-9]+\z/i
         return "pixiv##{hash_code}"
-      when /\Ahttp:\/\/piapro\.jp\/t\/[A-Za-z0-9_\-]+\z/i
+      when /\Ahttps?:\/\/piapro\.jp\/t\/[A-Za-z0-9_\-]+\z/i
         return "piapro##{hash_code}"
-      when /\Ahttp:\/\/seiga\.nicovideo\.jp\/seiga\/[A-Za-z0-9]+\z/i
+      when /\Ahttps?:\/\/seiga\.nicovideo\.jp\/seiga\/[A-Za-z0-9]+\z/i
         return "nicoseiga##{hash_code}"
       else
         return nil
