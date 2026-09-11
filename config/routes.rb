@@ -43,11 +43,7 @@ Rails.application.routes.draw do
   get  'status'   => 'json/status#index'
 
   resource :catalog, except: [:show, :new, :create, :edit, :update, :destroy], format: false do
-    root               'catalogs#index',            on: :collection
-    get   'history' => 'catalogs#show_history',     on: :collection
-  end
-  resources :catalogs, except: [:index, :new, :create, :edit, :update, :destroy], format: false do
-    get 'diff' => 'catalogs#diff', on: :member
+    root 'catalogs#index', on: :collection
   end
 
   resources :tracks, except: [:new, :create, :edit, :update, :destroy], format: false do
