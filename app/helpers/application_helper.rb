@@ -92,7 +92,6 @@ module ApplicationHelper
       {url: images_path,       text: t('navbar.images'),   link_options: {remote: true}},
       {url: chat_path,         text: t('navbar.chat'),     link_options: {remote: true}},
       {url: faq_path,          text: t('navbar.faq'),      link_options: {remote: true}},
-      {url: issues_path,       text: t('navbar.feedback'), link_options: {remote: true}},
       {url: '/phate.m3u',      text: 'phate.m3u'}
     ]
   end
@@ -103,7 +102,6 @@ module ApplicationHelper
       {url: admin_images_path,           text: t('admin.images.background_management'),               privilege: 5},
       {url: admin_playlist_index_path,   text: t('admin.playlist.playlist_management'),               privilege: 5},
       {url: admin_tracks_path,           text: t('admin.track.track_management'),                     privilege: 5},
-      {url: admin_track_migrations_path, text: t('admin.track_migration.track_migration_management'), privilege: 5},
       {url: logout_path,                 text: t('members.logout'),                                   privilege: 0}
     ]
   end

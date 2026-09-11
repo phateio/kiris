@@ -8,7 +8,6 @@ class Track < ActiveRecord::Base
   has_many :playlists, dependent: :destroy
   has_many :histories, dependent: :destroy
   has_many :images, dependent: :destroy
-  has_many :track_comments, dependent: :destroy
   has_one  :lyric, dependent: :destroy
 
   validates :title, presence: true

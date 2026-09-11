@@ -4,7 +4,6 @@ class Image < ActiveRecord::Base
   before_validation :normalize_image_url
 
   belongs_to :track, counter_cache: true
-  has_many :image_comments, dependent: :destroy
 
   # All three sites have been HTTPS-only for years, so the scheme is optional.
   valid_sources = [

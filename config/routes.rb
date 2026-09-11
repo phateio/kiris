@@ -31,15 +31,6 @@ Rails.application.routes.draw do
   get 'support'  => 'default#support', format: false
   get 'privacy'  => 'default#privacy', format: false
 
-  # TODO: RESTful
-  get    'issues'      => 'issues#index', format: false
-  get    'issues/new'  => 'issues#new', format: false
-  post   'issues/new'  => 'issues#create', format: false
-  get    'issues/:id'  => 'issues#show', format: false
-  post   'issues/:id'  => 'issues#append', format: false
-  put    'issues/:id'  => 'issues#update', format: false
-  delete 'issues/:id'  => 'issues#destroy', format: false
-
   get 'listen'         => 'listen#redirect', as: 'listen'
   get 'robots.txt'     => 'static#robots', format: false, as: 'robots'
   get 'cache.appcache' => 'static#manifest', format: false, as: 'manifest'
@@ -52,38 +43,22 @@ Rails.application.routes.draw do
   get  'status'   => 'json/status#index'
 
   resource :catalog, except: [:show, :new, :create, :edit, :update, :destroy], format: false do
-    root               'catalogs#index',            on: :collection
-    get   'edit'    => 'catalogs#edit_or_new',      on: :collection
-    match 'edit'    => 'catalogs#update_or_create', on: :collection, via: [:post, :patch]
-    get   'history' => 'catalogs#show_history',     on: :collection
-  end
-  resources :catalogs, except: [:index, :new, :create, :edit, :update, :destroy], format: false do
-    get 'diff' => 'catalogs#diff', on: :member
+    root 'catalogs#index', on: :collection
   end
 
   resources :tracks, except: [:new, :create, :edit, :update, :destroy], format: false do
-    resources :comments, controller: 'tracks/comments'
-    resources :images, controller: 'tracks/images'
-    resource  :lyrics, controller: 'tracks/lyrics'
+    resources :images, controller: 'tracks/images', only: [:index]
+    resource  :lyrics, controller: 'tracks/lyrics', only: [:show]
   end
 
-  resources :images, except: [:new, :create, :edit, :update, :destroy], format: false do
-    resources :comments, controller: 'images/comments'
-  end
+  resources :images, except: [:new, :create, :edit, :update, :destroy], format: false
 
   namespace :upload do
     get '' => '/upload#index', format: false
 
-    resources :asin, except: [:create, :update], format: false do
-      post  'new'  => 'asin#create', on: :collection, as: 'create'
-      patch 'edit' => 'asin#update', on: :member,     as: 'update'
-    end
+    resources :asin, only: [:index, :show], format: false
 
-    resources :niconico, param: :track_id, except: [:create, :update], format: false do
-      patch 'new'  => 'niconico#fetch' , on: :collection, as: 'fetch'
-      post  'new'  => 'niconico#create', on: :collection, as: 'create'
-      patch 'edit' => 'niconico#update', on: :member,     as: 'update'
-    end
+    resources :niconico, only: [:index], format: false
   end
 
   namespace :admin do
@@ -106,13 +81,6 @@ Rails.application.routes.draw do
       patch 'edit'   => 'tracks#update', on: :member,     as: 'update'
       get   'review' => 'tracks#review', on: :member
       patch 'review' => 'tracks#confirm', on: :member
-    end
-
-    resources :track_migrations, except: [:create, :update], format: false do
-      post  'new'     => 'track_migrations#create', on: :collection, as: 'create'
-      patch 'edit'    => 'track_migrations#update', on: :member,     as: 'update'
-      get   'migrate' => 'track_migrations#migrate', on: :member
-      post  'migrate' => 'track_migrations#transfer', on: :member
     end
   end
 

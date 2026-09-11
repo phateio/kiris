@@ -43,20 +43,7 @@ class Admin::TracksController < ApplicationController
   def confirm
     @track = Track.find(track_id)
     set_site_title(I18n.t('admin.track.review_title_with_index', id: @track.id))
-    message = ''
-    message += "Title: 「#{@track.title}」→「#{track_params[:title]}」" if @track.title != track_params[:title]
-    message += "\nArtist: 「#{@track.artist}」→「#{track_params[:artist]}」" if @track.artist != track_params[:artist]
-    message += "\nTags: 「#{@track.tags}」→「#{track_params[:tags]}」" if @track.tags != track_params[:tags]
-    message += "\nUploader: 「#{@track.uploader}」→「#{track_params[:uploader]}」" if @track.uploader != track_params[:uploader]
     render 'review' and return if not @track.update(track_params)
-    if message.present?
-      @track_comment = @track.track_comments.build({message: message.strip,
-                                                    nickname: 'Changelog',
-                                                    useragent: @client[:useragent],
-                                                    userip: '',
-                                                    identity: @identity})
-      @track_comment.save!
-    end
     x_redirect_to redirect_to_params || admin_tracks_path
   end
 

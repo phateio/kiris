@@ -11,14 +11,6 @@ module ImagesHelper
     end
   end
 
-  def render_image_rules
-    render partial: 'images/image_rules'
-  end
-
-  def render_image_form(image)
-    render partial: 'images/image_form', :locals => {image: image}
-  end
-
   def render_image_list(images)
     render partial: 'images/image_list', :locals => {images: images}
   end

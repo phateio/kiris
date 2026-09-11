@@ -60,8 +60,4 @@ module SearchHelper
   def render_search_list_column_track_lyrics_link(track)
     render partial: 'search_list_column_track_lyrics_link', :locals => {track: track}
   end
-
-  def render_search_list_column_track_comments_link(track)
-    render partial: 'search_list_column_track_comments_link', :locals => {track: track}
-  end
 end
