@@ -12,8 +12,8 @@ class Upload::AsinController < ApplicationController
     flash.now[:error] = 'invalid_amazon_asin' and return if (/^[A-Z0-9]{10}$/ =~ asin_id) == nil
     Amazon::Ecs.configure do |options|
       options[:associate_tag] = 'pharad-20'
-      options[:AWS_access_key_id] = 'AKIAJEXZ37EYB5FJXSRQ'
-      options[:AWS_secret_key] = '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'
+      options[:AWS_access_key_id] = ENV['AWS_ACCESS_KEY_ID']
+      options[:AWS_secret_key] = ENV['AWS_SECRET_ACCESS_KEY']
     end
     res = Amazon::Ecs.item_lookup(asin_id, country: 'jp', ResponseGroup: 'Images,ItemAttributes,Tracks,AlternateVersions')
     flash.now[:error] = 'invalid_amazon_asin' and return if not res.is_valid_request?
