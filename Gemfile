@@ -81,8 +81,6 @@ gem 'redcarpet'
 # Use CodeRay for syntax highlighting
 gem 'coderay'
 
-# Use amazon-ecs for Amazon Product Advertising API
-gem 'amazon-ecs'
 # Use http_accept_language help detect the users preferred language
 gem 'http_accept_language'
 

@@ -56,8 +56,6 @@ Rails.application.routes.draw do
   namespace :upload do
     get '' => '/upload#index', format: false
 
-    resources :asin, only: [:index, :show], format: false
-
     resources :niconico, only: [:index], format: false
   end
 
