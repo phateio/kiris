@@ -52,13 +52,13 @@ bundle exec rake test TEST=test/models/track_test.rb TESTOPTS="-n /validations/"
 
 There is no `rails test` runner — that arrived in Rails 5; the rake task reads `TEST` / `TESTOPTS`.
 Tests are Minitest with `fixtures :all` and one helper, `authenticate_member` (`test/test_helper.rb`),
-which just sets `session[:access] = 5`. **27 of the 53 test files are empty generator stubs** —
+which just sets `session[:access] = 5`. **25 of the 51 test files are empty generator stubs** —
 `.github/workflows/ci.yml` does run `rubocop` and `rake db:test:prepare test` on Ruby 2.5.9 against a
 PostgreSQL service, on every PR and every push to `master`, but a green run proves less than it looks.
 
 ## Routing conventions
 
-`config/routes.rb` deliberately breaks REST in the `admin` and `upload` namespaces: **`POST` goes to
+`config/routes.rb` deliberately breaks REST in the `admin` namespace: **`POST` goes to
 a `new` path and `PATCH` to an `edit` path**, mapped onto `create` / `update` actions.
 
 ```ruby
@@ -73,9 +73,10 @@ Follow this shape for new admin/upload resources. Also:
 - Subdomain constraints: `api.` forces `format: :json`; `gitio.` proxies git.io via `static#gitio_proxy`.
 - Most public routes carry `format: false`, so `/search.json` is deliberately not a route.
 - `/kernel/playlist` and friends are legacy aliases for old streaming clients — keep them working.
-- **Routed but broken, both pre-existing:** `catalogs#show`, `#show_history` and `#diff` have routes
-  but no actions (`CatalogsController` defines only `index`), and `Upload::AsinController#index` /
-  `#show` exist while `app/views/upload/asin/` does not, so both raise `MissingTemplate`.
+- **`except:` over-declares — several implicit REST routes resolve to actions that don't exist.**
+  All pre-existing, all 404 rather than 500, which is why they've gone unnoticed: public
+  `resources :tracks` routes `index` (`TracksController` has only `show`); under `admin`,
+  `resources :images` routes `new`/`edit`/`destroy`, and `:playlist` and `:tracks` each route `show`.
 
 **The entire write surface fits in one paragraph.** Anonymous writes reach exactly three endpoints:
 `POST /request` (song requests — the only live listener-facing write), `POST /login` and
@@ -186,8 +187,6 @@ docker compose run --rm web bundle exec rake db:migrate
 
 - **No `# frozen_string_literal: true` anywhere in `app/` or `lib/`** — only `Gemfile` carries it.
   Don't add it as a "project standard"; it isn't one.
-- `app/controllers/upload/asin_controller.rb` hardcodes live Amazon Product API credentials in plain
-  source. Treat them as compromised pending rotation; never copy or echo the values.
 - RuboCop 0.51 pins `TargetRubyVersion: 2.4` (it cannot parse 2.5.9) and excludes `db/`, `config/`, `script/`
   plus `vendor/`, `node_modules/` — `Exclude` *replaces* the defaults. Line length 120; `Documentation` off;
   `Style/ClassAndModuleChildren` off, which is why controllers are written `class Bridge::PlaylistController`.
